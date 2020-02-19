@@ -1,0 +1,148 @@
+/*? Colors */
+/* #DCDCDD #46494C #4C5C68 #1985A1, #582e83, #6E0D25*/
+@import url("https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap");
+}
+
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.borderCenter {
+  position: relative;
+}
+
+.borderCenter::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 60%;
+  height: 1px;
+  opacity: 0;
+  background-color: white;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.borderCenter:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+/* ****** PULSE NAVBAR BUTTON EFFECT ****** */
+
+.pulseAnimOn {
+  display: block;
+  padding: 1.5em;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.8);
+  -moz-animation: pulse 2s infinite;
+  -webkit-animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
+}
+
+.pulseAnimOff {
+  display: block;
+  padding: 1.5em;
+  border-radius: 50%;
+  background: linear-gradient(-45deg, #1985a1, #6e0d25, #1985a1, #582e83);
+  background-size: 600%;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(25, 133, 161, 0.5);
+  -moz-animation: pulse 2s infinite;
+  -webkit-animation: pulse 2s infinite;
+  animation: pulseOff 2s infinite, gradient 5s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes pulseOff {
+  0% {
+    box-shadow: 0 0 0 0 rgba(25, 133, 161, 0.5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(25, 133, 161, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(25, 133, 161, 0);
+  }
+}
+
+/* ****** GRADIENT ANIMATED BACKGROUND ****** */
+.gradientBG {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: linear-gradient(-45deg, #1985a1, #6e0d25, #1985a1, #582e83);
+  background-size: 600% 600%;
+  color: white;
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  overflow: auto;
+  animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* ****** FADE IN LEFT ****** */
+
+.fade-in-left {
+  -webkit-animation: fade-in-left 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: fade-in-left 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
