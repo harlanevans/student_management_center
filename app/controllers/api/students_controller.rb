@@ -18,9 +18,22 @@ class Api::StudentsController < ApplicationController
     render json: @student
   end
 
+  def update
+    @student = Student.find(params[:id])
+    if @student.update(student_params)
+      render json: @student
+    else
+      render json: @student.errors, status: 422
+    end
+  end
+
   private
 
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :technical, :effort, :social, :course_id)
   end
 end

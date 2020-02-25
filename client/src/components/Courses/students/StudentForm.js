@@ -29,10 +29,8 @@ const StudentForm = props => {
     social: social
   };
 
-  
-
   useEffect(() => {
-    const { student } = props;
+    const { student, singleStudent } = props;
     if (student) {
       const { first_name, last_name, technical, effort, social } = student;
       setFirstName(first_name);
@@ -40,29 +38,44 @@ const StudentForm = props => {
       setTechnical(technical);
       setEffort(effort);
       setSocial(social);
+    } else if (singleStudent) {
+      const {
+        first_name,
+        last_name,
+        technical,
+        effort,
+        social
+      } = singleStudent;
+      setFirstName(first_name);
+      setLastName(last_name);
+      setTechnical(technical);
+      setEffort(effort);
+      setSocial(social);
     } else {
-
-      setDefaultValue()
+      setDefaultValue();
     }
   }, []);
-  
-  const setDefaultValue = () => {
-  if (technical === "") {
-    setTechnical(3)
-  }
-  if (effort === "") {
-    setEffort(3)
-  }
-  if (social === "") {
-    setSocial(3)
-  }
 
-  }
+  const setDefaultValue = () => {
+    if (technical === "") {
+      setTechnical(3);
+    }
+    if (effort === "") {
+      setEffort(3);
+    }
+    if (social === "") {
+      setSocial(3);
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { student } = props;
-    if (student) {
+    const { student, singleStudent } = props;
+    if (singleStudent) {
+      debugger;
+      props.editSingleStudent(singleStudent.id, mainStudent);
+      props.toggleEditForm();
+    } else if (student) {
       props.editStudent(student.id, mainStudent);
       props.toggleEdit();
     } else {
@@ -95,69 +108,71 @@ const StudentForm = props => {
         onChange={e => setLastName(e.target.value)}
       />
       <div>
-
-      <Row style={styles.skills}>
-      <div style={{display: 'flex', flexDirection: "column"}}>
-
-      <Label>Technical</Label>
-        <Select
-          name="technical"
-          label="Technical"
-          required
-          value={technical}
-          onChange={e => setTechnical(e.target.value)}
-        >
-          <option value="" disabled >
-            Technical
-          </option>
-          <option value="1">1 (Very Low)</option>
-          <option value="2">2 (Low)</option>
-          <option value="3" selected>3 (Average)</option>
-          <option value="4">4 (Great)</option>
-          <option value="5">5 (Very Great)</option>
-        </Select>
-      </div>
-      <div style={{display: 'flex', flexDirection: "column"}}>
-
-      <Label>Effort</Label>
-        <Select
-          name="effort"
-          label="Effort"
-          value={effort}
-          required
-          onChange={e => setEffort(e.target.value)}
-        >
-          <option value="" disabled >
-            Effort
-          </option>
-          <option value="1">1 (Very Low)</option>
-          <option value="2">2 (Low)</option>
-            <option value="3" selected>3 (Average)</option>
-          <option value="4">4 (Great)</option>
-          <option value="5">5 (Very Great)</option>
-        </Select>
-        </div>
-      <div style={{display: 'flex', flexDirection: "column"}}>
-
-      <Label>Social</Label>
-        <Select
-          name="social"
-          label="Social"
-          required
-          value={social}
-          onChange={e => setSocial(e.target.value)}
-          >
-          <option value="" disabled>
-            Social
-          </option>
-          <option value="1">1 (Very Low)</option>
-          <option value="2">2 (Low)</option>
-            <option value="3" selected>3 (Average)</option>
-          <option value="4">4 (Great)</option>
-          <option value="5">5 (Very Great)</option>
-        </Select>
-        </div>
-      </Row>
+        <Row style={styles.skills}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Label>Technical</Label>
+            <Select
+              name="technical"
+              label="Technical"
+              required
+              value={technical}
+              onChange={e => setTechnical(e.target.value)}
+            >
+              <option value="" disabled>
+                Technical
+              </option>
+              <option value="1">1 (Very Low)</option>
+              <option value="2">2 (Low)</option>
+              <option value="3" selected>
+                3 (Average)
+              </option>
+              <option value="4">4 (Great)</option>
+              <option value="5">5 (Very Great)</option>
+            </Select>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Label>Effort</Label>
+            <Select
+              name="effort"
+              label="Effort"
+              value={effort}
+              required
+              onChange={e => setEffort(e.target.value)}
+            >
+              <option value="" disabled>
+                Effort
+              </option>
+              <option value="1">1 (Very Low)</option>
+              <option value="2">2 (Low)</option>
+              <option value="3" selected>
+                3 (Average)
+              </option>
+              <option value="4">4 (Great)</option>
+              <option value="5">5 (Very Great)</option>
+            </Select>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Label>Social</Label>
+            <Select
+              name="social"
+              label="Social"
+              required
+              value={social}
+              onChange={e => setSocial(e.target.value)}
+            >
+              <option value="" disabled>
+                Social
+              </option>
+              <option value="1">1 (Very Low)</option>
+              <option value="2">2 (Low)</option>
+              <option value="3" selected>
+                3 (Average)
+              </option>
+              <option value="4">4 (Great)</option>
+              <option value="5">5 (Very Great)</option>
+            </Select>
+          </div>
+        </Row>
       </div>
       {/* <Label>Technical</Label>
       <Input
@@ -213,6 +228,6 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: '35%'
+    width: "35%"
   }
 };

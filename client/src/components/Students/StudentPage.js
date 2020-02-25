@@ -4,6 +4,7 @@ import { Row, H1, Button } from "../../styles/Global";
 import { Skill, Average, LowAverage, HighAverage } from "../../styles/Student";
 import Comments from "./comments/Comments";
 import CForm from "./comments/CForm";
+import StudentForm from "../Courses/students/StudentForm";
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -16,8 +17,11 @@ const StudentPage = props => {
     });
   }, []);
 
+  const toggleEdit = () => {
+    setToggleForm(!toggleForm);
+  };
+
   const changeAvg = () => {
-    
     const average = (student.technical + student.social + student.effort) / 3;
     var roundedAverage = Math.round(average * 10) / 10;
     if (roundedAverage <= 2.4) {
@@ -27,6 +31,13 @@ const StudentPage = props => {
     } else {
       return <HighAverage>Average: {roundedAverage}</HighAverage>;
     }
+  };
+
+  const editStudent = (id, student) => {
+    axios.put(`/api/students/${id}`, { student }).then(res => {
+      const newStudent = res.data;
+      setStudent(newStudent);
+    });
   };
 
   if (!student) return null;
@@ -49,6 +60,18 @@ const StudentPage = props => {
       <div style={styles.padding}>
         <Row style={styles.center}>{changeAvg()}</Row>
       </div>
+      <Row>
+        <Button onClick={toggleEdit}>Edit Student</Button>
+      </Row>
+      {toggleForm ? (
+        <StudentForm
+          singleStudent={student}
+          editSingleStudent={editStudent}
+          toggleEditForm={toggleEdit}
+        />
+      ) : (
+        <></>
+      )}
       <div style={styles.padding}></div>
       <hr />
       <div style={styles.mainRow}>
