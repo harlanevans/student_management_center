@@ -3,8 +3,13 @@ import "./styles/App.css";
 import { Switch, Route } from "react-router-dom";
 
 // File Imports
-import Landing from "./components/Landing";
-import Navbar from "./components/Navbar";
+import Landing from "./components/shared/Landing";
+import Navbar from "./components/shared/Navbar";
+import StudentsAll from './components/Students/StudentsAll';
+import Courses from './components/Courses/Courses';
+import CoursePage from './components/Courses/CoursePage';
+
+import StudentPage from './components/Students/StudentPage';
 
 const App = () => {
   return (
@@ -16,6 +21,10 @@ const App = () => {
         <div style={styles.flexTwo}>
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/courses" component={Courses} />
+            <Route exact path="/courses/:id" component={CoursePage} />
+            <Route exact path="/students" component={StudentsAll} />
+            <Route exact path='/student/:id' component={StudentPage} />
           </Switch>
         </div>
       </div>

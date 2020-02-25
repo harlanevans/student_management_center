@@ -1,8 +1,11 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-// font-family: 'Roboto', sans-serif;
-// font - family: 'Raleway', sans - serif;
+// /* #DCDCDD #46494C #4C5C68 #1985A1,
+// #582e83, #6E0D25 #533953 #3F5772
+// #80B192 #136F63
+// font - family: "Roboto", sans - serif;
+// font - family: "Raleway", sans - serif;
 
 export const OpenButton = styled.button`
   border: none;

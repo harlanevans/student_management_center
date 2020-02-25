@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  technical: 1
+  effort: 1
+  social: 1
+  course: one
+
+two:
+  first_name: MyString
+  last_name: MyString
+  technical: 1
+  effort: 1
+  social: 1
+  course: two

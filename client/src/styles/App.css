@@ -14,16 +14,50 @@
 }
 
 
-a {
+/*!******* INPUT FIELD *******/
+::placeholder {
+  font-size: 1em;
+}
+
+input[type="text"],
+input[type='number'] {
+  font-size: 1em;
+}
+
+
+a.navItem {
   color: white;
   text-decoration: none;
 }
 
-.borderCenter {
+a.link {
+  text-decoration: none;
+
+}
+
+a.card-link {
+  text-decoration: none;
+  color: #46494C;
+  z-index: 1;
+}
+
+a.student-link {
+  text-decoration: none;
+  color: #46494C;
+  z-index: 1;
+}
+
+a.student-link:hover {
+  text-decoration: none;
+  color: white;
+  z-index: 1;
+}
+
+.borderCenterWhite {
   position: relative;
 }
 
-.borderCenter::after {
+.borderCenterWhite::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -36,7 +70,51 @@ a {
   transition: all 0.3s ease-in-out;
 }
 
-.borderCenter:hover::after {
+.borderCenterWhite:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.borderCenterBlue {
+  position: relative;
+}
+
+.borderCenterBlue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 60%;
+  height: 1px;
+  opacity: 0;
+  background-color: #1985A1;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.borderCenterBlue:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.borderCenterOther {
+  position: relative;
+}
+
+.borderCenterOther::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 60%;
+  height: 1px;
+  opacity: 0;
+  background-color: #46494C;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.borderCenterOther:hover::after {
   width: 100%;
   opacity: 1;
 }
