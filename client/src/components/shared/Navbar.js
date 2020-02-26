@@ -9,6 +9,7 @@ import {
 import { Fade } from "react-reveal";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import  Logo  from '../../assets/DPL_white_logo.png';
 
 const Navbar = () => {
   const [toggleNav, setToggleNav] = useState(false);
@@ -91,9 +92,18 @@ const Navbar = () => {
                   Students
                 </Link>
               </NavItem>
+              <NavItem>
+                <Link to="/rubric" className="borderCenterWhite navItem">
+                  Rubric
+                </Link>
+              </NavItem>
             </LinkCont>
           </ItemCont>
           {/* </div> */}
+          <div style={styles.logoCont}>
+
+          <img src={Logo} style={styles.logo}/>
+          </div>
         </div>
       ) : (
         <div style={styles.buttonCont}>
@@ -124,5 +134,14 @@ const styles = {
     width: "20%",
     position: "fixed",
     overflow: "auto"
+  },
+  logo: {
+    width: "50%",
+    zIndex: '200',
+  },
+  logoCont: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 };

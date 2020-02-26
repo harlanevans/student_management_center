@@ -15,6 +15,7 @@ import CourseMap from "./CourseMap";
 const Courses = () => {
   const [toggleForm, setToggleForm] = useState(false);
   const [courses, setCourses] = useState([]);
+  // const value = useContext(MyContext);
 
   useEffect(() => {
     axios.get("/api/courses").then(res => {

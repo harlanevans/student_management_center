@@ -72,7 +72,6 @@ const StudentForm = props => {
     e.preventDefault();
     const { student, singleStudent } = props;
     if (singleStudent) {
-      debugger;
       props.editSingleStudent(singleStudent.id, mainStudent);
       props.toggleEditForm();
     } else if (student) {

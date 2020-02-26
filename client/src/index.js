@@ -3,11 +3,15 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import CourseProvider from './components/context/CourseProvider';
 
 ReactDOM.render(
+  <CourseProvider>
+
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
+  </CourseProvider>,
   document.getElementById("root")
 );
 

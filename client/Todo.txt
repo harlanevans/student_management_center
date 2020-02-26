@@ -1,0 +1,13 @@
+Things to do :
+
+- On all students page, have a filter select for student first name asc and desc.
+
+- Project time help counter??
+
+- Decide rubric for students skill level
+
+- consolidate css files and structures. 
+
+- understand Context to bring courses into navbar, and other components
+
+- is students all page even worth having?

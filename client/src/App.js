@@ -10,6 +10,7 @@ import Courses from './components/Courses/Courses';
 import CoursePage from './components/Courses/CoursePage';
 
 import StudentPage from './components/Students/StudentPage';
+import Rubric from './components/shared/Rubric';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route exact path="/courses/:id" component={CoursePage} />
             <Route exact path="/students" component={StudentsAll} />
             <Route exact path='/student/:id' component={StudentPage} />
+            <Route exact path ='/rubric' component={Rubric} />
           </Switch>
         </div>
       </div>
