@@ -23,7 +23,7 @@ export const Paragraph = styled.p`
   
   export const Row = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   `;
 
   

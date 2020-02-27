@@ -11,3 +11,7 @@ Things to do :
 - understand Context to bring courses into navbar, and other components
 
 - is students all page even worth having?
+
+
+- students should have tasks as well as comments - what we are doing etc.
+- students also have a help model or column? just has 

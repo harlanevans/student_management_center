@@ -19,7 +19,7 @@ const CoursePage = props => {
   if (!course) return null;
   return (
     <div style={styles.container}>
-      <Row>
+      <Row style={styles.textCont}>
         <H1>{course.title}</H1>
       </Row>
       <Students course={course} />
@@ -37,5 +37,12 @@ export default CoursePage;
       display: "flex",
       flexDirection: "row",
       justifyContent: "center"
+    },
+    textCont: {
+      display: "flex",
+      flexFlow: "row wrap",
+      justifyContent: "center",
+      textAlign: 'center',
+
     }
   };

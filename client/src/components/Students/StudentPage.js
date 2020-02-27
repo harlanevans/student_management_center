@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Row, H1, Button } from "../../styles/Global";
-import { Skill, Average, LowAverage, HighAverage } from "../../styles/Student";
+import {
+  Skill,
+  Average,
+  LowAverage,
+  HighAverage,
+  Count
+} from "../../styles/Student";
 import Comments from "./comments/Comments";
 import CForm from "./comments/CForm";
 import StudentForm from "../Courses/students/StudentForm";
@@ -9,6 +15,7 @@ import StudentForm from "../Courses/students/StudentForm";
 const StudentPage = props => {
   const [student, setStudent] = useState();
   const [toggleForm, setToggleForm] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const { id } = props.match.params;
@@ -26,7 +33,7 @@ const StudentPage = props => {
     var roundedAverage = Math.round(average * 10) / 10;
     if (roundedAverage <= 2.4) {
       return <LowAverage>Average: {roundedAverage}</LowAverage>;
-    } else if (roundedAverage > 2.5 && roundedAverage <= 3.6) {
+    } else if (roundedAverage > 2.5 && roundedAverage < 3.8) {
       return <Average>Average: {roundedAverage}</Average>;
     } else {
       return <HighAverage>Average: {roundedAverage}</HighAverage>;
@@ -38,6 +45,34 @@ const StudentPage = props => {
       const newStudent = res.data;
       setStudent(newStudent);
     });
+  };
+
+  const toggleLoaded = () => {
+    setIsLoaded(!isLoaded);
+  };
+
+  const increase = () => {
+    toggleLoaded();
+    axios
+      .put(`/api/students/${props.match.params.id}`, {
+        student: { times_helped: student.times_helped + 1 }
+      })
+      .then(res => {
+        const newStudent = res.data;
+        setStudent(newStudent);
+      });
+  };
+
+  const decrease = () => {
+    toggleLoaded();
+    axios
+      .put(`/api/students/${props.match.params.id}`, {
+        student: { times_helped: student.times_helped - 1 }
+      })
+      .then(res => {
+        const newStudent = res.data;
+        setStudent(newStudent);
+      });
   };
 
   if (!student) return null;
@@ -60,8 +95,52 @@ const StudentPage = props => {
       <div style={styles.padding}>
         <Row style={styles.center}>{changeAvg()}</Row>
       </div>
-      <Row>
+      <Row
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between"
+        }}
+      >
+      <div style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            // width: '25%',
+            // height: '100%',
+          }} >
         <Button onClick={toggleEdit}>Edit Student</Button>
+      </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            width: '25%',
+            // height: '100%',
+          }}
+        >
+          <Row style={{display: 'flex', justifyContent: 'center', padding: '1em 0em'}}>
+            <Skill>Times Helped</Skill>
+          </Row>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              width: "100%"
+            }}
+          >
+            <Count onClick={increase}>+</Count>
+            <Skill>
+              {student.times_helped === null || undefined
+                ? "0"
+                : student.times_helped}
+            </Skill>
+            <Count onClick={decrease}>-</Count>
+          </div>
+        </div>
       </Row>
       {toggleForm ? (
         <StudentForm

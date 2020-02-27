@@ -28,11 +28,16 @@ const Courses = () => {
   };
 
   const renderCourses = () => {
-    return courses.map(course =>(
+    return courses.map(course => (
       <div style={styles.cardMap}>
-       <CourseMap key={course.id} {...course} deleteCourse={deleteCourse} editCourse={editCourse}/>
+        <CourseMap
+          key={course.id}
+          {...course}
+          deleteCourse={deleteCourse}
+          editCourse={editCourse}
+        />
       </div>
-       ));
+    ));
   };
 
   const addCourse = course => {
@@ -40,40 +45,47 @@ const Courses = () => {
   };
 
   const deleteCourse = id => {
-    axios.delete(`/api/courses/${id}`)
-    .then(res => {
-      console.log(res.data)
-    })
-    setCourses(courses.filter(course => course.id !== id))
-
-  }
+    axios.delete(`/api/courses/${id}`).then(res => {
+      console.log(res.data);
+    });
+    setCourses(courses.filter(course => course.id !== id));
+  };
 
   const editCourse = (id, title) => {
-    axios.put(`/api/courses/${id}`, {title })
-    .then(res => {
+    axios.put(`/api/courses/${id}`, { title }).then(res => {
       const newCourses = courses.map(c => {
         if (c.id === id) {
           return res.data;
         }
         return c;
-      })
-      setCourses( newCourses )
-    })
-  }
+      });
+      setCourses(newCourses);
+    });
+  };
 
   return (
     <div style={styles.container}>
       <Fade>
-        <H1>Courses Page</H1>
-        <Paragraph style={styles.padding}>
-          You can either add a new course, or select one of the two below.
-        </Paragraph>
-        <Paragraph>There should only ever be two courses.</Paragraph>
+        <Row style={styles.textCont}>
+          <H1>Courses Page</H1>
+        </Row>
+        <Row style={styles.textCont}>
+          <Paragraph style={styles.padding}>
+            You can either add a new course, or select one of the two below.
+          </Paragraph>
+        </Row>
+        <Row style={styles.textCont}>
+          <Paragraph>There should only ever be two courses.</Paragraph>
+        </Row>
         <Row style={styles.paddingMore}>
           <Button onClick={toggle}>Add Course</Button>
         </Row>
         {toggleForm ? (
-          <CourseForm addCourse={addCourse} editCourse={editCourse} toggleForm={toggle} />
+          <CourseForm
+            addCourse={addCourse}
+            editCourse={editCourse}
+            toggleForm={toggle}
+          />
         ) : (
           <></>
         )}
@@ -102,10 +114,17 @@ const styles = {
     padding: "2em 0em"
   },
   cardMap: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '100%',
-    flex: '50%',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "100%",
+    flex: "50%"
+  },
+  textCont: {    
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "center",
+    textAlign: 'center',
+
   }
 };

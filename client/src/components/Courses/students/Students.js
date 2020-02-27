@@ -120,7 +120,7 @@ const styles = {
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "space-evenly",
-    width: "100%"
+    // width: "100%"
   },
   form: {
     width: "100%"
@@ -130,5 +130,12 @@ const styles = {
     flexFlow: "row wrap",
     justifyContent: "center",
     width: "100%"
+  },
+  textCont: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "center",
+    textAlign: 'center',
+
   }
 };

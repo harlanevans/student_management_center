@@ -94,3 +94,18 @@ export const NameAll = styled.h1`
   font-size: 1em;
   font-weight: lighter;
 `;
+
+export const Count = styled.button`
+  font-family: "Raleway", sans-serif;
+  font-size: 1em;
+  padding: 0em 1em;
+  border-radius 3px;
+  border: solid 1.25px #4C5C68;
+color: #4C5C68;
+transition: .5s;
+
+&:hover {
+  background-color: #4C5C68;
+  color: white;
+}
+`;

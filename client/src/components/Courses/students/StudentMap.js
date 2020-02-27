@@ -33,7 +33,7 @@ const StudentMap = props => {
     var roundedAverage = Math.round(average * 10) / 10;
     if (roundedAverage <= 2.4) {
       return <LowAverage>Avg: {roundedAverage}</LowAverage>
-    } else if (roundedAverage > 2.5 && roundedAverage <= 3.6 ){
+    } else if (roundedAverage > 2.5 && roundedAverage <= 3.8 ){
       return <Average>Avg: {roundedAverage}</Average>;
     } else {
       return <HighAverage>Avg: {roundedAverage}</HighAverage>;
