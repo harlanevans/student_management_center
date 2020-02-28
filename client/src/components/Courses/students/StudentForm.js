@@ -19,6 +19,7 @@ const StudentForm = props => {
   const [effort, setEffort] = useState("");
   const [social, setSocial] = useState("");
   const [skill, setSkill] = useState("");
+  
   //!Sets a student object
   //! to all the state values to pass to edit
   const mainStudent = {
