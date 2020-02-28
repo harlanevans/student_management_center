@@ -36,6 +36,15 @@ class Api::Courses::StudentsController < ApplicationController
     end
   end
 
+  #! Student ordering select 
+   def student_asc
+    render json: Student.all.order('last_name ASC')
+  end
+
+  def student_desc
+    render json: Student.all.order('last_name DESC')
+  end
+
   private
 
   def set_course

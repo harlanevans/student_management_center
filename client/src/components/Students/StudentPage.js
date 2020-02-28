@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Row, H1, Button } from "../../styles/Global";
+import { Row, H1, Button, RedButton } from "../../styles/Global";
 import {
   Skill,
   Average,
@@ -9,7 +9,7 @@ import {
   Count
 } from "../../styles/Student";
 import Comments from "./comments/Comments";
-import CForm from "./comments/CForm";
+import { Link } from 'react-router-dom';
 import StudentForm from "../Courses/students/StudentForm";
 
 const StudentPage = props => {
@@ -33,7 +33,7 @@ const StudentPage = props => {
     var roundedAverage = Math.round(average * 10) / 10;
     if (roundedAverage <= 2.4) {
       return <LowAverage>Average: {roundedAverage}</LowAverage>;
-    } else if (roundedAverage > 2.5 && roundedAverage < 3.8) {
+    } else if (roundedAverage > 2.5 && roundedAverage < 3.7) {
       return <Average>Average: {roundedAverage}</Average>;
     } else {
       return <HighAverage>Average: {roundedAverage}</HighAverage>;
@@ -78,6 +78,11 @@ const StudentPage = props => {
   if (!student) return null;
   return (
     <div style={styles.container}>
+    <Row>
+      <Link to={{pathname: `/courses/${student.course_id}`}}>
+      <RedButton>Course Page</RedButton>
+      </Link>
+      </Row>
       <Row style={styles.center}>
         <H1>
           {student.first_name} {student.last_name}

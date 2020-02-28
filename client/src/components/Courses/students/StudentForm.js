@@ -94,6 +94,8 @@ const StudentForm = props => {
         placeholder="First Name"
         name="firstName"
         label="First Name"
+        required
+        autoFocus
         type="text"
         value={first_name}
         onChange={e => setFirstName(e.target.value)}
@@ -102,13 +104,16 @@ const StudentForm = props => {
         placeholder="Last Name"
         name="lastName"
         label="Last Name"
+        required
         type="text"
         value={last_name}
         onChange={e => setLastName(e.target.value)}
       />
       <div>
         <Row style={styles.skills}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+          >
             <Label>Technical</Label>
             <Select
               name="technical"
@@ -129,7 +134,9 @@ const StudentForm = props => {
               <option value="5">5 (Very Great)</option>
             </Select>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+          >
             <Label>Effort</Label>
             <Select
               name="effort"
@@ -150,7 +157,9 @@ const StudentForm = props => {
               <option value="5">5 (Very Great)</option>
             </Select>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+          >
             <Label>Social</Label>
             <Select
               name="social"
@@ -227,6 +236,6 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "35%"
+    width: "25%"
   }
 };

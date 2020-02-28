@@ -18,6 +18,7 @@ const CourseMap = props => {
   const length = students.length;
 
   const findClassAverage = () => {
+
     let average = 0;
     let studentAverage;
     let totalAverage;
@@ -41,7 +42,7 @@ const CourseMap = props => {
   return (
     <CourseCard style={styles.columnCard}>
       <CardTitle>
-        <Link to={{ pathname: `/courses/${props.id}` }} className="card-link">
+        <Link to={{ pathname: `/courses/${props.id}`,}} className="card-link">
           <div className="borderCenterOther">{props.title}</div>
         </Link>
       </CardTitle>
@@ -49,11 +50,11 @@ const CourseMap = props => {
         <Row style={styles.centerRow}>Students: {length}</Row>
       </CardTitle>
       <CardTitle>
-        <Row> {findClassAverage()}</Row>
+        <Row>{findClassAverage()}</Row>
       </CardTitle>
       <Row style={styles.buttonRow}>
         <Button onClick={toggle}>Edit</Button>
-        <Link to={{ pathname: `/courses/${props.id}` }}>
+        <Link to={{ pathname: `/courses/${props.id}`}}>
           <ViewButton>View Course</ViewButton>
         </Link>
         <RedButton
