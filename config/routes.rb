@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
     resources :students do
       resources :comments, module: 'students'
+      resources :checkins, module: 'students'
     end
     
   end

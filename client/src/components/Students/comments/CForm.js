@@ -29,14 +29,14 @@ const CForm = props => {
         props.toggleForm();
       });
   };
-  const bodyCount = () => {
-    const charCount = body.length;
-    if (charCount < 200) {
-      return <Count>{body.length} / 200</Count>;
-    } else {
-      return <Count style={{ color: "#6E0D25" }}>{body.length} / 200</Count>;
-    }
-  };
+  // const bodyCount = () => {
+  //   const charCount = body.length;
+  //   if (charCount < 200) {
+  //     return <Count>{body.length} / 200</Count>;
+  //   } else {
+  //     return <Count style={{ color: "#6E0D25" }}>{body.length} / 200</Count>;
+  //   }
+  // };
 
   return (
     <Form onSubmit={handleSubmit}>

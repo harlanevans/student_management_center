@@ -16,7 +16,10 @@ const Comments = props => {
   }, []);
 
   const renderComments = () => {
-    if (!comments) return "You have no comments for this student";
+    if (comments.length === 0)
+      return (
+        <Paragraph>You currently have no comments for this student.</Paragraph>
+      );
     return comments.map(comment => {
       return (
         <Com key={comment.id} {...comment} deleteComment={deleteComment} />
@@ -25,7 +28,6 @@ const Comments = props => {
   };
 
   const addComment = comment => {
-    debugger;
     setComments([comment, ...comments]);
   };
 

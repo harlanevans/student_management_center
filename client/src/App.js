@@ -11,6 +11,7 @@ import CoursePage from './components/Courses/CoursePage';
 
 import StudentPage from './components/Students/StudentPage';
 import Rubric from './components/shared/Rubric';
+import CHome from './components/Students/check_ins/CHome';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route exact path="/students" component={StudentsAll} />
             <Route exact path='/student/:id' component={StudentPage} />
             <Route exact path ='/rubric' component={Rubric} />
+            <Route exact path='/check_in/:id' component={CHome} />
           </Switch>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Row, H1, Button, RedButton } from "../../styles/Global";
+import { Row, H1, Button, RedButton, ViewButton } from "../../styles/Global";
 import {
   Skill,
   Average,
@@ -9,8 +9,9 @@ import {
   Count
 } from "../../styles/Student";
 import Comments from "./comments/Comments";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import StudentForm from "../Courses/students/StudentForm";
+import Checks from "./check_ins/Checks";
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -78,10 +79,10 @@ const StudentPage = props => {
   if (!student) return null;
   return (
     <div style={styles.container}>
-    <Row>
-      <Link to={{pathname: `/courses/${student.course_id}`}}>
-      <RedButton>Course Page</RedButton>
-      </Link>
+      <Row>
+        <Link to={{ pathname: `/courses/${student.course_id}` }}>
+          <RedButton>Course Page</RedButton>
+        </Link>
       </Row>
       <Row style={styles.center}>
         <H1>
@@ -107,26 +108,34 @@ const StudentPage = props => {
           justifyContent: "space-between"
         }}
       >
-      <div style={{
+        <div
+          style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-end",
+            justifyContent: "flex-end"
             // width: '25%',
             // height: '100%',
-          }} >
-        <Button onClick={toggleEdit}>Edit Student</Button>
-      </div>
+          }}
+        >
+          <Button onClick={toggleEdit}>Edit Student</Button>
+        </div>
 
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
-            width: '25%',
+            width: "25%"
             // height: '100%',
           }}
         >
-          <Row style={{display: 'flex', justifyContent: 'center', padding: '1em 0em'}}>
+          <Row
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "1em 0em"
+            }}
+          >
             <Skill>Times Helped</Skill>
           </Row>
           <div
@@ -163,6 +172,14 @@ const StudentPage = props => {
           <Comments student={student} />
         </div>
         <div style={styles.colTwo}>Student To Do's / Notes</div>
+      </div>
+      <div>
+        <div style={styles.padding}>
+          <Link to={{ pathname: `/check_in/${student.id}`}} >
+        <ViewButton>Add Check-In</ViewButton>
+        </Link>
+        </div>
+        <Checks student={student}/>
       </div>
     </div>
   );

@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_210944) do
+ActiveRecord::Schema.define(version: 2020_03_03_031322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "checkins", force: :cascade do |t|
+    t.text "feeling"
+    t.text "technical"
+    t.text "groups"
+    t.text "qcs"
+    t.text "feedback"
+    t.bigint "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "time_spent"
+    t.string "status"
+    t.index ["student_id"], name: "index_checkins_on_student_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -44,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_210944) do
     t.index ["course_id"], name: "index_students_on_course_id"
   end
 
+  add_foreign_key "checkins", "students"
   add_foreign_key "comments", "students"
   add_foreign_key "students", "courses"
 end
