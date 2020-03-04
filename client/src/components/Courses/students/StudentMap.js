@@ -83,9 +83,9 @@ const StudentMap = props => {
         {changeAvg()}
       </Row>
       <Row style={styles.skillRow}>
-        <Skill>Technical: {student.technical}</Skill>
-        <Skill>Effort: {student.effort}</Skill>
-        <Skill>Social: {student.social}</Skill>
+        <Skill>Technical: {props.technical}</Skill>
+        <Skill>Effort: {props.effort}</Skill>
+        <Skill>Group: {props.social}</Skill>
       </Row>
       <Row style={styles.skillRow}>
         <div style={styles.bottomCol}>

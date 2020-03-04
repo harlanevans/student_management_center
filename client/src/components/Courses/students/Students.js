@@ -27,40 +27,35 @@ const Students = props => {
     });
   }, [props.course.id, studentSort]);
 
+  const studentSortingChoice = () => {
+    if (studentSort === "asc") {
+      const firstNameAsc = students.sort(function(a, b) {
+        var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    }
 
-const studentSortingChoice = () => {
-
-  if (studentSort === 'asc') {
-
-    const firstNameAsc = students.sort(function(a, b) {
+    const firstNameDesc = students.sort(function(a, b) {
       var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
       var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    // names must be equal
-    return 0;
-  });
-}
-
-
- const firstNameDesc = students.sort(function(a, b) {
-   var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
-    var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
-    if (nameA > nameB) {
-      return -1;
-    }
-    if (nameA < nameB) {
-      return 1;
-    }
-    // names must be equal
-    return 0;
-  });
-  }
-
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+  };
 
   const renderStudents = () => {
     return students.map(student => {
@@ -122,10 +117,10 @@ const studentSortingChoice = () => {
             value={studentSort}
             onChange={e => setStudentSort(e.target.value)}
           >
-          <option disabled defaultValue selected>Sort By...</option>
-            <option value="asc" >
-              First Name Asc
+            <option disabled defaultValue selected>
+              Sort By...
             </option>
+            <option value="asc">First Name Asc</option>
             <option value="desc">First Name Desc</option>
             <option value="avgUp">By Average Up</option>
             <option value="avgDown">By Average Down</option>

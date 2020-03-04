@@ -131,8 +131,8 @@ const StudentForm = props => {
               <option value="3" selected>
                 3 (Average)
               </option>
-              <option value="4">4 (Great)</option>
-              <option value="5">5 (Very Great)</option>
+              <option value="4">4 (Good)</option>
+              <option value="5">5 (Very Good)</option>
             </Select>
           </div>
           <div
@@ -154,14 +154,14 @@ const StudentForm = props => {
               <option value="3" selected>
                 3 (Average)
               </option>
-              <option value="4">4 (Great)</option>
-              <option value="5">5 (Very Great)</option>
+              <option value="4">4 (Good)</option>
+              <option value="5">5 (Very Good)</option>
             </Select>
           </div>
           <div
             style={{ display: "flex", flexDirection: "column", width: "100%" }}
           >
-            <Label>Social</Label>
+            <Label>Group</Label>
             <Select
               name="social"
               label="Social"
@@ -170,15 +170,15 @@ const StudentForm = props => {
               onChange={e => setSocial(e.target.value)}
             >
               <option value="" disabled>
-                Social
+                Group
               </option>
               <option value="1">1 (Very Low)</option>
               <option value="2">2 (Low)</option>
               <option value="3" selected>
                 3 (Average)
               </option>
-              <option value="4">4 (Great)</option>
-              <option value="5">5 (Very Great)</option>
+              <option value="4">4 (Good)</option>
+              <option value="5">5 (Very Good)</option>
             </Select>
           </div>
         </Row>

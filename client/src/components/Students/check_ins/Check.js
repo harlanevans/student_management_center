@@ -87,6 +87,10 @@ const Check = props => {
             <Paragraph style={styles.topicTitle}>Time Spent</Paragraph>
             <Row>{props.time_spent}</Row>
           </div>
+          <div style={styles.topic}>
+            <Paragraph style={styles.topicTitle}>Our Feedback</Paragraph>
+            <Row>{props.feedback}</Row>
+          </div>
         </div>
       ) : (
         <></>
