@@ -1,10 +1,14 @@
 class Api::Students::CheckinsController < ApplicationController
   before_action :set_student
-  # before_action :set_comment, only: [:destroy]
+  before_action :set_checkin, only: [:destroy, :update]
 
   def index
-    render json: @student.checkins
+    render json: @student.checkins.all.order('id ASC')
   end
+
+  #  def student_asc
+  #   render json: Student.all.order('last_name ASC')
+  # end
 
   def create
     checkin = @student.checkins.new(checkin_params)
@@ -24,23 +28,24 @@ class Api::Students::CheckinsController < ApplicationController
   #   end
   # end
 
-  # # def update
+  def update
   
-  # #   if @student.update(student_params)
-  # #     render json: @student
-  # #   else
-  # #     render json: @student.errors, status: 422
-  # #   end
-  # # end
+    if @checkin.update(checkin_params)
+      render json: @checkin
+    else
+      render json: @checkin.errors, status: 422
+    end
+  end
 
-  # def destroy
-  #   @comment.destroy
-  #   if @comment.destroy
-  #   render json: { message: "Comment Deleted"}
-  #   else
-  #     render json: {message: "Comment was not deleted"}
-  #   end
-  # end
+  def destroy
+    @checkin.destroy
+    if @checkin.destroy
+      render json: {message: "Check In Deleted"}
+    else
+       render  json: {message: "Check In Not Deleted"}
+    end
+  end
+
 
     private
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Row, H1, Button, RedButton, ViewButton } from "../../styles/Global";
+import { Row, H1, Button, RedButton, ViewButton, Paragraph } from "../../styles/Global";
 import {
   Skill,
   Average,
@@ -12,6 +12,8 @@ import Comments from "./comments/Comments";
 import { Link } from "react-router-dom";
 import StudentForm from "../Courses/students/StudentForm";
 import Checks from "./check_ins/Checks";
+import { VeryBad, Bad, AverageCheck, Good, VeryGood } from "../../styles/CheckInS";
+import ColorKeys from "../shared/ColorKeys";
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -98,7 +100,7 @@ const StudentPage = props => {
           <Skill style={styles.smallPadding}>Social: {student.social}</Skill>
         </Row>
       </div>
-      <div style={styles.padding}>
+      <div>
         <Row style={styles.center}>{changeAvg()}</Row>
       </div>
       <Row
@@ -133,7 +135,7 @@ const StudentPage = props => {
             style={{
               display: "flex",
               justifyContent: "center",
-              padding: "1em 0em"
+              paddingBottom: "1em"
             }}
           >
             <Skill>Times Helped</Skill>
@@ -167,19 +169,35 @@ const StudentPage = props => {
       )}
       <div style={styles.padding}></div>
       <hr />
+
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
           <Comments student={student} />
         </div>
-        <div style={styles.colTwo}>Student To Do's / Notes</div>
-      </div>
-      <div>
-        <div style={styles.padding}>
-          <Link to={{ pathname: `/check_in/${student.id}`}} >
-        <ViewButton>Add Check-In</ViewButton>
-        </Link>
+        <div style={styles.colTwo}>
+        <H1>
+
+        Tasks
+        </H1>
         </div>
-        <Checks student={student}/>
+      </div>
+
+      <div style={styles.padding}></div>
+      <hr />
+      <div style={styles.mainRow}>
+        <div style={styles.colOne}>
+          <H1>Check Ins</H1>
+          <ColorKeys />
+          <div style={styles.padding}>
+            <Link to={{ pathname: `/check_in/${student.id}` }}>
+              <ViewButton>Add Check-In</ViewButton>
+            </Link>
+          </div>
+          <Checks student={student} />
+        </div>
+        <div style={styles.colTwo}>
+          <H1>Interviews</H1>
+        </div>
       </div>
     </div>
   );
@@ -214,14 +232,20 @@ const styles = {
     justifyContent: "space-between"
   },
   colOne: {
-    padding: "1em 0em",
+    // padding: "1em 0em",
     width: "50%"
   },
   colTwo: {
-    padding: "1em 0em",
+    // padding: "1em 0em",
     width: "50%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    // justifyContent: "center"
+  },
+  keyColors: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: 'space-between'
+    
   }
 };

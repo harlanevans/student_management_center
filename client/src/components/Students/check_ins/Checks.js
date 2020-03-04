@@ -12,9 +12,9 @@ const Checks = props => {
     });
   }, []);
 
-  const addCheckIn = (checkin) => { 
-    setChecks([checkin, ...checks])
-  }
+  const addCheckIn = checkin => {
+    setChecks([checkin, ...checks]);
+  };
 
   const renderCheckIns = () => {
     if (checks.length === 0)
@@ -22,13 +22,22 @@ const Checks = props => {
         <Paragraph>You currently have no check-ins for this student</Paragraph>
       );
     return checks.map(check => {
-      return <Check key={check.id} {...check} />;
+      return <Check key={check.id} {...check} deleteCheckIn={deleteCheckIn} />;
     });
+  };
+
+  const deleteCheckIn = (id, checkin) => {
+    debugger
+    axios
+      .delete(`/api/students/${props.student.id}/checkins/${id}`, checkin)
+      .then(res => {
+        console.log(res.data);
+      });
+    setChecks(checks.filter(checkin => checkin.id !== id));
   };
 
   return (
     <div>
-      <H1>Check Ins</H1>
       <Row>{renderCheckIns()}</Row>
     </div>
   );
