@@ -1,5 +1,4 @@
 class Api::Courses::StudentsController < ApplicationController
-  # This could be something else? ^^
 
   before_action :set_course
   before_action :set_student, only: [:update, :destroy]

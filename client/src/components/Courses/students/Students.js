@@ -58,18 +58,21 @@ const Students = props => {
   };
 
   const renderStudents = () => {
-    return students.map(student => {
-      return (
-        <StudentMap
-          key={student.id}
-          {...student}
-          deleteStudent={deleteStudent}
-          toggleForm
-          editStudent={editStudent}
-        />
-      );
-    });
+    return (
+      <div style={styles.studentFlex}>
+        {students.map(student => (
+          <StudentMap
+            key={student.id}
+            {...student}
+            deleteStudent={deleteStudent}
+            toggleForm
+            editStudent={editStudent}
+          />
+        ))}
+      </div>
+    );
   };
+
   //! ADD STUDENTS
   const addStudent = student => {
     setStudents([...students, student]);
@@ -107,7 +110,7 @@ const Students = props => {
   };
 
   return (
-    <div>
+    <>
       <Fade>
         <Row style={styles.buttonSelectRow}>
           <Button onClick={toggle}>Add Student</Button>
@@ -154,9 +157,9 @@ const Students = props => {
           )}
         </Row>
 
-        <Row style={styles.studentFlex}>{renderStudents()}</Row>
+        <>{renderStudents()}</>
       </Fade>
-    </div>
+    </>
   );
 };
 
@@ -172,8 +175,9 @@ const styles = {
   studentFlex: {
     display: "flex",
     flexFlow: "row wrap",
-    justifyContent: "space-evenly"
-    // width: "100%"
+    // justifyContent: "space-evenly",
+    // width: "100%",
+    width: "100%"
   },
   form: {
     width: "100%"

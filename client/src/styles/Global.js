@@ -14,6 +14,13 @@ export const H1 = styled.h1`
   color: #46494c;
 `;
 
+export const SchoolH1 = styled.h1`
+  font-family: "Roboto", sans-serif;
+  font-size: 2.25em;
+  font-weight: lighter;
+  color: #46494c;
+`;
+
 export const Paragraph = styled.p`
   font-family: "Raleway", sans-serif;
   display: flex;

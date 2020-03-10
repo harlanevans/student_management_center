@@ -12,33 +12,41 @@ import axios from "axios";
 import CourseForm from "./CourseForm";
 import CourseMap from "./CourseMap";
 
-const Courses = () => {
+const Courses = props => {
   const [toggleForm, setToggleForm] = useState(false);
   const [courses, setCourses] = useState([]);
   // const value = useContext(MyContext);
 
   useEffect(() => {
-    axios.get("/api/courses").then(res => {
-      setCourses(res.data);
-    });
-  }, []);
+    if (props.school) {
+      axios.get(`/api/schools/${props.school.id}/courses`).then(res => {
+        setCourses(res.data);
+      });
+    } else {
+      axios.get(`/api/courses`).then(res => {
+        setCourses(res.data);
+      });
+    }
+  }, [props.school]);
 
   const toggle = () => {
     setToggleForm(!toggleForm);
   };
 
-  const renderCourses = () => {
-    return courses.map(course => (
-      <div style={styles.cardMap}>
-        <CourseMap
-          key={course.id}
-          {...course}
-          deleteCourse={deleteCourse}
-          editCourse={editCourse}
-        />
-      </div>
-    ));
-  };
+    const renderCourses = () => {
+      return (
+        <div style={styles.cardMap}>
+          {courses.map(course => (
+            <CourseMap
+              key={course.id}
+              {...course}
+              deleteCourse={deleteCourse}
+              editCourse={editCourse}
+            />
+          ))}
+        </div>
+      );
+    };
 
   const addCourse = course => {
     setCourses([...courses, course]);
@@ -67,7 +75,7 @@ const Courses = () => {
     <div style={styles.container}>
       <Fade>
         <Row style={styles.textCont}>
-          <H1>Courses Page</H1>
+          <H1>Courses</H1>
         </Row>
         <Row style={styles.textCont}>
           <Paragraph style={styles.padding}>
@@ -75,7 +83,7 @@ const Courses = () => {
           </Paragraph>
         </Row>
         <Row style={styles.textCont}>
-          <Paragraph>There should only ever be two courses.</Paragraph>
+          <Paragraph>These are all of the courses for all schools.</Paragraph>
         </Row>
         <Row style={styles.paddingMore}>
           <Button onClick={toggle}>Add Course</Button>
@@ -85,17 +93,20 @@ const Courses = () => {
             addCourse={addCourse}
             editCourse={editCourse}
             toggleForm={toggle}
+            school={props.school}
           />
         ) : (
           <></>
         )}
-        <Row>
+        <div>
           {courses.length > 0 ? (
             <>{renderCourses()}</>
           ) : (
-            <Paragraph>You currently have no courses.</Paragraph>
+            <Row style={styles.textCont}>
+              <Paragraph>You currently have no courses.</Paragraph>
+            </Row>
           )}
-        </Row>
+        </div>
       </Fade>
     </div>
   );
@@ -115,16 +126,16 @@ const styles = {
   },
   cardMap: {
     display: "flex",
-    flexDirection: "row",
+    flexFlow: "row wrap",
     justifyContent: "space-evenly",
     width: "100%",
-    flex: "50%"
+    flex: "50%",
   },
-  textCont: {    
+  textCont: {
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "center",
-    textAlign: 'center',
-
+    textAlign: "center",
+    width: "100%"
   }
 };

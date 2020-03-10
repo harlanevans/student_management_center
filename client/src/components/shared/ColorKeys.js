@@ -15,8 +15,8 @@ const ColorKeys = () => {
         Keys
       </Paragraph>
       <Row style={styles.keyColors}>
-        <VeryBad>Very Bad</VeryBad>
-        <Bad>Bad</Bad>
+        <VeryBad>Bad</VeryBad>
+        <Bad>Below Average</Bad>
         <Average>Average</Average>
         <Good>Good</Good>
         <VeryGood>Very Good</VeryGood>
@@ -28,18 +28,17 @@ const ColorKeys = () => {
 export default ColorKeys;
 
 const styles = {
-  container: {
-    padding: "2em"
-  },
   padding: {
-    padding: "1em 0em"
+    padding: "1em 1em",
+    border: "solid .5px gray",
+    borderRadius: '5px',
+    boxShadow: ".5px .5px 1px 1px #dcdcdd",
+    width: '50%'
   },
-  
   keyColors: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: 'space-between'
-
+    flexFlow: "row wrap",
+    justifyContent: 'space-between',
   }
 };
 

@@ -148,13 +148,13 @@ const StudentPage = props => {
               width: "100%"
             }}
           >
-            <Count onClick={increase}>+</Count>
+              <Count onClick={decrease}>-</Count>
             <Skill>
               {student.times_helped === null || undefined
                 ? "0"
                 : student.times_helped}
             </Skill>
-            <Count onClick={decrease}>-</Count>
+                <Count onClick={increase}>+</Count>
           </div>
         </div>
       </Row>
@@ -184,10 +184,13 @@ const StudentPage = props => {
 
       <div style={styles.padding}></div>
       <hr />
+      <div style={styles.padding}></div>
+      <div style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-evenly', width: '100%'}}>
+          <ColorKeys />
+        </div>
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
           <H1>Check Ins</H1>
-          <ColorKeys />
           <div style={styles.padding}>
             <Link to={{ pathname: `/check_in/${student.id}` }}>
               <ViewButton>Add Check-In</ViewButton>

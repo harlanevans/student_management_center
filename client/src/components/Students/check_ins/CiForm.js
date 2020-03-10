@@ -10,9 +10,9 @@ import {
   Label
 } from "../../../styles/Global";
 import { Text, Count, Select } from "../../../styles/CheckInS";
-import axios from 'axios';
+import axios from "axios";
 
-const CiForm = (props) => {
+const CiForm = props => {
   const [feeling, setFeeling] = useState("");
   const [technical, setTechnical] = useState("");
   const [groups, setGroups] = useState("");
@@ -27,24 +27,21 @@ const CiForm = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const checkin = { feeling, technical, groups, qcs, feedback, time_spent, status: status.value };
-    debugger
-    axios.post(`/api/students/${props.student.id}/checkins`, checkin)
-    .then(res => {
-      window.location.href = `/student/${props.student.id}`
-    })
+    const checkin = {
+      feeling,
+      technical,
+      groups,
+      qcs,
+      feedback,
+      time_spent,
+      status: status.value
+    };
+    axios
+      .post(`/api/students/${props.student.id}/checkins`, checkin)
+      .then(res => {
+        window.location.href = `/student/${props.student.id}`;
+      });
   };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const comment = { author, body, tag: tag.value };
-  //   axios
-  //     .post(`/api/students/${props.student.id}/comments`, comment)
-  //     .then(res => {
-  //       props.addComment(res.data);
-  //       props.toggleForm();
-  //     });
-  // };
 
   return (
     <div style={styles.container}>
@@ -96,8 +93,10 @@ const CiForm = (props) => {
           <option disabled selected>
             Status...
           </option>
-          <option value="1">1 (Very Bad)</option>
-          <option value="2">2 (Bad)</option>
+          {/* Change these to below average for 2 and bad for 1
+           */}
+          <option value="1">1 (Bad)</option>
+          <option value="2">2 (Below Average)</option>
           <option value="3">3 (Average)</option>
           <option value="4">4 (Good)</option>
           <option value="5">5 (Very Good)</option>

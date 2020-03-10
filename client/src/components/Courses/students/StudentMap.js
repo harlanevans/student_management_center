@@ -103,13 +103,13 @@ const StudentMap = props => {
         >
           <Skill>Times Helped</Skill>
           <Row>
-            <Count onClick={increase}>+</Count>
+            <Count onClick={decrease}>-</Count>
             <Skill style={{ padding: "0em .5em" }}>
               {student.times_helped === null || undefined
                 ? "0"
                 : student.times_helped}
             </Skill>
-            <Count onClick={decrease}>-</Count>
+                <Count onClick={increase}>+</Count>
           </Row>
         </div>
         <div style={styles.bottomCol}>

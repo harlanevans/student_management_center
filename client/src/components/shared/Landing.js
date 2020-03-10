@@ -32,7 +32,7 @@ const Landing = () => {
           </a>
         </Paragraph>
         <Row style={styles.row}>
-          <Link to='courses'>
+          <Link to='/schools'>
           <RedButton>Get Started</RedButton>
           </Link>
         </Row>
