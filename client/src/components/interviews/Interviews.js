@@ -4,8 +4,8 @@ import { Row, H1} from '../../styles/Global';
 const Interviews = () => {
 
   return(
-    <div>
-      <Row>
+    <div style={styles.container}>
+      <Row style={styles.centerRow}>
         <H1>
       Interviews
         </H1>
@@ -15,3 +15,14 @@ const Interviews = () => {
 }
 
 export default Interviews;
+
+const styles = {
+  container: {
+    padding: "2em"
+  },
+  centerRow: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: 'center',
+  }
+}

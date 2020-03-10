@@ -1,6 +1,6 @@
 class Api::Schools::CoursesController < ApplicationController
 
-  before_action :set_school, only: [:index, :create]
+  before_action :set_school, only: [:index, :create, :destroy]
   before_action :set_course, only: [:update, :destroy]
 
   def index

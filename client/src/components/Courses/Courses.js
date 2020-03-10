@@ -53,14 +53,14 @@ const Courses = props => {
   };
 
   const deleteCourse = id => {
-    axios.delete(`/api/courses/${id}`).then(res => {
+    axios.delete(`/api/schools/${props.school.id}/courses/${id}`).then(res => {
       console.log(res.data);
     });
     setCourses(courses.filter(course => course.id !== id));
   };
 
   const editCourse = (id, title) => {
-    axios.put(`/api/courses/${id}`, { title }).then(res => {
+    axios.put(`/api/schools/${props.school.id}/courses/${id}`, { title }).then(res => {
       const newCourses = courses.map(c => {
         if (c.id === id) {
           return res.data;
