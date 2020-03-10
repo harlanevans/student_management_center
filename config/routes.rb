@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   namespace :api do 
     resources :students
     resources :comments
+    resources :courses
+    resources :interviews
+
+    resources :schools do
+      resources :courses, module: "schools"
+    end
+
 
     
     resources :courses do

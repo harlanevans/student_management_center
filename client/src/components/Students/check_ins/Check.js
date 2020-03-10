@@ -57,10 +57,14 @@ const Check = props => {
     return `${fullDate} at ${strTime} (${dayOfWeek})`;
   };
 
+
+ 
   return (
     <CheckIn>
       <div style={styles.topRow}>
-        <H1>Check-in: {props.id}</H1>
+        {/* This props.id isn't correct, need to ternary or 
+    sort to show either 1 : or 2 */}
+        <H1>Check-in</H1>
       </div>
 
       {seeAll ? (

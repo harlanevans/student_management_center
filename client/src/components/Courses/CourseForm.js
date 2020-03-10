@@ -17,7 +17,7 @@ const CourseForm = props => {
       props.editCourse(props.id, title);
       props.toggleEdit();
     } else {
-      axios.post("/api/courses", { title }).then(res => {
+      axios.post(`/api/schools/${props.school.id}/courses`, { title }).then(res => {
         props.addCourse(res.data);
         props.toggleForm();
       });

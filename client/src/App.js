@@ -9,6 +9,11 @@ import StudentsAll from './components/Students/StudentsAll';
 import Courses from './components/Courses/Courses';
 import CoursePage from './components/Courses/CoursePage';
 
+import Schools from './components/Schools/Schools';
+import SchoolPage from './components/Schools/SchoolPage';
+
+import InterviewsPage from './components/interviews/Interviews';
+
 import StudentPage from './components/Students/StudentPage';
 import Rubric from './components/shared/Rubric';
 import CHome from './components/Students/check_ins/CHome';
@@ -23,6 +28,9 @@ const App = () => {
         <div style={styles.flexTwo}>
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path='/schools' component={Schools} />
+            <Route exact path='/schools/:id' component={SchoolPage} />
+            <Route exact path='/interviews' component={InterviewsPage} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/courses/:id" component={CoursePage} />
             <Route exact path="/students" component={StudentsAll} />

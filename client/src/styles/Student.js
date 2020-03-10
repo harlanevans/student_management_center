@@ -8,10 +8,10 @@ import styled, { keyframes } from "styled-components";
 // font - family: "Raleway", sans - serif;
 
 export const StudentCard = styled.div`
-  flex: 0 0 33%;
+  flex: 1 1 37%;
   border: solid 2px #46494c;
-  padding: 1em;
-  margin: 0.5em;
+  padding: 1.5em;
+  margin: 1em;
   border-radius: 3px;
   width: 100%;
   height: 100%;

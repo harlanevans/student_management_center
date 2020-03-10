@@ -5,6 +5,7 @@ import Check from "./Check";
 
 const Checks = props => {
   const [checks, setChecks] = useState([]);
+  const [checkId, setCheckId] = useState();
 
   useEffect(() => {
     axios.get(`/api/students/${props.student.id}/checkins`).then(res => {
@@ -22,12 +23,19 @@ const Checks = props => {
         <Paragraph>You currently have no check-ins for this student</Paragraph>
       );
     return checks.map(check => {
-      return <Check key={check.id} {...check} deleteCheckIn={deleteCheckIn} />;
+      return (
+        <Check
+          key={check.id}
+          {...check}
+          deleteCheckIn={deleteCheckIn}
+          checkId={checkId}
+        />
+      );
     });
   };
 
   const deleteCheckIn = (id, checkin) => {
-    debugger
+    debugger;
     axios
       .delete(`/api/students/${props.student.id}/checkins/${id}`, checkin)
       .then(res => {

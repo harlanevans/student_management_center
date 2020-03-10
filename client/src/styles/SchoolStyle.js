@@ -7,10 +7,10 @@ import styled, { keyframes } from "styled-components";
 // font - family: "Roboto", sans - serif;
 // font - family: "Raleway", sans - serif;
 
-export const CourseCard = styled.div`
-  flex: 1 1 37%;
+export const SchoolCard = styled.div`
+  flex: 1 1 50%;
   border: solid 2px #46494c;
-  padding: 1.5em;
+  padding: 2em;
   margin: 1em;
   border-radius: 3px;
   width: 100%;
@@ -19,10 +19,9 @@ export const CourseCard = styled.div`
   box-shadow: 1px 1px 2px 2px #dcdcdd;
 `;
 
-export const CardTitle = styled.h1`
+export const SchoolTitle = styled.h1`
   font-family: "Roboto", sans-serif;
   font-size: 1.5em;
-  padding: .5em;
   color: #46494c;
   font-weight: lighter;
   display: flex;
