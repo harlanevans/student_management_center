@@ -13,6 +13,8 @@ import Schools from './components/Schools/Schools';
 import SchoolPage from './components/Schools/SchoolPage';
 
 import InterviewsPage from './components/interviews/Interviews';
+import NewInterview from './components/interviews/NewInterview';
+import IntPage from './components/interviews/IntPage';
 
 import StudentPage from './components/Students/StudentPage';
 import Rubric from './components/shared/Rubric';
@@ -31,6 +33,8 @@ const App = () => {
             <Route exact path='/schools' component={Schools} />
             <Route exact path='/schools/:id' component={SchoolPage} />
             <Route exact path='/interviews' component={InterviewsPage} />
+            <Route exact path='/new_interview' component={NewInterview} />
+            <Route exact path='/interview/:id' component={IntPage} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/courses/:id" component={CoursePage} />
             <Route exact path="/students" component={StudentsAll} />
