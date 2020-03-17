@@ -18,18 +18,39 @@ const Interviews = () => {
   const toggle = () => {
     setNewInterview(!newInterview);
   };
- 
+
   const addInterview = interview => {
     setInterviews([...interviews, interview]);
   };
 
-  const editInterview = () => {
-    
-  }
+  const editInterview = (id, name) => {
+    axios.put(`/api/interviews/${id}`, { name }).then(res => {
+      const newArray = interviews.map(i => {
+        if (i.id === id) {
+          return res.data;
+        }
+        return i;
+      });
+      setInterviews(newArray);
+    });
+  };
+
+  const deleteInterview = id => {
+    debugger;
+    axios.delete(`/api/interviews/${id}`, id).then(res => {
+      console.log(res.data);
+    });
+    setInterviews(interviews.filter(i => i.id !== id));
+  };
 
   const renderInterviews = () =>
     interviews.map(i => (
-      <MapInt key={i.id} {...i}/>
+      <MapInt
+        key={i.id}
+        {...i}
+        editInterview={editInterview}
+        deleteInterview={deleteInterview}
+      />
     ));
 
   return (

@@ -1,6 +1,6 @@
 class Api::StudentsController < ApplicationController
 
-  before_action :set_student, only: [:show]
+  before_action :set_student, only: [:show, :update]
 
   def index
     render json: Student.all
@@ -19,7 +19,6 @@ class Api::StudentsController < ApplicationController
   end
 
   def update
-    @student = Student.find(params[:id])
     if @student.update(student_params)
       render json: @student
     else

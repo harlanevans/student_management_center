@@ -4,27 +4,36 @@ import { Button, RedButton, ViewButton, Row, H1 } from "../../styles/Global";
 import { Link } from "react-router-dom";
 import NewInterview from "./NewInterview";
 
-
 const MapInt = props => {
-  const [editInterview, setEditInterview] = useState(false);
+  const [editInterviewForm, setEditInterviewForm] = useState(false);
 
   const toggleEdit = () => {
-    setEditInterview(!editInterview);
+    setEditInterviewForm(!editInterviewForm);
   };
 
   return (
     <InterviewCard>
-      <CardTitle>{props.name}</CardTitle>
+      <Link to={{ pathname: `/interview/${props.id}`, }} className="card-link">
+        <CardTitle >
+          <div className="borderCenterOther">
+        {props.name}
+        </div>
+        </CardTitle>
+      </Link>
       <Row style={styles.buttons}>
         <Button onClick={toggleEdit}>Edit</Button>
         <Link to={{ pathname: `/interview/${props.id}` }}>
           <ViewButton>Interview Page</ViewButton>
         </Link>
-        <RedButton>Delete</RedButton>
+        <RedButton onClick={() => props.deleteInterview(props.id)}>Delete</RedButton>
       </Row>
-      {editInterview ? (
+      {editInterviewForm ? (
         <Row>
-          <NewInterview />
+          <NewInterview
+            editInterview={props.editInterview}
+            interview={props}
+            toggleEdit={toggleEdit}
+          />
         </Row>
       ) : (
         <></>
