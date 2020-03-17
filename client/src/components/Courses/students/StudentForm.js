@@ -19,7 +19,7 @@ const StudentForm = props => {
   const [effort, setEffort] = useState("");
   const [social, setSocial] = useState("");
   const [skill, setSkill] = useState("");
-  
+
   //!Sets a student object
   //! to all the state values to pass to edit
   const mainStudent = {
@@ -126,8 +126,8 @@ const StudentForm = props => {
               <option value="" disabled>
                 Technical
               </option>
-              <option value="1">1 (Very Low)</option>
-              <option value="2">2 (Low)</option>
+              <option value="1">1 (Bad)</option>
+              <option value="2">2 (Below Average)</option>
               <option value="3" selected>
                 3 (Average)
               </option>
@@ -149,8 +149,8 @@ const StudentForm = props => {
               <option value="" disabled>
                 Effort
               </option>
-              <option value="1">1 (Very Low)</option>
-              <option value="2">2 (Low)</option>
+              <option value="1">1 (Bad)</option>
+              <option value="2">2 (Below Average)</option>
               <option value="3" selected>
                 3 (Average)
               </option>
@@ -172,8 +172,8 @@ const StudentForm = props => {
               <option value="" disabled>
                 Group
               </option>
-              <option value="1">1 (Very Low)</option>
-              <option value="2">2 (Low)</option>
+              <option value="1">1 (Bad)</option>
+              <option value="2">2 (Below Average)</option>
               <option value="3" selected>
                 3 (Average)
               </option>

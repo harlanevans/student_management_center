@@ -183,7 +183,6 @@ const StudentPage = props => {
       </div>
 
       <div style={styles.padding}></div>
-      <hr />
       <div style={styles.padding}></div>
       <div style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-evenly', width: '100%'}}>
           <ColorKeys />

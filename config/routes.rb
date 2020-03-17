@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     resources :students
     resources :comments
     resources :courses
-    resources :interviews
+    
+    resources :interviews do
+      resources :questions, module: 'interviews'
+    end
 
     resources :schools do
       resources :courses, module: "schools"
