@@ -33,20 +33,20 @@ const Courses = props => {
     setToggleForm(!toggleForm);
   };
 
-    const renderCourses = () => {
-      return (
-        <div style={styles.cardMap}>
-          {courses.map(course => (
-            <CourseMap
-              key={course.id}
-              {...course}
-              deleteCourse={deleteCourse}
-              editCourse={editCourse}
-            />
-          ))}
-        </div>
-      );
-    };
+  const renderCourses = () => {
+    return (
+      <div style={styles.cardMap}>
+        {courses.map(course => (
+          <CourseMap
+            key={course.id}
+            {...course}
+            deleteCourse={deleteCourse}
+            editCourse={editCourse}
+          />
+        ))}
+      </div>
+    );
+  };
 
   const addCourse = course => {
     setCourses([...courses, course]);
@@ -60,34 +60,41 @@ const Courses = props => {
   };
 
   const editCourse = (id, title) => {
-    axios.put(`/api/schools/${props.school.id}/courses/${id}`, { title }).then(res => {
-      const newCourses = courses.map(c => {
-        if (c.id === id) {
-          return res.data;
-        }
-        return c;
+    axios
+      .put(`/api/schools/${props.school.id}/courses/${id}`, { title })
+      .then(res => {
+        const newCourses = courses.map(c => {
+          if (c.id === id) {
+            return res.data;
+          }
+          return c;
+        });
+        setCourses(newCourses);
       });
-      setCourses(newCourses);
-    });
   };
 
   return (
     <div style={styles.container}>
       <Fade>
         <Row style={styles.textCont}>
-          <H1>Courses</H1>
+          <H1>{props.school ? `Courses for ${props.school.name}` : 'All Courses'}</H1>
         </Row>
-        <Row style={styles.textCont}>
-          <Paragraph style={styles.padding}>
-            You can either add a new course, or select one of the two below.
-          </Paragraph>
-        </Row>
-        <Row style={styles.textCont}>
-          <Paragraph>These are all of the courses for all schools.</Paragraph>
-        </Row>
+        {props.school ? (
+          <>
+          <Row style={styles.textCont}>
+            <Paragraph style={styles.padding}>
+              You can either add a new course, or select one of the two below.
+            </Paragraph>
+          </Row>
         <Row style={styles.paddingMore}>
           <Button onClick={toggle}>Add Course</Button>
         </Row>
+        </>
+        ) : (
+          <Row style={styles.textCont}>
+              <Paragraph style={styles.padding}>These are all of the courses for all schools.</Paragraph>
+          </Row>
+        )}
         {toggleForm ? (
           <CourseForm
             addCourse={addCourse}
@@ -129,7 +136,7 @@ const styles = {
     flexFlow: "row wrap",
     justifyContent: "space-evenly",
     width: "100%",
-    flex: "50%",
+    flex: "50%"
   },
   textCont: {
     display: "flex",

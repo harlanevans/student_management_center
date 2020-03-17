@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do 
     resources :students
     resources :comments
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     resources :students do
       resources :comments, module: 'students'
       resources :checkins, module: 'students'
+      resources :tasks, module: 'students'
     end
     
   end

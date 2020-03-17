@@ -20,6 +20,11 @@ import StudentPage from './components/Students/StudentPage';
 import Rubric from './components/shared/Rubric';
 import CHome from './components/Students/check_ins/CHome';
 
+// AUTH
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import NoMatch from './components/shared/NoMatch';
+
 const App = () => {
   return (
     <>
@@ -30,17 +35,20 @@ const App = () => {
         <div style={styles.flexTwo}>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path='/schools' component={Schools} />
-            <Route exact path='/schools/:id' component={SchoolPage} />
-            <Route exact path='/interviews' component={InterviewsPage} />
-            <Route exact path='/new_interview' component={NewInterview} />
-            <Route exact path='/interview/:id' component={IntPage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/schools" component={Schools} />
+            <Route exact path="/schools/:id" component={SchoolPage} />
+            <Route exact path="/interviews" component={InterviewsPage} />
+            <Route exact path="/new_interview" component={NewInterview} />
+            <Route exact path="/interview/:id" component={IntPage} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/courses/:id" component={CoursePage} />
             <Route exact path="/students" component={StudentsAll} />
-            <Route exact path='/student/:id' component={StudentPage} />
-            <Route exact path ='/rubric' component={Rubric} />
-            <Route exact path='/check_in/:id' component={CHome} />
+            <Route exact path="/student/:id" component={StudentPage} />
+            <Route exact path="/rubric" component={Rubric} />
+            <Route exact path="/check_in/:id" component={CHome} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </div>

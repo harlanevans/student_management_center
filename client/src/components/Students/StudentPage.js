@@ -14,6 +14,7 @@ import StudentForm from "../Courses/students/StudentForm";
 import Checks from "./check_ins/Checks";
 import { VeryBad, Bad, AverageCheck, Good, VeryGood } from "../../styles/CheckInS";
 import ColorKeys from "../shared/ColorKeys";
+import StudentTasks from './tasks/StudentTasks';
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -169,16 +170,19 @@ const StudentPage = props => {
       )}
       <div style={styles.padding}></div>
       <hr />
-
+{/* COMMENTS */}
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
           <Comments student={student} />
         </div>
+
+{/* TASKS */}
         <div style={styles.colTwo}>
         <H1>
 
         Tasks
         </H1>
+        <StudentTasks studentId={student.id}/>
         </div>
       </div>
 
@@ -240,8 +244,8 @@ const styles = {
   colTwo: {
     // padding: "1em 0em",
     width: "50%",
-    display: "flex",
-    flexDirection: "row",
+    // display: "flex",
+    // flexDirection: "row",
     // justifyContent: "center"
   },
   keyColors: {

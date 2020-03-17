@@ -6,12 +6,14 @@ import {
   OpenButton,
   LinkCont
 } from "../../styles/NavStyles";
-import { Fade } from "react-reveal";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import Logo from "../../assets/DPL_white_logo.png";
+import { Fade } from "react-reveal";
 
-const Navbar = () => {
+import { AuthConsumer } from "../../providers/AuthProvider";
+import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
+
+const Navbar = props => {
   const [toggleNav, setToggleNav] = useState(false);
   const [courses, setCourses] = useState([]);
   const [schools, setSchools] = useState([]);
@@ -60,6 +62,29 @@ const Navbar = () => {
         </div>
       );
     });
+  };
+
+  const authenticationItems = () => {
+    const {
+      auth: { user, handleLogout },
+      location
+    } = props;
+
+    if (user) {
+      return (
+        <NavItem onClick={() => handleLogout(props.history)}>Logout</NavItem>
+      );
+    } else {
+      return (
+        <div>
+          <NavItem>
+            <Link to="/login" className="borderCenterWhite navItem">
+              Login
+            </Link>
+          </NavItem>
+        </div>
+      );
+    }
   };
 
   const mapCourses = () => {
@@ -137,9 +162,12 @@ const Navbar = () => {
               </NavItem>
             </LinkCont>
           </ItemCont>
-          {/* </div> */}
-          <div style={styles.logoCont}>
-            <img src={Logo} style={styles.logo} />
+          <div>
+            <NavItem>{authenticationItems()}</NavItem>
+
+            <div style={styles.logoCont}>
+              <img src={Logo} style={styles.logo} />
+            </div>
           </div>
         </div>
       ) : (
@@ -160,7 +188,13 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export const ConnectedNavbar = props => {
+  return (
+    <AuthConsumer>{auth => <Navbar {...props} auth={auth} />}</AuthConsumer>
+  );
+};
+
+export default withRouter(ConnectedNavbar);
 
 const styles = {
   buttonCont: {
