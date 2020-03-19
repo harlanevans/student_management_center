@@ -76,13 +76,11 @@ const Navbar = props => {
       );
     } else {
       return (
-        <div>
-          <NavItem>
-            <Link to="/login" className="borderCenterWhite navItem">
-              Login
-            </Link>
-          </NavItem>
-        </div>
+        <NavItem>
+          <Link to="/login" className="borderCenterWhite navItem">
+            Login
+          </Link>
+        </NavItem>
       );
     }
   };
@@ -105,6 +103,15 @@ const Navbar = props => {
     });
   };
 
+  const getName = () => {
+    const {
+      auth: { user }
+    } = props;
+
+    if (!user) return null;
+    return `Welcome, ${user.name}`;
+  };
+
   return (
     <div>
       {toggleNav === false ? (
@@ -117,6 +124,7 @@ const Navbar = props => {
                 onClick={toggleSideNav}
               ></OpenButton>
             </NavItem>
+            <NavItem>{getName()}</NavItem>
             <NavItem
               style={{
                 textAlign: "center",
@@ -163,7 +171,7 @@ const Navbar = props => {
             </LinkCont>
           </ItemCont>
           <div>
-            <NavItem>{authenticationItems()}</NavItem>
+            {authenticationItems()}
 
             <div style={styles.logoCont}>
               <img src={Logo} style={styles.logo} />

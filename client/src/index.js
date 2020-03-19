@@ -6,6 +6,9 @@ import * as serviceWorker from "./serviceWorker";
 import CourseProvider from './components/context/CourseProvider';
 // import { AuthProvider} from './providers/AuthProvider';
 import { AuthProvider } from './providers/AuthProvider';
+import { initMiddleware } from "devise-axios";
+
+initMiddleware();
 
 ReactDOM.render(
 <AuthProvider>

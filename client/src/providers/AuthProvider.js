@@ -1,54 +1,62 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
-export const AuthProvider = (props) => {
-  const [user, setUser] = useState(null)
+export class AuthProvider extends React.Component {
+  state = { user: null };
 
-  const handleRegister = (user, history) => {
-    axios.post('/api/auth', user).then(res => {
-      setUser(res.data.data);
-      history.push('/')
-    })
-    .catch(res => {
-      console.log(res)
-    })
+  handleRegister = (user, history) => {
+    axios
+      .post("/api/auth", user)
+      .then(res => {
+        this.setState({ user: res.data.data });
+        history.push("/");
+      })
+      .catch(res => {
+        console.log(res);
+      });
+  };
+
+  handleLogin = (user, history) => {
+    axios
+      .post("/api/auth/sign_in", user)
+      .then(res => {
+        this.setState({ user: res.data.data });
+        history.push("/");
+      })
+      .catch(res => {
+        console.log(res);
+      });
+  };
+
+  handleLogout = history => {
+    axios
+      .delete("/api/auth/sign_out")
+      .then(res => {
+        this.setState({ user: null });
+        history.push("/");
+      })
+      .catch(res => {
+        console.log(res);
+      });
+  };
+
+  render() {
+    return (
+      <AuthContext.Provider
+        value={{
+          ...this.state,
+          authenticated: this.state.user !== null,
+          handleRegister: this.handleRegister,
+          handleLogin: this.handleLogin,
+          handleLogout: this.handleLogout,
+          setUser: user => this.setState({ user })
+        }}
+      >
+        {this.props.children}
+      </AuthContext.Provider>
+    );
   }
-
-  const handleLogin = (user, history) => {
-    axios.post('/api/auth/sign_in', user).then(res => {
-      setUser(res.data.data)
-      history.push('/')
-    })
-    .catch(res => { 
-      console.log(res)
-    })
-  }
-
-   const handleLogout = history => {
-      axios
-        .delete("/api/auth/sign_out")
-        .then(res => {
-          setUser(null);
-          history.push("/login");
-        })
-        .catch(res => {
-          console.log(res);
-        });
-    };
-  
-
-  return(
-    <AuthContext.Provider value={{
-      authenticated: user !== null,
-      handleRegister: handleRegister,
-      handleLogin: handleLogin,
-      handleLogout: handleLogout,
-      setUser: (user) => setUser(user)
-    }}>
-      {props.children}
-    </AuthContext.Provider>
-  )
 }
