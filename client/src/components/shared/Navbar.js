@@ -50,7 +50,7 @@ const Navbar = props => {
     ascSchools();
     return schools.map(school => {
       return (
-        <div>
+        <div key={school.id}>
           <NavItem>
             <Link
               to={{ pathname: `/schools/${school.id}` }}
@@ -72,7 +72,9 @@ const Navbar = props => {
 
     if (user) {
       return (
-        <NavItem onClick={() => handleLogout(props.history)}>Logout</NavItem>
+        <NavItem onClick={() => handleLogout(props.history)}>
+          <div className="borderCenterWhite navItem">Logout</div>
+        </NavItem>
       );
     } else {
       return (
@@ -124,12 +126,12 @@ const Navbar = props => {
                 onClick={toggleSideNav}
               ></OpenButton>
             </NavItem>
-            <NavItem>{getName()}</NavItem>
             <NavItem
               style={{
                 textAlign: "center",
                 fontFamily: "'Roboto', sans-serif",
-                fontSize: "1.5em"
+                fontSize: "1.5em",
+                padding: ".5em 0"
               }}
             >
               Student Manangement Center
@@ -170,6 +172,8 @@ const Navbar = props => {
               </NavItem>
             </LinkCont>
           </ItemCont>
+          <NavItem style={{ padding: "0" }}>{getName()}</NavItem>
+
           <div>
             {authenticationItems()}
 
