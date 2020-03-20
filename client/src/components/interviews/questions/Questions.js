@@ -24,7 +24,6 @@ const Questions = props => {
   };
 
   const addQuestion = question => {
-    debugger;
     axios
       .post(`/api/interviews/${props.interview.id}/questions`, question)
       .then(res => {

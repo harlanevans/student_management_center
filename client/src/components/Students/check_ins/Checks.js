@@ -35,7 +35,6 @@ const Checks = props => {
   };
 
   const deleteCheckIn = (id, checkin) => {
-    debugger;
     axios
       .delete(`/api/students/${props.student.id}/checkins/${id}`, checkin)
       .then(res => {

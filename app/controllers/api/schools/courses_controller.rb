@@ -13,7 +13,6 @@ class Api::Schools::CoursesController < ApplicationController
 
   def create
     course = @school.courses.new(course_params)
-    binding.pry
     if course.save
       render json: course
     else
