@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { H1, Row, Form, Input, Button } from "../../../styles/Global";
 import axios from "axios";
+import { AuthConsumer } from "../../../providers/AuthProvider";
+import { withRouter } from "react-router-dom";
 
 const StudentTasks = props => {
   const [tasks, setTasks] = useState([]);
@@ -8,6 +10,7 @@ const StudentTasks = props => {
   const [taskComplete, setTaskComplete] = useState(false);
   const [staffName, setStaffName] = useState("");
   const [toggleForm, setToggleForm] = useState(false);
+  const [user, setUser] = useState()
 
   const wholeTask = {
     name: taskName,
@@ -19,6 +22,7 @@ const StudentTasks = props => {
     axios.get(`/api/students/${props.studentId}/tasks}`).then(res => {
       setTasks(res.data);
     });
+    setUser(props.auth.user)
   }, []);
 
   const toggleTaskForm = () => {
@@ -71,7 +75,15 @@ const StudentTasks = props => {
   );
 };
 
-export default StudentTasks;
+export const ConnectedStudentTasks = (props) => {
+  return(
+
+    <AuthConsumer>{auth => <StudentTasks {...props} auth={auth}/>}</AuthConsumer>
+    )
+}
+
+export default withRouter(ConnectedStudentTasks);
+
 
 const styles = {
   formCont: {
