@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_025404) do
+ActiveRecord::Schema.define(version: 2020_03_20_174705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,11 +89,9 @@ ActiveRecord::Schema.define(version: 2020_03_20_025404) do
     t.string "staff"
     t.boolean "complete"
     t.bigint "student_id", null: false
-    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
-    t.index ["course_id"], name: "index_tasks_on_course_id"
     t.index ["student_id"], name: "index_tasks_on_student_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -134,7 +132,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_025404) do
   add_foreign_key "courses", "schools"
   add_foreign_key "questions", "interviews"
   add_foreign_key "students", "courses"
-  add_foreign_key "tasks", "courses"
   add_foreign_key "tasks", "students"
   add_foreign_key "tasks", "users"
 end

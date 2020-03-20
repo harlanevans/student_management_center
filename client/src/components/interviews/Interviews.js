@@ -36,7 +36,6 @@ const Interviews = () => {
   };
 
   const deleteInterview = id => {
-    debugger;
     axios.delete(`/api/interviews/${id}`, id).then(res => {
       console.log(res.data);
     });
