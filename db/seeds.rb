@@ -111,14 +111,7 @@ User.create(
 
   email: "contact@devpointlabs.com",
   password: 'DevPoint',
-  name: "Marc"
-
-)
-User.create(
-
-  email: "will.liang@devpointlabs.com",
-  password: 'DevPoint',
-  name: "Nhi"
+  name: "Admin"
 
 )
 
