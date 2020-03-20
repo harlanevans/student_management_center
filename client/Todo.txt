@@ -14,6 +14,8 @@ ok
 
 - is students all page even worth having?
 
+- Create Auth and users instead of staff members as strings for tasks and comments
+
 
 - students should have tasks as well as comments - what we are doing etc.
 - students also have a help model or column? just has 

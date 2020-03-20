@@ -20,7 +20,8 @@
 }
 
 input[type="text"],
-input[type='number'] {
+input[type='number'],
+input[type="password"] {
   font-size: 1em;
 }
 

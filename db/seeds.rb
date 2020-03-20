@@ -63,5 +63,22 @@
           course_id: @course2.id
       )
   end
+ 1.times do
 
+User.create(
+
+  email: "harlan.evans@devpointlabs.com",
+  password: 'DevPoint',
+  name: "Harlan"
+
+)
+User.create(
+
+  email: "will.liang@devpointlabs.com",
+  password: 'DevPoint',
+  name: "Will"
+
+)
+
+ end
 puts "Data Seeded"

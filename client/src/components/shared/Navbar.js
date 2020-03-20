@@ -6,12 +6,14 @@ import {
   OpenButton,
   LinkCont
 } from "../../styles/NavStyles";
-import { Fade } from "react-reveal";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import Logo from "../../assets/DPL_white_logo.png";
+import { Fade } from "react-reveal";
 
-const Navbar = () => {
+import { AuthConsumer } from "../../providers/AuthProvider"; 
+import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
+
+const Navbar = props => {
   const [toggleNav, setToggleNav] = useState(false);
   const [courses, setCourses] = useState([]);
   const [schools, setSchools] = useState([]);
@@ -48,7 +50,7 @@ const Navbar = () => {
     ascSchools();
     return schools.map(school => {
       return (
-        <div>
+        <div key={school.id}>
           <NavItem>
             <Link
               to={{ pathname: `/schools/${school.id}` }}
@@ -60,6 +62,29 @@ const Navbar = () => {
         </div>
       );
     });
+  };
+
+  const authenticationItems = () => {
+    const {
+      auth: { user, handleLogout },
+      location
+    } = props;
+
+    if (user) {
+      return (
+        <NavItem onClick={() => handleLogout(props.history)}>
+          <div className="borderCenterWhite navItem">Logout</div>
+        </NavItem>
+      );
+    } else {
+      return (
+        <NavItem>
+          <Link to="/login" className="borderCenterWhite navItem">
+            Login
+          </Link>
+        </NavItem>
+      );
+    }
   };
 
   const mapCourses = () => {
@@ -80,6 +105,15 @@ const Navbar = () => {
     });
   };
 
+  const getName = () => {
+    const {
+      auth: { user }
+    } = props;
+
+    if (!user) return null;
+    return `Welcome, ${user.name}`;
+  };
+
   return (
     <div>
       {toggleNav === false ? (
@@ -96,7 +130,8 @@ const Navbar = () => {
               style={{
                 textAlign: "center",
                 fontFamily: "'Roboto', sans-serif",
-                fontSize: "1.5em"
+                fontSize: "1.5em",
+                padding: ".5em 0"
               }}
             >
               Student Manangement Center
@@ -137,9 +172,14 @@ const Navbar = () => {
               </NavItem>
             </LinkCont>
           </ItemCont>
-          {/* </div> */}
-          <div style={styles.logoCont}>
-            <img src={Logo} style={styles.logo} />
+          <NavItem style={{ padding: "0" }}>{getName()}</NavItem>
+
+          <div>
+            {authenticationItems()}
+
+            <div style={styles.logoCont}>
+              <img src={Logo} style={styles.logo} />
+            </div>
           </div>
         </div>
       ) : (
@@ -160,7 +200,13 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export const ConnectedNavbar = props => {
+  return (
+    <AuthConsumer>{auth => <Navbar {...props} auth={auth} />}</AuthConsumer>
+  );
+};
+
+export default withRouter(ConnectedNavbar);
 
 const styles = {
   buttonCont: {

@@ -7,13 +7,21 @@ import {
   Text,
   Count
 } from "../../../styles/ComStyle";
-import { Row } from "../../../styles/Global";
+import { Row, Paragraph } from "../../../styles/Global";
 import axios from "axios";
+import { AuthConsumer } from "../../../providers/AuthProvider";
+import { withRouter } from "react-router-dom";
 
 const CForm = props => {
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
   const [author, setAuthor] = useState("");
+  const [user_id, setUserId] = useState("");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    setUser(props.auth.user);
+  }, []);
 
   const handleSelectChange = event => {
     setTag({ value: event.target.value });
@@ -21,7 +29,12 @@ const CForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const comment = { author, body, tag: tag.value };
+    const comment = {
+      author: user.name,
+      body,
+      tag: tag.value,
+      user_id: user.id
+    };
     axios
       .post(`/api/students/${props.student.id}/comments`, comment)
       .then(res => {
@@ -29,24 +42,11 @@ const CForm = props => {
         props.toggleForm();
       });
   };
-  // const bodyCount = () => {
-  //   const charCount = body.length;
-  //   if (charCount < 200) {
-  //     return <Count>{body.length} / 200</Count>;
-  //   } else {
-  //     return <Count style={{ color: "#6E0D25" }}>{body.length} / 200</Count>;
-  //   }
-  // };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row style={styles.space}>
-        <Input
-          placeholder="Author..."
-          value={author}
-          onChange={e => setAuthor(e.target.value)}
-        />
-        {/* Maybe do tags as checkboxes instead of a select? */}
+        
         <Select onChange={handleSelectChange} required>
           <option>Tag...</option>
           <option value="Update">Update</option>
@@ -87,7 +87,21 @@ const CForm = props => {
   );
 };
 
-export default CForm;
+// export const ConnectedNavbar = props => {
+//   return (
+//     <AuthConsumer>{auth => <Navbar {...props} auth={auth} />}</AuthConsumer>
+//   );
+// };
+
+// export default withRouter(ConnectedNavbar);
+
+export const ConnectedCommentForm = props => {
+  return (
+    <AuthConsumer>{auth => <CForm {...props} auth={auth} />}</AuthConsumer>
+  );
+};
+
+export default withRouter(ConnectedCommentForm);
 
 const styles = {
   space: {
@@ -96,7 +110,5 @@ const styles = {
     justifyContent: "flex-start",
     width: "100%"
   },
-  padding: {
-    
-  }
+  padding: {}
 };

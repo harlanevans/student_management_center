@@ -97,6 +97,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingRight: "1em"
+    width: '100%'
+    // paddingRight: "1em"
   }
 };
