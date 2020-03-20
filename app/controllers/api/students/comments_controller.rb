@@ -1,5 +1,5 @@
 class Api::Students::CommentsController < ApplicationController
-  before_action :set_student
+  before_action :set_student, except: [:get_users]
   before_action :set_comment, only: [:destroy]
 
   def index
@@ -10,7 +10,6 @@ class Api::Students::CommentsController < ApplicationController
     comment = @student.comments.new(comment_params)
     if comment.save
       render json: comment
-      
     else
       render json: {message: "Unable to create comment."}
     end
@@ -41,7 +40,7 @@ class Api::Students::CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:body, :author, :tag, :student_id)
+      params.require(:comment).permit(:body, :author, :tag, :student_id, :user_id)
     end
 
     def set_comment 

@@ -58,16 +58,16 @@ export const Select = styled.select`
 `;
 
 export const CommentCard = styled.div`
-  flex: 0 0 50%;
+  flex: 0 0 40%;
   font-family: "Raleway", sans-serif;
-  border: solid 2px #46494c;
+  border: solid .5px grey;
   padding: 1em;
   margin: 1em 0em;
   border-radius: 3px;
-  width: 100%;
+  width: 95%;
   height: 100%;
   background-color: white;
-  box-shadow: 1px 1px 2px 2px #dcdcdd;
+  box-shadow: .5px .5px 1px 1px #dcdcdd;
 `;
 
 export const Author = styled.h1`

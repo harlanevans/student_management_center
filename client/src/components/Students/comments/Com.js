@@ -26,8 +26,7 @@ const Com = props => {
   };
 
   const dateCreated = () => {
-
-    //! REFACTOR THIS TO MOMENTJS 
+    //! REFACTOR THIS TO MOMENTJS
     var date = new Date(props.created_at);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -45,20 +44,26 @@ const Com = props => {
     return `${fullDate} at ${strTime} (${dayOfWeek})`;
   };
 
+  // const deleteAndEdit = () => (
+  //   <Row style={styles.buttons}>
+  //     <Button style={{ margin: "0em 1em" }}>Edit</Button>
+  //     <RedButton onClick={() => props.deleteComment(props.id)}>
+  //       Delete
+  //     </RedButton>
+  //   </Row>
+  // );
+
   return (
     <CommentCard>
       <Row style={styles.top}>
         <Author>{props.author} commented:</Author>
         {tagColor()}
       </Row>
-      <Row style={styles.body}>"{props.body}"</Row>
-      <Row></Row>
-      {/* <Row style={styles.buttons}>
-        <Button style={{margin: "0em 1em"}}>Edit</Button>
-        <RedButton onClick={() => props.deleteComment(props.id)}>
-          Delete
-        </RedButton>
-      </Row> */}
+      <Row style={styles.body}>
+
+        {props.body}
+        </Row>
+      {/* {deleteAndEdit()} */}
       <Row>
         <DatePosted>{dateCreated()}</DatePosted>
       </Row>
@@ -75,7 +80,7 @@ const styles = {
     justifyContent: "space-between"
   },
   body: {
-    padding: "1em 1em"
+    padding: ".5em 0em"
   },
   tag: {},
   buttons: {

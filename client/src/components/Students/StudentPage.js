@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Row, H1, Button, RedButton, ViewButton, Paragraph } from "../../styles/Global";
+import {
+  Row,
+  H1,
+  Button,
+  RedButton,
+  ViewButton,
+  Paragraph
+} from "../../styles/Global";
 import {
   Skill,
   Average,
@@ -12,9 +19,15 @@ import Comments from "./comments/Comments";
 import { Link } from "react-router-dom";
 import StudentForm from "../Courses/students/StudentForm";
 import Checks from "./check_ins/Checks";
-import { VeryBad, Bad, AverageCheck, Good, VeryGood } from "../../styles/CheckInS";
+import {
+  VeryBad,
+  Bad,
+  AverageCheck,
+  Good,
+  VeryGood
+} from "../../styles/CheckInS";
 import ColorKeys from "../shared/ColorKeys";
-import StudentTasks from './tasks/StudentTasks';
+import StudentTasks from "./tasks/StudentTasks";
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -149,13 +162,13 @@ const StudentPage = props => {
               width: "100%"
             }}
           >
-              <Count onClick={decrease}>-</Count>
+            <Count onClick={decrease}>-</Count>
             <Skill>
               {student.times_helped === null || undefined
                 ? "0"
                 : student.times_helped}
             </Skill>
-                <Count onClick={increase}>+</Count>
+            <Count onClick={increase}>+</Count>
           </div>
         </div>
       </Row>
@@ -170,27 +183,31 @@ const StudentPage = props => {
       )}
       <div style={styles.padding}></div>
       <hr />
-{/* COMMENTS */}
+      {/* COMMENTS */}
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
           <Comments student={student} />
         </div>
 
-{/* TASKS */}
+        {/* TASKS */}
         <div style={styles.colTwo}>
-        <H1>
-
-        Tasks
-        </H1>
-        <StudentTasks studentId={student.id}/>
+          <H1>Tasks</H1>
+          <StudentTasks studentId={student.id} />
         </div>
       </div>
 
       <div style={styles.padding}></div>
       <div style={styles.padding}></div>
-      <div style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-evenly', width: '100%'}}>
-          <ColorKeys />
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexFlow: "row wrap",
+          justifyContent: "space-evenly",
+          width: "100%"
+        }}
+      >
+        <ColorKeys />
+      </div>
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
           <H1>Check Ins</H1>
@@ -239,11 +256,11 @@ const styles = {
   },
   colOne: {
     // padding: "1em 0em",
-    width: "50%"
+    width: "45%"
   },
   colTwo: {
     // padding: "1em 0em",
-    width: "50%",
+    width: "50%"
     // display: "flex",
     // flexDirection: "row",
     // justifyContent: "center"
@@ -251,7 +268,6 @@ const styles = {
   keyColors: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: 'space-between'
-    
+    justifyContent: "space-between"
   }
 };

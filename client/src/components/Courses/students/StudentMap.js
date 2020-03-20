@@ -8,7 +8,7 @@ import {
   HighAverage,
   Count
 } from "../../../styles/Student";
-import { Row, RedButton, Button, ViewButton } from "../../../styles/Global";
+import { Row, RedButton, Button, } from "../../../styles/Global";
 import StudentForm from "./StudentForm";
 import { Link } from "react-router-dom";
 import axios from "axios";

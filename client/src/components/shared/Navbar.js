@@ -9,7 +9,7 @@ import {
 import Logo from "../../assets/DPL_white_logo.png";
 import { Fade } from "react-reveal";
 
-import { AuthConsumer } from "../../providers/AuthProvider";
+import { AuthConsumer } from "../../providers/AuthProvider"; 
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 
