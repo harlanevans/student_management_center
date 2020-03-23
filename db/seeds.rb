@@ -69,47 +69,47 @@ def create_users
     User.create(
       email: "harlan.evans@devpointlabs.com",
       password: 'DevPoint',
-    ),
+    )
     User.create(
       email: "will@devpointlabs.com",
       password: 'DevPoint',
       name: "Will"
-    ),
+    )
     User.create(
       email: "nick.ristagno@devpointstudios.com",
       password: 'DevPoint',
       name: "Nick"
-    ),
+    )
     User.create(
       email: "scott.christensen@devpointlabs.com",
       password: 'DevPoint',
       name: "DC"
-    ),
+    )
     User.create(
       email: "derek@devpointlabs.com",
       password: 'DevPoint',
       name: "Derek"
-    ),
+    )
     User.create(
       email: "james.yeates@devpointlabs.com",
       password: 'DevPoint',
       name: "James"
-    ),
+    )
     User.create(
       email: "contact@devpointlabs.com",
       password: 'DevPoint',
       name: "Admin"
-    ),
+    )
     User.create(
       email: "marc.price@devpointlabs.com",
       password: 'DevPoint',
       name: "Marc"
-    ),
+    )
     User.create(
       email: "nhi@devpointlabs.com",
       password: 'DevPoint',
       name: "Nhi"
-    ),
+    )
     User.create(
       email: "henry@devpointlabs.com",
       password: 'DevPoint',
