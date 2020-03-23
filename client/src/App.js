@@ -27,6 +27,8 @@ import NoMatch from "./components/shared/NoMatch";
 import FetchUser from "./components/auth/FetchUser";
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
+import Account from './components/accounts/Account';
+
 const App = () => {
   return (
     <>
@@ -51,6 +53,7 @@ const App = () => {
               <ProtectedRoute exact path="/student/:id" component={StudentPage} />
               <ProtectedRoute exact path="/rubric" component={Rubric} />
               <ProtectedRoute exact path="/check_in/:id" component={CHome} />
+              <ProtectedRoute exact path='/account' component={Account}/>
               <Route component={NoMatch} />
             </Switch>
           </div>
