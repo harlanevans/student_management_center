@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Row, H1, Button, RedButton, ViewButton } from "../../styles/Global";
+import { Row, H1, Button,  } from "../../styles/Global";
 import axios from "axios";
 import NewInterview from "./NewInterview";
-import { InterviewCard, CardTitle } from "../../styles/IntStyles";
+// import { InterviewCard, CardTitle } from "../../styles/IntStyles";
 import MapInt from "./MapInt";
 
 const Interviews = () => {

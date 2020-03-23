@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, H1, Form, Input, Button } from "../../styles/Global";
+import { Form, Input, Button } from "../../styles/Global";
 import axios from "axios";
 
 const NewInterview = props => {
@@ -9,7 +9,7 @@ const NewInterview = props => {
     if (props.interview) {
       setName(props.interview.name);
     }
-  },[]);
+  },[props.interview]);
 
   const handleSubmit = e => {
     e.preventDefault();

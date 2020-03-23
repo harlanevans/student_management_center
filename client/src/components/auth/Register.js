@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthConsumer } from "../../providers/AuthProvider";
 import { Row, H1, Button, Form, Input } from "../../styles/Global";
-import { Text } from '../../styles/ComStyle';
+// import { Text } from '../../styles/ComStyle';
 
 class Register extends React.Component {
   state = { email: "", password: "", passwordConfirmation: "", name: "" };

@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import {
-  H1,
-  Paragraph,
   Button,
   Row,
-  RedButton,
-  Input,
   Form,
   Label
 } from "../../../styles/Global";
-import { Text, Count, Select } from "../../../styles/CheckInS";
+import { Text, Select } from "../../../styles/CheckInS";
 import axios from "axios";
 
 const CiForm = props => {

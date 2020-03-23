@@ -27,7 +27,7 @@ const StudentMap = props => {
     axios.get(`/api/students/${props.id}`).then(res => {
       setStudent(res.data);
     });
-  }, []);
+  }, [props.id]);
 
   const toggleLoaded = () => {
     setIsLoaded(!isLoaded);

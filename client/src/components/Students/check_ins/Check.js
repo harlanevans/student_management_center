@@ -4,8 +4,6 @@ import {
   Row,
   Paragraph,
   Button,
-  RedButton,
-  ViewButton
 } from "../../../styles/Global";
 import {
   CheckIn,

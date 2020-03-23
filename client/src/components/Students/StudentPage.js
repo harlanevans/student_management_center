@@ -6,7 +6,6 @@ import {
   Button,
   RedButton,
   ViewButton,
-  Paragraph
 } from "../../styles/Global";
 import {
   Skill,
@@ -19,13 +18,6 @@ import Comments from "./comments/Comments";
 import { Link } from "react-router-dom";
 import StudentForm from "../Courses/students/StudentForm";
 import Checks from "./check_ins/Checks";
-import {
-  VeryBad,
-  Bad,
-  AverageCheck,
-  Good,
-  VeryGood
-} from "../../styles/CheckInS";
 import ColorKeys from "../shared/ColorKeys";
 import StudentTasks from "./tasks/StudentTasks";
 
@@ -39,7 +31,7 @@ const StudentPage = props => {
     axios.get(`/api/students/${id}`).then(res => {
       setStudent(res.data);
     });
-  }, []);
+  }, [props.match.params]);
 
   const toggleEdit = () => {
     setToggleForm(!toggleForm);

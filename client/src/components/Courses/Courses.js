@@ -4,8 +4,6 @@ import {
   Paragraph,
   Row,
   Button,
-  Input,
-  FormButton
 } from "../../styles/Global";
 import { Fade } from "react-reveal";
 import axios from "axios";

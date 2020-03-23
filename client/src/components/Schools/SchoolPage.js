@@ -5,7 +5,7 @@ import Courses from "../Courses/Courses";
 
 const SchoolPage = props => {
   const [school, setSchool] = useState();
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
   const [showCourses, setShowCourses] = useState(true);
 
   useEffect(() => {
@@ -13,10 +13,10 @@ const SchoolPage = props => {
     axios.get(`/api/schools/${id}`).then(res => {
       setSchool(res.data);
     });
-    axios.get(`/api/schools/${id}/courses`).then(res => {
-      setCourses(res.data);
-    });
-  }, [props.match.params.id]);
+    // axios.get(`/api/schools/${id}/courses`).then(res => {
+    //   setCourses(res.data);
+    // });
+  }, [props.match.params]);
 
   const toggleCoursesPage = () => {
     setShowCourses(!showCourses);
