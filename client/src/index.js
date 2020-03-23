@@ -3,20 +3,18 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import CourseProvider from './components/context/CourseProvider';
-// import { AuthProvider} from './providers/AuthProvider';
-import { AuthProvider } from './providers/AuthProvider';
+// import CourseProvider from "./components/context/CourseProvider";
+import { AuthProvider } from "./providers/AuthProvider";
 import { initMiddleware } from "devise-axios";
 
 initMiddleware();
 
 ReactDOM.render(
-<AuthProvider>
-
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-</AuthProvider>,
+  <AuthProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </AuthProvider>,
   document.getElementById("root")
 );
 

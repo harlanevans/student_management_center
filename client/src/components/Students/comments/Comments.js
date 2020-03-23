@@ -13,7 +13,7 @@ const Comments = props => {
     axios.get(`/api/students/${props.student.id}/comments`).then(res => {
       setComments(res.data);
     });
-  }, []);
+  }, [props.student.id]);
 
   const renderComments = () => {
     if (comments.length === 0)

@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  H1,
-  Paragraph,
-  Button,
-  Row,
-  RedButton,
-  Select
-} from "../../../styles/Global";
+import { H1, Paragraph, Button, Row, Select } from "../../../styles/Global";
 import { Fade } from "react-reveal";
 import StudentMap from "./StudentMap";
 import StudentForm from "./StudentForm";
 import axios from "axios";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 
 const Students = props => {
   const [students, setStudents] = useState([]);
@@ -27,35 +20,35 @@ const Students = props => {
     });
   }, [props.course.id, studentSort]);
 
-  const studentSortingChoice = () => {
-    if (studentSort === "asc") {
-      const firstNameAsc = students.sort(function(a, b) {
-        var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      });
-    }
-
-    const firstNameDesc = students.sort(function(a, b) {
-      var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
-      if (nameA > nameB) {
-        return -1;
-      }
-      if (nameA < nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
-    });
-  };
+  // const studentSortingChoice = () => {
+  //   if (studentSort === "asc") {
+  //     const firstNameAsc = students.sort(function(a, b) {
+  //       var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
+  //       var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
+  //       if (nameA < nameB) {
+  //         return -1;
+  //       }
+  //       if (nameA > nameB) {
+  //         return 1;
+  //       }
+  //       // names must be equal
+  //       return 0;
+  //     });
+  //   } else {
+  //     const firstNameDesc = students.sort(function(a, b) {
+  //       var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
+  //       var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
+  //       if (nameA > nameB) {
+  //         return -1;
+  //       }
+  //       if (nameA < nameB) {
+  //         return 1;
+  //       }
+  //       // names must be equal
+  //       return 0;
+  //     });
+  //   }
+  // };
 
   const renderStudents = () => {
     return (

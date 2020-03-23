@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Form,
-  Input,
   FormButton,
   Select,
   Text,
   Count
 } from "../../../styles/ComStyle";
-import { Row, Paragraph } from "../../../styles/Global";
+import { Row, } from "../../../styles/Global";
 import axios from "axios";
 import { AuthConsumer } from "../../../providers/AuthProvider";
 import { withRouter } from "react-router-dom";
@@ -15,13 +14,13 @@ import { withRouter } from "react-router-dom";
 const CForm = props => {
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
-  const [author, setAuthor] = useState("");
-  const [user_id, setUserId] = useState("");
+  // const [author, setAuthor] = useState("");
+  // const [user_id, setUserId] = useState("");
   const [user, setUser] = useState();
 
   useEffect(() => {
     setUser(props.auth.user);
-  }, []);
+  }, [props.auth.user]);
 
   const handleSelectChange = event => {
     setTag({ value: event.target.value });

@@ -52,9 +52,9 @@ const AddQuestion = (props) => {
 export default AddQuestion;
 
 
-const styles = {
-  container: {
-    padding: '2em 0em',
-    width: '100%'
-  }
-}
+// const styles = {
+//   container: {
+//     padding: '2em 0em',
+//     width: '100%'
+//   }
+// }

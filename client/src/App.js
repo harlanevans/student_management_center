@@ -39,7 +39,7 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
+              <Route exact path="/register-staff" component={Register} />
               <ProtectedRoute exact path="/schools" component={Schools} />
               <ProtectedRoute exact path="/schools/:id" component={SchoolPage} />
               <ProtectedRoute exact path="/interviews" component={InterviewsPage} />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   NavItem,
-  NavCont,
   ItemCont,
   OpenButton,
   LinkCont
@@ -15,7 +14,7 @@ import axios from "axios";
 
 const Navbar = props => {
   const [toggleNav, setToggleNav] = useState(false);
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
   const [schools, setSchools] = useState([]);
 
   const toggleSideNav = () => {
@@ -26,18 +25,19 @@ const Navbar = props => {
     axios.get("/api/schools").then(res => {
       setSchools(res.data);
     });
-    axios.get("/api/courses").then(res => {
-      setCourses(res.data);
-    });
+    // axios.get("/api/courses").then(res => {
+    //   setCourses(res.data);
+    // });
   }, []);
 
-  const ascCourses = () => {
-    courses.sort(function(a, b) {
-      var first = a.title.toUpperCase();
-      var last = b.title.toUpperCase();
-      return first < last ? -1 : first > last ? 1 : 0;
-    });
-  };
+  // const ascCourses = () => {
+  //   courses.sort(function(a, b) {
+  //     var first = a.title.toUpperCase();
+  //     var last = b.title.toUpperCase();
+  //     return first < last ? -1 : first > last ? 1 : 0;
+  //   });
+  // };
+
   const ascSchools = () => {
     schools.sort(function(a, b) {
       var first = a.name.toUpperCase();
@@ -67,7 +67,7 @@ const Navbar = props => {
   const authenticationItems = () => {
     const {
       auth: { user, handleLogout },
-      location
+      // location
     } = props;
 
     if (user) {
@@ -87,23 +87,23 @@ const Navbar = props => {
     }
   };
 
-  const mapCourses = () => {
-    ascCourses();
-    return courses.map(course => {
-      return (
-        <div>
-          <NavItem>
-            <Link
-              to={{ pathname: `/courses/${course.id}` }}
-              className="borderCenterWhite navItem"
-            >
-              {course.title}
-            </Link>
-          </NavItem>
-        </div>
-      );
-    });
-  };
+  // const mapCourses = () => {
+  //   ascCourses();
+  //   return courses.map(course => {
+  //     return (
+  //       <div>
+  //         <NavItem>
+  //           <Link
+  //             to={{ pathname: `/courses/${course.id}` }}
+  //             className="borderCenterWhite navItem"
+  //           >
+  //             {course.title}
+  //           </Link>
+  //         </NavItem>
+  //       </div>
+  //     );
+  //   });
+  // };
 
   const getName = () => {
     const {
@@ -154,6 +154,7 @@ const Navbar = props => {
                   All Courses
                 </Link>
               </NavItem>
+              {/* Do I map through courses in the navbar?  */}
               {/* <div>{mapCourses()}</div> */}
               <NavItem>
                 <Link to="/students" className="borderCenterWhite navItem">
@@ -178,7 +179,7 @@ const Navbar = props => {
             {authenticationItems()}
 
             <div style={styles.logoCont}>
-              <img src={Logo} style={styles.logo} />
+              <img src={Logo} style={styles.logo} alt='dpl logo'/>
             </div>
           </div>
         </div>

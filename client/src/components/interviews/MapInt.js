@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,  } from "react";
 import { InterviewCard, CardTitle } from "../../styles/IntStyles";
-import { Button, RedButton, ViewButton, Row, H1 } from "../../styles/Global";
+import { Button, RedButton, ViewButton, Row,} from "../../styles/Global";
 import { Link } from "react-router-dom";
 import NewInterview from "./NewInterview";
 

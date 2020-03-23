@@ -13,7 +13,7 @@ const CourseMap = props => {
     axios.get(`/api/courses/${props.id}/students`).then(res => {
       setStudents(res.data);
     });
-  }, []);
+  }, [props.id]);
 
   const length = students.length;
 
@@ -23,8 +23,8 @@ const CourseMap = props => {
     let studentAverage;
     let totalAverage;
     students.map(s => {
-      studentAverage = (s.technical + s.effort + s.social) / 3;
-      average = average + studentAverage;
+       studentAverage = (s.technical + s.effort + s.social) / 3;
+       average = average + studentAverage;
     });
     if (length > 0) {
       totalAverage = average / length;

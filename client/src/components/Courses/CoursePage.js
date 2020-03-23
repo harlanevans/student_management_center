@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, RedButton, Row, H1, Paragraph } from "../../styles/Global";
-import { Link } from "react-router-dom";
+import { Row, H1, Paragraph } from "../../styles/Global";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import Students from "./students/Students";
 // useLayoutEffect
@@ -17,7 +17,7 @@ const CoursePage = props => {
     axios.get(`/api/courses/${id}/students`).then(res => {
       setStudents(res.data)
     });
-  }, [props.match.params.id]);
+  }, [props.match.params]);
 
 
   const length = students.length;

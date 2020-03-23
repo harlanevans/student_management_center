@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 // /* #DCDCDD #46494C #4C5C68 #1985A1,
 // #582e83, #6E0D25 #533953 #3F5772

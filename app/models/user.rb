@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :comments
+  has_many :tasks, through: :student
 
 end
