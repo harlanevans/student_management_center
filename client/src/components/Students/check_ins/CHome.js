@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CiForm from "./CiForm";
-import { H1, Row, RedButton, Button } from "../../../styles/Global";
+import { H1, Row, RedButton, } from "../../../styles/Global";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ const CHome = props => {
     axios.get(`/api/students/${id}`).then(res => {
       setStudent(res.data);
     });
-  }, []);
+  }, [props.match.params]);
 
   
 

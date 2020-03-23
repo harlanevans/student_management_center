@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, H1, Paragraph, Button } from "../../../styles/Global";
+import { Row, Paragraph, Button } from "../../../styles/Global";
 import {
   QuestionCont,
   Answer,
@@ -17,7 +17,7 @@ const Questions = props => {
     axios.get(`/api/interviews/${props.interview.id}/questions`).then(res => {
       setQuestions(res.data);
     });
-  }, []);
+  }, [props.interview.id]);
 
   const toggleAdd = () => {
     setToggleAddQuestions(!toggleAddQuestions);
@@ -71,10 +71,10 @@ const Questions = props => {
 
 export default Questions;
 
-const styles = {
-  centerRow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start"
-  }
-};
+// const styles = {
+//   centerRow: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "flex-start"
+//   }
+// };

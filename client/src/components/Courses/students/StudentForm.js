@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  H1,
-  Paragraph,
   Button,
   Row,
   RedButton,
@@ -18,7 +16,7 @@ const StudentForm = props => {
   const [technical, setTechnical] = useState("");
   const [effort, setEffort] = useState("");
   const [social, setSocial] = useState("");
-  const [skill, setSkill] = useState("");
+  // const [skill, setSkill] = useState("");
 
   //!Sets a student object
   //! to all the state values to pass to edit
@@ -55,7 +53,7 @@ const StudentForm = props => {
     } else {
       setDefaultValue();
     }
-  }, []);
+  }, [props, ]);
 
   const setDefaultValue = () => {
     if (technical === "") {

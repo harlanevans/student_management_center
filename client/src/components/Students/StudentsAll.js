@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { H1, Paragraph, Row } from "../../styles/Global";
+import { H1, Row } from "../../styles/Global";
 import { Fade } from "react-reveal";
-import StudentForm from "../Courses/students/StudentForm";
+// import StudentForm from "../Courses/students/StudentForm";
 import axios from "axios";
 import MapStudents from "./MapStudents";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const StudentsAll = () => {
   const [students, setStudents] = useState([]);
-  const [select, setSelect] = useState(null);
+  // const [select, setSelect] = useState(null);
 
   useEffect(() => {
     axios.get("/api/students").then(res => {
@@ -30,9 +30,9 @@ const StudentsAll = () => {
 
 
   //! Handle change for select for student sort order
-  const handleChange = event => {
-    setSelect({ value: event.target.value });
-  };
+  // const handleChange = event => {
+  //   setSelect({ value: event.target.value });
+  // };
 
   const renderStudents = () => {
     return students.map(student => {

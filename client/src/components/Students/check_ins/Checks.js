@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { H1, Row, Paragraph } from "../../../styles/Global";
+import { Row, Paragraph } from "../../../styles/Global";
 import axios from "axios";
 import Check from "./Check";
 
 const Checks = props => {
   const [checks, setChecks] = useState([]);
-  const [checkId, setCheckId] = useState();
+  // const [checkId, setCheckId] = useState();
 
   useEffect(() => {
     axios.get(`/api/students/${props.student.id}/checkins`).then(res => {
       setChecks(res.data);
     });
-  }, []);
+  }, [props.student.id]);
 
-  const addCheckIn = checkin => {
-    setChecks([checkin, ...checks]);
-  };
+  // const addCheckIn = checkin => {
+  //   setChecks([checkin, ...checks]);
+  // };
 
+  //TODO Need to compare check in id's so that the lesser one will = 1, greater = 2 
   const renderCheckIns = () => {
     if (checks.length === 0)
       return (
@@ -28,7 +29,7 @@ const Checks = props => {
           key={check.id}
           {...check}
           deleteCheckIn={deleteCheckIn}
-          checkId={checkId}
+          // checkId={checkId}
         />
       );
     });

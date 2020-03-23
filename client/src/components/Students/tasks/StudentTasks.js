@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { H1, Row, Form, Input, Button } from "../../../styles/Global";
+import { Button } from "../../../styles/Global";
 import axios from "axios";
 import { AuthConsumer } from "../../../providers/AuthProvider";
 import { withRouter } from "react-router-dom";
@@ -7,7 +7,7 @@ import TaskForm from './TaskForm';
 
 const StudentTasks = props => {
   const [tasks, setTasks] = useState([]);
-  const [taskComplete, setTaskComplete] = useState(false);
+  // const [taskComplete, setTaskComplete] = useState(false);
   const [toggleForm, setToggleForm] = useState(false);
   const [user, setUser] = useState();
 
@@ -18,7 +18,7 @@ const StudentTasks = props => {
       setTasks(res.data);
     });
     setUser(props.auth.user);
-  }, []);
+  }, [props.auth.user, props.studentId]);
 
   const toggleTaskForm = () => {
     setToggleForm(!toggleForm);
@@ -27,7 +27,7 @@ const StudentTasks = props => {
   const renderTasks = () => {
     // if (!tasks) return null;
     return tasks.map(task => (
-      <div>
+      <div key={task.id}>
         {task.name}
         {task.complete ? "Complete" : "NOT Complete"}
         {/* <Input type='checkbox' value={taskComplete} onChange={handleComplete}/> */}
@@ -43,16 +43,17 @@ const StudentTasks = props => {
       });
   };
 
-  const handleComplete = () => {
-    setTaskComplete(!taskComplete);
-  };
+  //! Sets tasks to complete
+  // const handleComplete = () => {
+  //   setTaskComplete(!taskComplete);
+  // };
 
   return (
     <div style={styles.mainRow}>
       <div style={styles.colOne}>
         <Button onClick={toggleTaskForm}>New Task</Button>
         {toggleForm ? (
-            <TaskForm user={props.auth.user} addTask={addTask} toggle={toggleTaskForm}/>
+            <TaskForm user={user} addTask={addTask} toggle={toggleTaskForm}/>
         ) : (
           <></>
         )}

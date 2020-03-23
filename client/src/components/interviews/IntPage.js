@@ -14,7 +14,7 @@ const IntPage = props => {
         setInt(res.data);
       });
     }
-  }, []);
+  }, [props.match.params]);
 
   if (!int) return null;
   return (

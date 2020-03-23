@@ -1,9 +1,8 @@
 import React from "react";
-import { Row, H1, Button, RedButton } from "../../../styles/Global";
+import { Row, } from "../../../styles/Global";
 import {
   CommentCard,
   Author,
-  Body,
   TagOther,
   TagConcern,
   TagUpdate,

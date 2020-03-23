@@ -9,7 +9,7 @@ const CourseForm = props => {
     if (props.id) {
       setTitle(props.title);
     }
-  }, []);
+  }, [props.id, props.title]);
 
   const handleSubmit = e => {
     e.preventDefault();

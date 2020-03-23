@@ -3,7 +3,6 @@ import {
   H1,
   Paragraph,
   Row,
-  Button,
 } from "../../styles/Global";
 
 const Rubric = () => {
