@@ -73,7 +73,7 @@ const Navbar = props => {
     if (user) {
       return (
         <NavItem onClick={() => handleLogout(props.history)}>
-          <div className="borderCenterWhite navItem">Logout</div>
+          <div style={{cursor: 'pointer'}} className="borderCenterWhite navItem">Logout</div>
         </NavItem>
       );
     } else {
@@ -111,7 +111,7 @@ const Navbar = props => {
     } = props;
 
     if (!user) return null;
-    return `Welcome, ${user.name}`;
+    return `Welcome ${user.name}`;
   };
 
   return (
@@ -173,13 +173,17 @@ const Navbar = props => {
               </NavItem>
             </LinkCont>
           </ItemCont>
-          <NavItem style={{ padding: "0" }}>{getName()}</NavItem>
+          <NavItem style={{ padding: "0" }}>
+            <Link to="/account" className="borderCenterWhite navItem">
+            {getName()}
+            </Link>
+          </NavItem>
 
           <div>
             {authenticationItems()}
 
             <div style={styles.logoCont}>
-              <img src={Logo} style={styles.logo} alt='dpl logo'/>
+              <img src={Logo} style={styles.logo} alt="dpl logo" />
             </div>
           </div>
         </div>
