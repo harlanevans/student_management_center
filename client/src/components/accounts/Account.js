@@ -26,17 +26,32 @@ const Account = props => {
   };
 
   const accountView = () => (
-    <div>
+    <>
       <Row style={styles.centerRow}>
-        <img src={props.auth.user.image || defaultImage} />
+        <div style={styles.imageCont}>
+        <img src={props.auth.user.image || defaultImage} style={styles.image}/>
+        </div>
       </Row>
       <Row style={styles.userStuff}>
-        <Paragraph>Name: {name}</Paragraph>
+        <Paragraph>Name: </Paragraph>
       </Row>
       <Row style={styles.userStuff}>
-        <Paragraph>Email: {email}</Paragraph>
+        <Paragraph>
+          <b>{name}</b>
+        </Paragraph>
       </Row>
-    </div>
+      <Row style={styles.userStuff}>
+        <Paragraph>Email:</Paragraph>
+      </Row>
+      <Row style={styles.userStuff}>
+        <Paragraph>
+          <b>{email}</b>
+        </Paragraph>
+      </Row>
+      <Row style={styles.button}>
+        <ViewButton onClick={toggleEdit}>Edit</ViewButton>
+      </Row>
+    </>
   );
 
   return (
@@ -44,14 +59,14 @@ const Account = props => {
       <Row style={styles.centerRow}>
         <H1>Account Details</H1>
       </Row>
-      <Row>
-        <ViewButton onClick={toggleEdit}>Edit</ViewButton>
-      </Row>
       <Row style={styles.container}></Row>
       {editing ? (
-        <AForm auth={props.auth} />
+        <div style={styles.accountCont}>
+        <AForm auth={props.auth} defaultImage={defaultImage} toggleEdit={toggleEdit}/>
+      
+        </div>
       ) : (
-        <Row style={styles.centerRow}>{accountView()}</Row>
+        <div style={styles.accountCont}>{accountView()}</div>
       )}
     </div>
   );
@@ -71,8 +86,28 @@ const styles = {
     justifyContent: "center"
   },
   userStuff: {
-    justifyContent: "center",
-    paddingTop: '.5em'
-
+    // justifyContent: "space-between",
+    paddingTop: ".5em"
+  },
+  accountCont: {
+    border: "solid 2px #46494c",
+    padding: "1em",
+    // margin: "1em",
+    borderRadius: "3px",
+    // width: "100%",
+    // height: "100%",
+    backgroundColor: "white",
+    boxShadow: "1px 1px 2px 2px #dcdcdd"
+  },
+  button: {
+    paddingTop: '1em'
+  },
+  imageCont: {
+    width: '25%',
+    height: '25%'
+  },
+  image: {
+    width: '100%',
+    height: '100%'
   }
 };

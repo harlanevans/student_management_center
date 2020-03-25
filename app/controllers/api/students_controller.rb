@@ -1,4 +1,5 @@
 class Api::StudentsController < ApplicationController
+  before_action :authenticate_user!w
 
   before_action :set_student, only: [:show, :update]
 

@@ -1,4 +1,5 @@
 class Api::Schools::CoursesController < ApplicationController
+  before_action :authenticate_user!
 
   before_action :set_school, only: [:index, :create, :destroy]
   before_action :set_course, only: [:update, :destroy]
