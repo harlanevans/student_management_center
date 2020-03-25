@@ -12,6 +12,7 @@ import Dropzone from "react-dropzone";
 const AForm = props => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  // const [image, setImage] = useState("");
   const [file, setFile] = useState("");
 
   useEffect(() => {
@@ -55,22 +56,21 @@ const AForm = props => {
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
                 <div style={styles.centerRow}>
-
-                <div {...getRootProps()} style={styles.dropzone}>
-                  <input {...getInputProps()} />
-                  {isDragActive ? (
-                    <Paragraph>Drop files here...</Paragraph>
-                  ) : (
-                    <Paragraph>
-                      Try dropping some files here, or click to select files to
-                      upload.
-                    </Paragraph>
-                  )}
-                </div>
-                <Row style={styles.centerRow}>
-                <Label>File size must be smaller than 10MB.</Label>
-                </Row>
+                  <div {...getRootProps()} style={styles.dropzone}>
+                    <input {...getInputProps()} />
+                    {isDragActive ? (
+                      <Paragraph>Drop files here...</Paragraph>
+                    ) : (
+                      <Paragraph>
+                        Try dropping some files here, or click to select files
+                        to upload.
+                      </Paragraph>
+                    )}
                   </div>
+                  <Row style={styles.centerRow}>
+                    <Label>File size must be smaller than 10MB.</Label>
+                  </Row>
+                </div>
               );
             }}
           </Dropzone>
@@ -95,9 +95,9 @@ const AForm = props => {
             onChange={e => setEmail(e.target.value)}
           />
         </Row>
-      <Row style={styles.button}>
-        <ViewButton onSubmit={handleSubmit}>Submit</ViewButton>
-      </Row>
+        <Row style={styles.button}>
+          <ViewButton onSubmit={handleSubmit}>Submit</ViewButton>
+        </Row>
       </Form>
     </>
   );

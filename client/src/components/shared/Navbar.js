@@ -8,7 +8,7 @@ import {
 import Logo from "../../assets/DPL_white_logo.png";
 import { Fade } from "react-reveal";
 
-import { AuthConsumer } from "../../providers/AuthProvider"; 
+import { AuthConsumer } from "../../providers/AuthProvider";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -16,19 +16,22 @@ const Navbar = props => {
   const [toggleNav, setToggleNav] = useState(false);
   // const [courses, setCourses] = useState([]);
   const [schools, setSchools] = useState([]);
+  const [currentUser, setCurrentUser] = useState();
 
   const toggleSideNav = () => {
     setToggleNav(!toggleNav);
   };
 
   useEffect(() => {
+
+    setCurrentUser(props.auth.user);
     axios.get("/api/schools").then(res => {
       setSchools(res.data);
     });
     // axios.get("/api/courses").then(res => {
     //   setCourses(res.data);
     // });
-  }, []);
+  }, [props.auth.user, currentUser]);
 
   // const ascCourses = () => {
   //   courses.sort(function(a, b) {
@@ -47,9 +50,11 @@ const Navbar = props => {
   };
 
   const mapSchools = () => {
-    ascSchools();
-    return schools.map(school => {
-      return (
+    if (currentUser) {
+
+      ascSchools();
+      return schools.map(school => {
+        return (
         <div key={school.id}>
           <NavItem>
             <Link
@@ -62,18 +67,23 @@ const Navbar = props => {
         </div>
       );
     });
+  } else {
+    return null;
+  }
   };
 
   const authenticationItems = () => {
-    const {
-      auth: { user, handleLogout },
-      // location
-    } = props;
+    const { handleLogout } = props.auth;
 
-    if (user) {
+    if (currentUser) {
       return (
         <NavItem onClick={() => handleLogout(props.history)}>
-          <div style={{cursor: 'pointer'}} className="borderCenterWhite navItem">Logout</div>
+          <div
+            style={{ cursor: "pointer" }}
+            className="borderCenterWhite navItem"
+          >
+            Logout
+          </div>
         </NavItem>
       );
     } else {
@@ -106,12 +116,8 @@ const Navbar = props => {
   // };
 
   const getName = () => {
-    const {
-      auth: { user }
-    } = props;
-
-    if (!user) return null;
-    return `Welcome ${user.name}`;
+    if (!currentUser) return null;
+    return `Welcome ${currentUser.name}`;
   };
 
   return (
@@ -175,7 +181,7 @@ const Navbar = props => {
           </ItemCont>
           <NavItem style={{ padding: "0" }}>
             <Link to="/account" className="borderCenterWhite navItem">
-            {getName()}
+              {getName()}
             </Link>
           </NavItem>
 

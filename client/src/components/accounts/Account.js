@@ -12,14 +12,10 @@ const Account = props => {
     "https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png";
 
   useEffect(() => {
-    const {
-      auth: {
-        user: { name, email }
-      }
-    } = props;
+    const { name, email } = props.auth.user;
     setName(name);
     setEmail(email);
-  }, []);
+  }, [props.auth.user]);
 
   const toggleEdit = () => {
     setEditing(!editing);
@@ -29,7 +25,7 @@ const Account = props => {
     <>
       <Row style={styles.centerRow}>
         <div style={styles.imageCont}>
-        <img src={props.auth.user.image || defaultImage} style={styles.image}/>
+        <img src={props.auth.user.image || defaultImage} alt="user" style={styles.image}/>
         </div>
       </Row>
       <Row style={styles.userStuff}>

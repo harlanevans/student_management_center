@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AuthConsumer } from "../../providers/AuthProvider";
-import { Row, H1, Button, Form, Input } from "../../styles/Global";
+import { Row, H1, Button, Form, Input, Paragraph } from "../../styles/Global";
 
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fail, setFail] = useState();
 
   const handleSubmit = e => {
     e.preventDefault();
     props.auth.handleLogin({ email, password }, props.history);
+  };
+
+  useEffect(() => {
+    setFail(props.auth.loginFailed)
+  }, [props.auth.loginFailed])
+
+  const failed = () => {
+    if (fail === true) {
+
+      return (
+        <>
+          <Row style={{ paddingTop: ".5em" }}>
+            <Paragraph style={{ color: "red", fontWeight: "500" }}>
+              Login Failed
+            </Paragraph>
+          </Row>
+          <Row style={{ paddingTop: ".5em" }}>
+            <Paragraph>Please check your email and password</Paragraph>
+          </Row>
+        </>
+      );
+    } else {
+      return null;
+    }
+    // return null;
   };
 
   return (
@@ -42,6 +68,7 @@ const Login = props => {
           </Form>
         </div>
       </div>
+      {failed()}
     </div>
   );
 };

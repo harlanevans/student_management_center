@@ -5,7 +5,7 @@ const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
 export class AuthProvider extends React.Component {
-  state = { user: null };
+  state = { user: null, loginFailed: false,};
 
   handleRegister = (user, history) => {
     axios
@@ -21,15 +21,27 @@ export class AuthProvider extends React.Component {
 
   handleLogin = (user, history) => {
     axios
-      .post("/api/auth/sign_in", user)
-      .then(res => {
-        this.setState({ user: res.data.data });
+    .post("/api/auth/sign_in", user)
+    .then(res => {
+      this.setState({ user: res.data.data });
         history.push("/");
       })
       .catch(res => {
+        // If this hits, show error on login page. 
+        this.errorLoginHandling()
         console.log(res);
       });
-  };
+    };
+
+  errorLoginHandling = () => {
+    this.setState({loginFailed: true})
+    setTimeout(
+      function() {
+        this.setState({ loginFailed: false });
+      }.bind(this),
+      5000
+    );
+  }
 
   handleLogout = history => {
     axios
@@ -49,9 +61,9 @@ export class AuthProvider extends React.Component {
     axios
       .put(`/api/users/${id}?name=${user.name}&email=${user.email}`, data)
       .then(res => this.setState({ user: res.data }))
-      .catch(
-        res => {alert("File size was too large.")}
-      )
+      // .catch(
+      //   res => {alert("File size was too large.")}
+      // )
   };
 
   render() {
@@ -64,7 +76,8 @@ export class AuthProvider extends React.Component {
           handleLogin: this.handleLogin,
           handleLogout: this.handleLogout,
           setUser: user => this.setState({ user }),
-          updateUser: this.updateUser
+          updateUser: this.updateUser,
+          loginFailed: this.state.loginFailed,
         }}
       >
         {this.props.children}
