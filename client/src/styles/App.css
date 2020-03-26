@@ -72,7 +72,28 @@ a.student-link:hover {
 }
 
 .borderCenterWhite:hover::after {
-  width: 100%;
+  width: 125%;
+  opacity: 1;
+}
+.borderCenterWhiteHome {
+  position: relative;
+}
+
+.borderCenterWhiteHome::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 60%;
+  height: 1px;
+  opacity: 0;
+  background-color: white;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.borderCenterWhiteHome:hover::after {
+  width: 75%;
   opacity: 1;
 }
 
