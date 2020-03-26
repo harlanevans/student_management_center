@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { H1, Paragraph, Button, Row, Select } from "../../../styles/Global";
+import { H1, Paragraph, Button, Row, Select, SubTitle } from "../../../styles/Global";
 import { Fade } from "react-reveal";
 import StudentMap from "./StudentMap";
 import StudentForm from "./StudentForm";
@@ -127,14 +127,14 @@ const Students = props => {
           {students.length === 0 ? (
             <Row style={styles.center}>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <H1 style={styles.center}>No Students</H1>
+                <SubTitle style={styles.center}>No Students</SubTitle>
                 <Paragraph style={styles.center}>
                   Please add some students to this course.
                 </Paragraph>
               </div>
             </Row>
           ) : (
-            <H1 style={styles.center}>Students</H1>
+            <SubTitle style={styles.center}>Students</SubTitle>
           )}
         </Row>
 

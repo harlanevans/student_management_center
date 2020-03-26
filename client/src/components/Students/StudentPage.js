@@ -6,6 +6,7 @@ import {
   Button,
   RedButton,
   ViewButton,
+  SubTitle
 } from "../../styles/Global";
 import {
   Skill,
@@ -15,23 +16,26 @@ import {
   Count
 } from "../../styles/Student";
 import Comments from "./comments/Comments";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import StudentForm from "../Courses/students/StudentForm";
 import Checks from "./check_ins/Checks";
 import ColorKeys from "../shared/ColorKeys";
 import StudentTasks from "./tasks/StudentTasks";
+import { AuthConsumer } from "../../providers/AuthProvider";
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
   const [toggleForm, setToggleForm] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [user, setUser] = useState()
 
   useEffect(() => {
     const { id } = props.match.params;
     axios.get(`/api/students/${id}`).then(res => {
       setStudent(res.data);
     });
-  }, [props.match.params]);
+    setUser(props.auth.user)
+  }, [props.match.params, props.auth.user]);
 
   const toggleEdit = () => {
     setToggleForm(!toggleForm);
@@ -178,13 +182,13 @@ const StudentPage = props => {
       {/* COMMENTS */}
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
-          <Comments student={student} />
+          <Comments student={student} user={user} />
         </div>
 
         {/* TASKS */}
         <div style={styles.colTwo}>
-          <H1>Tasks</H1>
-          <StudentTasks studentId={student.id} />
+          <SubTitle>Tasks</SubTitle>
+          <StudentTasks studentId={student.id} user={user} />
         </div>
       </div>
 
@@ -202,23 +206,31 @@ const StudentPage = props => {
       </div>
       <div style={styles.mainRow}>
         <div style={styles.colOne}>
-          <H1>Check Ins</H1>
+          <SubTitle>Check Ins</SubTitle>
           <div style={styles.padding}>
             <Link to={{ pathname: `/check_in/${student.id}` }}>
               <ViewButton>Add Check-In</ViewButton>
             </Link>
           </div>
-          <Checks student={student} />
+          <Checks student={student} user={user} />
         </div>
         <div style={styles.colTwo}>
-          <H1>Interviews</H1>
+          <SubTitle>Interviews</SubTitle>
         </div>
       </div>
     </div>
   );
 };
 
-export default StudentPage;
+export const ConnectedStudentPage = props => {
+  return (
+    <AuthConsumer>
+      {auth => <StudentPage {...props} auth={auth} />}
+    </AuthConsumer>
+  );
+};
+
+export default withRouter(ConnectedStudentPage);
 
 const styles = {
   container: {

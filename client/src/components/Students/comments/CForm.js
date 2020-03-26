@@ -15,12 +15,6 @@ const CForm = props => {
   const [body, setBody] = useState("");
   const [tag, setTag] = useState("");
   // const [author, setAuthor] = useState("");
-  // const [user_id, setUserId] = useState("");
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    setUser(props.auth.user);
-  }, [props.auth.user]);
 
   const handleSelectChange = event => {
     setTag({ value: event.target.value });
@@ -29,10 +23,10 @@ const CForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const comment = {
-      author: user.name,
+      author: props.user.name,
       body,
       tag: tag.value,
-      user_id: user.id
+      user_id: props.user.id
     };
     axios
       .post(`/api/students/${props.student.id}/comments`, comment)
@@ -86,21 +80,7 @@ const CForm = props => {
   );
 };
 
-// export const ConnectedNavbar = props => {
-//   return (
-//     <AuthConsumer>{auth => <Navbar {...props} auth={auth} />}</AuthConsumer>
-//   );
-// };
-
-// export default withRouter(ConnectedNavbar);
-
-export const ConnectedCommentForm = props => {
-  return (
-    <AuthConsumer>{auth => <CForm {...props} auth={auth} />}</AuthConsumer>
-  );
-};
-
-export default withRouter(ConnectedCommentForm);
+export default CForm;
 
 const styles = {
   space: {

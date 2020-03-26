@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Paragraph, Button } from "../../../styles/Global";
+import { Row, SubTitle, Button } from "../../../styles/Global";
 import {
   QuestionCont,
   Answer,
@@ -27,7 +27,7 @@ const Questions = props => {
     axios
       .post(`/api/interviews/${props.interview.id}/questions`, question)
       .then(res => {
-        setQuestions(res.data);
+        setQuestions([question, ...questions]);
       });
   };
 
@@ -50,7 +50,7 @@ const Questions = props => {
     ));
   };
 
-  // if (!questions) return null;
+  if (!questions) return null;
   return (
     <div>
       <Button onClick={toggleAdd}>Add Questions</Button>
@@ -61,8 +61,8 @@ const Questions = props => {
           <></>
         )}
       </Row>
-      <Row style={{ padding: "1em 0em" }}>
-        <Paragraph>Questions</Paragraph>
+      <Row style={styles.centerRow}>
+        <SubTitle>Questions</SubTitle>
       </Row>
       <Row>{renderQuestions()}</Row>
     </div>
@@ -71,10 +71,12 @@ const Questions = props => {
 
 export default Questions;
 
-// const styles = {
-//   centerRow: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "flex-start"
-//   }
-// };
+const styles = {
+  centerRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: "1em 0em"
+  },
+  
+};

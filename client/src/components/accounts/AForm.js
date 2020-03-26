@@ -52,10 +52,10 @@ const AForm = props => {
       <Form onSubmit={handleSubmit}>
         <Row style={styles.centerRow}>
           {/* <img src={props.auth.user.image || props.defaultImage} /> */}
-          <Dropzone onDrop={onDrop} multiple={false}>
+          <Dropzone onDrop={onDrop} multiple={false} style={{margin: 0}}>
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
-                <div style={styles.centerRow}>
+                <div style={{margin: '0'}}>
                   <div {...getRootProps()} style={styles.dropzone}>
                     <input {...getInputProps()} />
                     {isDragActive ? (
@@ -75,6 +75,8 @@ const AForm = props => {
             }}
           </Dropzone>
         </Row>
+        <div>
+
         <Row style={styles.userStuff}>
           <Label>Name</Label>
           <Input
@@ -95,6 +97,7 @@ const AForm = props => {
             onChange={e => setEmail(e.target.value)}
           />
         </Row>
+            </div>
         <Row style={styles.button}>
           <ViewButton onSubmit={handleSubmit}>Submit</ViewButton>
         </Row>
@@ -110,21 +113,7 @@ const styles = {
     padding: "2em"
   },
   centerRow: {
-    justifyContent: "center"
-  },
-  userStuff: {
-    // justifyContent: "space-between",
-    // paddingTop: ".5em"
-  },
-  accountCont: {
-    border: "solid 2px #46494c",
-    padding: "1.5em",
-    margin: "1em",
-    borderRadius: "3px",
-    width: "100%",
-    height: "100%",
-    backgroundColor: "white",
-    boxShadow: "1px 1px 2px 2px #dcdcdd"
+    justifyContent: "center",
   },
   input: {
     width: "100%",
@@ -134,13 +123,14 @@ const styles = {
     paddingTop: "1em"
   },
   dropzone: {
-    height: "150px",
-    width: "150px",
+    height: "10em",
+    width: "10em",
     border: "1px dashed #46494c",
     borderRadius: "5px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "10px"
+    marginLeft: '10%',
+    padding: "0em 1em"
   }
 };

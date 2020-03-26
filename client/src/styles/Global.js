@@ -12,6 +12,12 @@ export const H1 = styled.h1`
   font-weight: lighter;
   color: #46494c;
 `;
+export const SubTitle = styled.h1`
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  font-weight: lighter;
+  color: #46494c;
+`;
 
 export const SchoolH1 = styled.h1`
   font-family: "Roboto", sans-serif;
