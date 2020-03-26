@@ -23,7 +23,6 @@ const Navbar = props => {
   };
 
   useEffect(() => {
-
     setCurrentUser(props.auth.user);
     axios.get("/api/schools").then(res => {
       setSchools(res.data);
@@ -51,25 +50,24 @@ const Navbar = props => {
 
   const mapSchools = () => {
     if (currentUser) {
-
       ascSchools();
       return schools.map(school => {
         return (
-        <div key={school.id}>
-          <NavItem>
-            <Link
-              to={{ pathname: `/schools/${school.id}` }}
-              className="borderCenterWhite navItem"
-            >
-              {school.name}
-            </Link>
-          </NavItem>
-        </div>
-      );
-    });
-  } else {
-    return null;
-  }
+          <div key={school.id}>
+            <NavItem>
+              <Link
+                to={{ pathname: `/schools/${school.id}` }}
+                className="borderCenterWhite navItem"
+              >
+                {school.name}
+              </Link>
+            </NavItem>
+          </div>
+        );
+      });
+    } else {
+      return null;
+    }
   };
 
   const authenticationItems = () => {
@@ -136,48 +134,53 @@ const Navbar = props => {
               style={{
                 textAlign: "center",
                 fontFamily: "'Roboto', sans-serif",
-                fontSize: "1.5em",
-                padding: ".5em 0"
+                fontSize: "1.25em",
+                padding: ".5em 0.25em"
               }}
             >
-              Student Manangement Center
+              <Link to="/" className="borderCenterWhiteHome navItem">
+                Student Manangement Center
+              </Link>
             </NavItem>
-
-            <LinkCont>
-              <NavItem>
-                <Link to="/" className="borderCenterWhite navItem">
-                  Home
-                </Link>
-              </NavItem>
-              {/* <NavItem>
+            {currentUser ? (
+              <>
+                <LinkCont>
+                  {/* <NavItem>
                 <Link to="/schools" className="borderCenterWhite navItem">
                   - Schools -
                 </Link>
               </NavItem> */}
-              <div>{mapSchools()}</div>
-              <NavItem>
-                <Link to="/courses" className="borderCenterWhite navItem">
-                  All Courses
-                </Link>
-              </NavItem>
-              {/* Do I map through courses in the navbar?  */}
-              {/* <div>{mapCourses()}</div> */}
-              <NavItem>
-                <Link to="/students" className="borderCenterWhite navItem">
-                  Students
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/rubric" className="borderCenterWhite navItem">
-                  Rubric
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/interviews" className="borderCenterWhite navItem">
-                  Interviews
-                </Link>
-              </NavItem>
-            </LinkCont>
+                  <div>{mapSchools()}</div>
+                  <NavItem>
+                    <Link to="/courses" className="borderCenterWhite navItem">
+                      All Courses
+                    </Link>
+                  </NavItem>
+                  {/* Do I map through courses in the navbar?  */}
+                  {/* <div>{mapCourses()}</div> */}
+                  <NavItem>
+                    <Link to="/students" className="borderCenterWhite navItem">
+                      Students
+                    </Link>
+                  </NavItem>
+                  <NavItem>
+                    <Link to="/rubric" className="borderCenterWhite navItem">
+                      Rubric
+                    </Link>
+                  </NavItem>
+                  <NavItem>
+                    <Link
+                      to="/interviews"
+                      className="borderCenterWhite navItem"
+                    >
+                      Interviews
+                    </Link>
+                  </NavItem>
+                </LinkCont>
+              </>
+            ) : (
+              <></>
+            )}
           </ItemCont>
           <NavItem style={{ padding: "0" }}>
             <Link to="/account" className="borderCenterWhite navItem">
