@@ -9,9 +9,9 @@ const Ints = (props) => {
   useEffect(() => {
     const { id } = props.student;
     axios
-      .get(`/api/students/${id}/student_interviews`)
-      .then(res => setInterviews(res.data));
-  }, []);
+    .get(`/api/students/${id}/student_interviews`)
+    .then(res => setInterviews(res.data));
+  }, [props.student]);
 
   const renderInts = () => {
     return interviews.map(int => (

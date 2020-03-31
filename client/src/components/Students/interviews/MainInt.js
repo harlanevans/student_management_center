@@ -15,15 +15,15 @@ const MainInt = props => {
   const [interviews, setInterviews] = useState([]);
   const [student, setStudent] = useState({});
   const [intChoice, setIntChoice] = useState();
-  const [studentInterviews, setStudentInterviews] = useState({});
-  const [stuInt, setStuInt] = useState({});
+  // const [studentInterviews, setStudentInterviews] = useState({});
+  const [si, setSI] = useState({});
   const [intLoaded, setIntLoaded] = useState(false);
 
   useEffect(() => {
     const { id } = props.match.params;
     axios.get("/api/get_interviews").then(res => setInterviews(res.data));
     axios.get(`/api/students/${id}`).then(res => setStudent(res.data));
-    axios.get(`/api/students/${id}/student_interviews`).then(res => setStudentInterviews(res.data));
+    // axios.get(`/api/students/${id}/student_interviews`).then(res => setStudentInterviews(res.data));
   }, []);
 
   const iterateInts = () => {
@@ -58,7 +58,7 @@ const MainInt = props => {
   // http://localhost:3000/students/1/student_interviews
   const handleSubmit = e => {
     e.preventDefault();
-    postInt()
+    postInt();
   };
 
   const postInt = () => {
@@ -69,28 +69,37 @@ const MainInt = props => {
     axios
       .post(`/api/students/${student.id}/student_interviews`, student_interview)
       .then(res => {
-        setStuInt(res.data);
+        setSI(res.data);
+        if (res.data) {
+          setTimeout(() => {
+            loaded();
+          }, 1000);
+        }
       });
-    // change ternary to true and then redirect in render
-    loaded()
   };
+  // change ternary to true and then redirect in render
 
   const loaded = () => {
-    return setIntLoaded(!intLoaded);
+    if (si) {
+      setIntLoaded(!intLoaded);
+    } else {
+      alert("Nope");
+    }
   };
 
   if (!student || !interviews) return null;
   // if (something is true) redirect to the student_interview page
-  if (intLoaded === true)
+  if (intLoaded === true) {
     return (
       <Redirect
-        to={{
-          pathname: "/student_interview",
-          stu_int: stuInt,
-          student: student,
-        }}
+      to={{
+        pathname: `/student/${student.id}/student_interview/${si.id}`,
+        studentInterview: si,
+        student: student
+      }}
       />
-    );
+      );
+    }
   return (
     <div style={styles.container}>
       <Row style={styles.centerRow}>
@@ -99,7 +108,7 @@ const MainInt = props => {
         </H1>
       </Row>
       <Row>{intForm()}</Row>
-      <Row>{intLoaded ? "Chosen" : "not Chosen"}</Row>
+      {/* <Row>{intLoaded ? "Chosen" : "not Chosen"}</Row> */}
     </div>
   );
 };

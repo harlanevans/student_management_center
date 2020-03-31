@@ -1,11 +1,16 @@
 class Api::StudentInterviewsController < ApplicationController
   
+  before_action :set_student, only: [:index]
+  before_action :set_stu_int, only: [:show]
 
-  before_action :set_interview, only: [:interview_choice]
-  before_action :set_student, only: [:get_student, :create]
 
   def index
-    render json: StudentInterview.all
+    render json: @student.student_interviews
+  end
+
+  def show
+    binding.pry
+    render json: @stu_int
   end
 
   def get_interviews

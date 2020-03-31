@@ -10,7 +10,7 @@ const ViewStuInt = props => {
     axios
       .get(`/api/interviews/${props.interview}`)
       .then(res => setInterview(res.data));
-  }, []);
+  }, [props.student]);
 
   if (!interview) return null;
   return (
