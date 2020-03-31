@@ -1,5 +1,5 @@
 class Api::StudentInterviewsController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :set_student, only: [:index]
   before_action :set_stu_int, only: [:show]
 

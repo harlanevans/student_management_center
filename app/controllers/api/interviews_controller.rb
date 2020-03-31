@@ -1,5 +1,5 @@
 class Api::InterviewsController < ApplicationController
-  #   
+    before_action :authenticate_user!
 
   before_action :set_interview, only: [:show, :update, :destroy]
 

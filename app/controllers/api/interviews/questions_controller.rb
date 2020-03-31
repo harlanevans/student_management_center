@@ -1,5 +1,5 @@
 class Api::Interviews::QuestionsController < ApplicationController
-
+before_action :authenticate_user!
   before_action :set_interview
 
   def index
