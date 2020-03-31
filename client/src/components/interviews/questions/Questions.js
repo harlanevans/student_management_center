@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Row, SubTitle, Button } from "../../../styles/Global";
-import {
-  QuestionCont,
-  Answer,
-  QuestionText,
-  QType
-} from "../../../styles/QStyle";
+
 import axios from "axios";
 import AddQuestion from "./AddQuestion";
+import QMap from "./QMap";
 
 const Questions = props => {
   const [questions, setQuestions] = useState([]);
@@ -32,22 +28,13 @@ const Questions = props => {
   };
 
   const renderQuestions = () => {
-    return questions.map(question => (
-      <QuestionCont>
-        <Row>
-          Question:
-          <QuestionText>{question.q}</QuestionText>
-        </Row>
-        <Row>
-          Type of Question:
-          <QType>{question.qtype}</QType>
-        </Row>
-        <Row>
-          Answer:
-          <Answer>{question.answer}</Answer>
-        </Row>
-      </QuestionCont>
-    ));
+    return (
+      <div style={styles.qsCont}>
+        {questions.map(question => (
+          <QMap key={question.id} {...question} />
+        ))}
+      </div>
+    );
   };
 
   if (!questions) return null;
@@ -64,7 +51,7 @@ const Questions = props => {
       <Row style={styles.centerRow}>
         <SubTitle>Questions</SubTitle>
       </Row>
-      <Row>{renderQuestions()}</Row>
+      <div style={styles.qsCont}>{renderQuestions()}</div>
     </div>
   );
 };
@@ -78,5 +65,11 @@ const styles = {
     justifyContent: "center",
     padding: "1em 0em"
   },
-  
+  qsCont: {
+    display: "flex",
+    flexFlow: "row wrap",
+    // justifyContent: "space-evenly",
+    // width: "100%",
+    width: "100%"
+  }
 };

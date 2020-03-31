@@ -22,6 +22,7 @@ import Checks from "./check_ins/Checks";
 import ColorKeys from "../shared/ColorKeys";
 import StudentTasks from "./tasks/StudentTasks";
 import { AuthConsumer } from "../../providers/AuthProvider";
+import Ints from './interviews/Ints';
 
 const StudentPage = props => {
   const [student, setStudent] = useState();
@@ -209,13 +210,21 @@ const StudentPage = props => {
           <SubTitle>Check Ins</SubTitle>
           <div style={styles.padding}>
             <Link to={{ pathname: `/check_in/${student.id}` }}>
-              <ViewButton>Add Check-In</ViewButton>
+              <Button>Add Check-In</Button>
             </Link>
           </div>
           <Checks student={student} user={user} />
         </div>
         <div style={styles.colTwo}>
           <SubTitle>Interviews</SubTitle>
+          <div style={styles.padding}>
+            <Link
+              to={{ pathname: `/students/${student.id}/student_interviews` }}
+            >
+              <Button>New Interview</Button>
+            </Link>
+          </div>
+          <Ints student={student} user={user} />
         </div>
       </div>
     </div>

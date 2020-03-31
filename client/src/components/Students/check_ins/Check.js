@@ -4,6 +4,7 @@ import {
   Row,
   Paragraph,
   Button,
+  ViewButton
 } from "../../../styles/Global";
 import {
   CheckIn,
@@ -98,9 +99,9 @@ const Check = props => {
         <></>
       )}
       <Row style={styles.toggleButton}>
-        <Button onClick={toggleCheckIn}>
+        <ViewButton onClick={toggleCheckIn}>
           {seeAll ? "Close Check-In" : "View Check-In"}
-        </Button>
+        </ViewButton>
         <div>
           {/* <ViewButton>Edit</ViewButton>
           <RedButton onClick={() => props.deleteCheckIn(props.id)}>

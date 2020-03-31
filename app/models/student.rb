@@ -3,4 +3,5 @@ class Student < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :checkins, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :interviews, through: :student_interviews
 end

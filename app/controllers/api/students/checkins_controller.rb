@@ -1,5 +1,6 @@
 class Api::Students::CheckinsController < ApplicationController
-  before_action :authenticate_user!
+    
+
   before_action :set_student
   before_action :set_checkin, only: [:destroy, :update]
 
