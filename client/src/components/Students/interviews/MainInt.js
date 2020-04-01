@@ -73,7 +73,7 @@ const MainInt = props => {
         if (res.data) {
           setTimeout(() => {
             loaded();
-          }, 1000);
+          }, 500);
         }
       });
   };
@@ -93,7 +93,7 @@ const MainInt = props => {
     return (
       <Redirect
       to={{
-        pathname: `/student/${student.id}/student_interview/${si.id}`,
+        pathname: `/student/${student.id}/interview/${intChoice}/student_interview/${si.id}`,
         studentInterview: si,
         student: student
       }}

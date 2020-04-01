@@ -84,7 +84,7 @@ const App = () => {
               />
               <ProtectedRoute
                 exact
-                path="/student/:student_id/student_interview/:id"
+                path="/student/:student_id/interview/:interview_id/student_interview/:id"
                 component={StuInt}
               />
               <Route component={NoMatch} />
