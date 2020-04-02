@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { H1, Row, Button } from "../../styles/Global";
+import { H1, Row, Button, ViewButton } from "../../styles/Global";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Questions from "./questions/Questions";
@@ -21,7 +21,7 @@ const IntPage = props => {
     <div style={styles.container}>
       <Row style={{ padding: "0em 0em" }}>
         <Link to="/interviews">
-          <Button>Back</Button>
+          <ViewButton>Interview Page</ViewButton>
         </Link>
       </Row>
       <Row style={styles.center}>

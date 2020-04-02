@@ -27,11 +27,19 @@ const Questions = props => {
       });
   };
 
+  const deleteQ = id => {
+    axios
+      .delete(`/api/interviews/${props.interview.id}/questions/${id}`)
+      .then(res => {
+        setQuestions(questions.filter(q => q.id !== id));
+      });
+  };
+
   const renderQuestions = () => {
     return (
       <div style={styles.qsCont}>
         {questions.map(question => (
-          <QMap key={question.id} {...question} />
+          <QMap key={question.id} {...question} deleteQ={deleteQ} />
         ))}
       </div>
     );
@@ -40,12 +48,12 @@ const Questions = props => {
   if (!questions) return null;
   return (
     <div>
-      <Button onClick={toggleAdd}>Add Questions</Button>
+      <Row style={{padding: '1em 0em'}}>
+        <Button onClick={toggleAdd}>New Question</Button>
+      </Row>
       <Row>
-        {toggleAddQuestions ? (
+        {toggleAddQuestions && (
           <AddQuestion addQuestion={addQuestion} toggleAdd={toggleAdd} />
-        ) : (
-          <></>
         )}
       </Row>
       <Row style={styles.centerRow}>
