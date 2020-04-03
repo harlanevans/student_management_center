@@ -8,7 +8,8 @@ import styled from "styled-components";
 
 export const QuestionCont = styled.div`
   flex: 1 1 37%;
-
+  width: 100%;
+  height: 100%;
   font-family: "Raleway", sans-serif;
   border: solid 1px gray;
   border-radius: 4px;
@@ -25,22 +26,24 @@ export const QuestionCont = styled.div`
 // border-radius: 3px;
 
 export const Answer = styled.p`
-  font-style: italic;
-  color: gray;
+font-style: italic;
+color: gray;
 `;
 
 export const QuestionText = styled.p`
-  font-style: italic;
+font-style: italic;
   color: #46494c;
-`;
+  `;
 
-export const QType = styled.p`
+  export const QType = styled.p`
   font-style: italic;
   color: gray;
-`;
-
-export const QCard = styled.div`
+  `;
+  
+  export const QCard = styled.div`
   flex: 1 1 37%;
+  width: 100%;
+  height: 100%;
   font-family: "Raleway", sans-serif;
   border: solid 1px gray;
   border-radius: 4px;

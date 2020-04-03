@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_023841) do
+ActiveRecord::Schema.define(version: 2020_04_03_031100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string "answer"
+    t.bigint "question_id", null: false
+    t.bigint "student_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["student_id"], name: "index_answers_on_student_id"
+  end
 
   create_table "checkins", force: :cascade do |t|
     t.text "feeling"
@@ -56,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_03_26_023841) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "answer"
+    t.string "correct_answer"
     t.bigint "interview_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -135,6 +145,8 @@ ActiveRecord::Schema.define(version: 2020_03_26_023841) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "students"
   add_foreign_key "checkins", "students"
   add_foreign_key "comments", "students"
   add_foreign_key "comments", "users"

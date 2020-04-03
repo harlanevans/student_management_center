@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { H1, Paragraph, Button, Row, Select, SubTitle } from "../../../styles/Global";
+import {
+  H1,
+  Paragraph,
+  Button,
+  Row,
+  Select,
+  SubTitle
+} from "../../../styles/Global";
 import { Fade } from "react-reveal";
 import StudentMap from "./StudentMap";
 import StudentForm from "./StudentForm";
@@ -106,7 +113,15 @@ const Students = props => {
     <>
       <Fade>
         <Row style={styles.buttonSelectRow}>
-          <Button onClick={toggle}>Add Student</Button>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center"
+            }}
+          >
+            <Button onClick={toggle}>Add Student</Button>
+          </div>
           <Select
             name="sort"
             label="Sort By"

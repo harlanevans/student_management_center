@@ -5,4 +5,6 @@ class Student < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :student_interviews, dependent: :destroy
   has_many :interviews, :through => :student_interviews
+  has_many :answers
+  has_many :answers, :through => :questions
 end

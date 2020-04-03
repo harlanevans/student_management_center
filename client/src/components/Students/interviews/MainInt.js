@@ -92,14 +92,14 @@ const MainInt = props => {
   if (intLoaded === true) {
     return (
       <Redirect
-      to={{
-        pathname: `/student/${student.id}/interview/${intChoice}/student_interview/${si.id}`,
-        studentInterview: si,
-        student: student
-      }}
+        to={{
+          pathname: `/student/${student.id}/interview/${intChoice}/student_interview/${si.id}`,
+          studentInterview: si,
+          student: student
+        }}
       />
-      );
-    }
+    );
+  }
   return (
     <div style={styles.container}>
       <Row style={styles.centerRow}>

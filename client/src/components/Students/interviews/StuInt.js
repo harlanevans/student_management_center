@@ -54,9 +54,9 @@ const StuInt = props => {
       <Row style={styles.centerRow}>
         <SubTitle>{student.first_name}'s {interview.name}</SubTitle>
       </Row>
-      <div>
+      <>
         {renderIntQuestions()}
-      </div>
+      </>
     </div>
   );
 };
@@ -70,7 +70,8 @@ const styles = {
   centerRow: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding: '1em 0em'
   },
   qsCont: {
     display: "flex",

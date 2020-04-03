@@ -15,22 +15,22 @@ const Ints = props => {
   }, [props.student]);
 
   const renderInts = () => {
-    return interviews.map(int => (
-      <div
-        style={{
-          border: "solid 2px black",
-          borderRadius: "3px",
-          margin: "1em 0em",
-          padding: "1em"
-        }}
-      >
-        <ViewStuInt key={int.id} {...int} />
-      </div>
-    ));
+    return interviews.map(int => <ViewStuInt key={int.id} {...int} />);
   };
 
   if (!interviews) return null;
-  return <div>{renderInts()}</div>;
+  return (
+    <div
+      style={{
+        border: "solid 2px black",
+        borderRadius: "3px",
+        margin: "1em 0em",
+        padding: "1em"
+      }}
+    >
+      {renderInts()}
+    </div>
+  );
 };
 
 export default Ints;

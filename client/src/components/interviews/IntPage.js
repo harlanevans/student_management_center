@@ -21,7 +21,7 @@ const IntPage = props => {
     <div style={styles.container}>
       <Row style={{ padding: "0em 0em" }}>
         <Link to="/interviews">
-          <ViewButton>Interview Page</ViewButton>
+          <ViewButton>All Interviews</ViewButton>
         </Link>
       </Row>
       <Row style={styles.center}>

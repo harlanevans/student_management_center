@@ -6,9 +6,8 @@ import {
   QType
 } from "../../../styles/QStyle";
 import {
-  div,
-  SubTitle,
-  Button,
+  // SubTitle,
+  // Button,
   RedButton,
   ViewButton
 } from "../../../styles/Global";
@@ -16,13 +15,17 @@ import {
 import AddQuestion from "./AddQuestion";
 
 const QMap = props => {
-  const [toggle, setToggle] = useState(false);
 
+  const [toggle, setToggle] = useState(false);
   return (
     <QuestionCont>
-
       <div style={styles.cont}>
-
+        <div style={styles.rowCenter}>
+          <div style={styles.columns}>
+            <div style={styles.paddingRight}>Type Of Question:</div>
+            <QType>{props.qtype}</QType>
+          </div>
+        </div>
         <div style={styles.rowCenter}>
           <div style={styles.columns}>
             <div style={styles.paddingRight}> Question:</div>
@@ -30,29 +33,27 @@ const QMap = props => {
           </div>
         </div>
 
-          <div style={styles.rowCenter}>
-        <div style={styles.columns}>
-            <div style={styles.paddingRight}>Type Of Question:</div>
-            <QType>{props.qtype}</QType>
-          </div>
-        </div>
-
-          <div style={styles.rowCenter}>
-        <div style={styles.columns}>
+        <div style={styles.rowCenter}>
+          <div style={styles.columns}>
             <div style={styles.paddingRight}>Correct Answer: </div>
-            <Answer>{props.answer}</Answer>
+            <Answer>{props.correct_answer}</Answer>
           </div>
         </div>
-
       </div>
 
       <div style={styles.buttondiv}>
-        <ViewButton onClick={() => setToggle(!toggle)}>Edit</ViewButton>
+        <ViewButton onClick={() => setToggle(!toggle)}>{toggle ? "Cancel" : "Edit"}</ViewButton>
         <RedButton onClick={() => props.deleteQ(props.id)}>Delete</RedButton>
       </div>
 
       <div style={{ paddingTop: ".5em" }}>
-        {toggle && <AddQuestion toggle={setToggle} {...props} />}
+        {toggle && (
+          <AddQuestion
+            toggle={setToggle}
+            {...props}
+            editQuestion={props.editQuestion}
+          />
+        )}
       </div>
     </QuestionCont>
   );
@@ -68,8 +69,8 @@ const styles = {
     paddingTop: ".5em"
   },
   rowCenter: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     width: "100%",
     // border: "solid 2px blue",
@@ -80,7 +81,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    width: "100%",
+    width: "100%"
     // border: "solid 2px red",
   },
 
@@ -94,6 +95,6 @@ const styles = {
     // border: "solid 1px purple",
     display: "flex",
     flexDirection: "column",
-    justifyContent: 'center'
+    justifyContent: "center"
   }
 };

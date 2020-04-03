@@ -39,7 +39,7 @@ before_action :authenticate_user!
   private
 
   def question_params
-    params.require(:question).permit(:qtype, :answer, :q, :interview_id)
+    params.require(:question).permit(:qtype, :correct_answer, :q, :interview_id)
   end
 
   def set_interview

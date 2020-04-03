@@ -35,11 +35,28 @@ const Questions = props => {
       });
   };
 
+  const editQuestion = (id, question) => {
+    axios
+      .put(`/api/interviews/${props.interview.id}/questions/${id}`, question)
+      .then(res => {
+        const newQs = questions.map(q => {
+          if (id === q.id) return res.data;
+          return q;
+        });
+        setQuestions(newQs);
+      });
+  };
+
   const renderQuestions = () => {
     return (
       <div style={styles.qsCont}>
         {questions.map(question => (
-          <QMap key={question.id} {...question} deleteQ={deleteQ} />
+          <QMap
+            key={question.id}
+            {...question}
+            deleteQ={deleteQ}
+            editQuestion={editQuestion}
+          />
         ))}
       </div>
     );
@@ -48,7 +65,7 @@ const Questions = props => {
   if (!questions) return null;
   return (
     <div>
-      <Row style={{padding: '1em 0em'}}>
+      <Row style={{ padding: "1em 0em" }}>
         <Button onClick={toggleAdd}>New Question</Button>
       </Row>
       <Row>
@@ -59,7 +76,7 @@ const Questions = props => {
       <Row style={styles.centerRow}>
         <SubTitle>Questions</SubTitle>
       </Row>
-      <div style={styles.qsCont}>{renderQuestions()}</div>
+      <>{renderQuestions()}</>
     </div>
   );
 };
