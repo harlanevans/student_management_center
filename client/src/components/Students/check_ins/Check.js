@@ -4,7 +4,8 @@ import {
   Row,
   Paragraph,
   Button,
-  ViewButton
+  ViewButton,
+  SubTitle
 } from "../../../styles/Global";
 import {
   CheckIn,
@@ -63,8 +64,30 @@ const Check = props => {
       <div style={styles.topRow}>
         {/* This props.id isn't correct, need to ternary or 
     sort to show either 1 : or 2 */}
-        <H1>Check-in</H1>
+        <SubTitle>Check-in</SubTitle>
       </div>
+      <Row style={styles.toggleButton}>
+        <ViewButton onClick={toggleCheckIn}>
+          {seeAll ? (
+            <>
+              Hide Check-In <span>&#8593;</span>
+            </>
+          ) : (
+            <>
+            Show Check-In <span>&#8595;</span>
+            </>
+          )}
+        </ViewButton>
+        <div>
+          {/* <ViewButton>Edit</ViewButton>
+          <RedButton onClick={() => props.deleteCheckIn(props.id)}>
+            Delete
+          </RedButton> */}
+          <div style={styles.columnStatus}>
+            <div style={styles.status}>{checkStatus()}</div>
+          </div>
+        </div>
+      </Row>
 
       {seeAll ? (
         <div style={styles.topicCol}>
@@ -98,20 +121,6 @@ const Check = props => {
       ) : (
         <></>
       )}
-      <Row style={styles.toggleButton}>
-        <ViewButton onClick={toggleCheckIn}>
-          {seeAll ? "Close Check-In" : "View Check-In"}
-        </ViewButton>
-        <div>
-          {/* <ViewButton>Edit</ViewButton>
-          <RedButton onClick={() => props.deleteCheckIn(props.id)}>
-            Delete
-          </RedButton> */}
-          <div style={styles.columnStatus}>
-            <div style={styles.status}>{checkStatus()}</div>
-          </div>
-        </div>
-      </Row>
       <Row style={{ paddingTop: "0.5em" }}>
         <DatePosted>Submitted: {dateCreated()}</DatePosted>
       </Row>
@@ -130,7 +139,7 @@ const styles = {
     padding: ".5em 0em"
   },
   toggleButton: {
-    paddingTop: "1em",
+    padding: ".5em 0em",
     justifyContent: "space-between"
   },
   columnStatus: {

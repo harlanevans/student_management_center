@@ -20,7 +20,7 @@ import StudentPage from "./components/Students/StudentPage";
 import Rubric from "./components/shared/Rubric";
 import CHome from "./components/Students/check_ins/CHome";
 
-import MainInt from './components/Students/interviews/MainInt';
+import NewInt from './components/Students/interviews/NewInt';
 import StuInt from './components/Students/interviews/StuInt';
 
 // AUTH
@@ -80,7 +80,7 @@ const App = () => {
               <ProtectedRoute
                 exact
                 path="/students/:id/student_interviews"
-                component={MainInt}
+                component={NewInt}
               />
               <ProtectedRoute
                 exact

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Row,
   H1,
-  SubTitle,
-  Paragraph,
   Select,
   Form,
   Button
@@ -11,7 +9,7 @@ import {
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-const MainInt = props => {
+const NewInt = props => {
   const [interviews, setInterviews] = useState([]);
   const [student, setStudent] = useState({});
   const [intChoice, setIntChoice] = useState();
@@ -48,7 +46,7 @@ const MainInt = props => {
           </option>
           {iterateInts()}
         </Select>
-        <div>
+        <div style={{ paddingTop: "1em"}}>
           <Button onSubmit={handleSubmit}>Choose Interview</Button>
         </div>
       </Form>
@@ -87,7 +85,6 @@ const MainInt = props => {
     }
   };
 
-  if (!student || !interviews) return null;
   // if (something is true) redirect to the student_interview page
   if (intLoaded === true) {
     return (
@@ -97,9 +94,10 @@ const MainInt = props => {
           studentInterview: si,
           student: student
         }}
-      />
+        />
     );
   }
+  if (!student) return null;
   return (
     <div style={styles.container}>
       <Row style={styles.centerRow}>
@@ -107,19 +105,19 @@ const MainInt = props => {
           New Interview For {student.first_name} {student.last_name}
         </H1>
       </Row>
-      <Row>{intForm()}</Row>
-      {/* <Row>{intLoaded ? "Chosen" : "not Chosen"}</Row> */}
+      <>{intForm()}</>
     </div>
   );
 };
 
-export default MainInt;
+export default NewInt;
 
 const styles = {
   centerRow: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding: '1em 0em'
   },
   container: {
     padding: "2em"

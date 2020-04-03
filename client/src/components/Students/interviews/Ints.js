@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Row, SubTitle } from "../../../styles/Global";
-import ViewStuInt from "./ViewStuInt";
+import MapStuInt from "./MapStuInt";
 import { Link } from "react-router-dom";
 
 const Ints = props => {
@@ -15,18 +15,13 @@ const Ints = props => {
   }, [props.student]);
 
   const renderInts = () => {
-    return interviews.map(int => <ViewStuInt key={int.id} {...int} />);
+    return interviews.map(int => <MapStuInt key={int.id} {...int} />);
   };
 
   if (!interviews) return null;
   return (
     <div
-      style={{
-        border: "solid 2px black",
-        borderRadius: "3px",
-        margin: "1em 0em",
-        padding: "1em"
-      }}
+
     >
       {renderInts()}
     </div>
