@@ -7,17 +7,17 @@ import styled from "styled-components";
 // font - family: "Raleway", sans - serif;
 
 export const QuestionCont = styled.div`
-  flex: 1 1 37%;
-  width: 100%;
-  height: 100%;
-  font-family: "Raleway", sans-serif;
-  border: solid 1px gray;
-  border-radius: 4px;
-  padding: 1em;
-  margin: 1em;
-  background-color: white;
-  box-shadow: 1px 1px 2px 2px #dcdcdd;
-`;
+         flex: 0 0 25%;
+         width: 100%;
+         height: 100%;
+         font-family: "Raleway", sans-serif;
+         border: solid 1px gray;
+         border-radius: 4px;
+         padding: 1em;
+         margin: 1em;
+         background-color: white;
+         box-shadow: 1px 1px 2px 2px #dcdcdd;
+       `;
 
 //        flex: 1 1 37%;
 // border: solid 2px #46494c;

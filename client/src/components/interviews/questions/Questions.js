@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, SubTitle, Button } from "../../../styles/Global";
+import { Row, SubTitle, Button, Paragraph } from "../../../styles/Global";
 
 import axios from "axios";
 import AddQuestion from "./AddQuestion";
@@ -13,7 +13,7 @@ const Questions = props => {
     axios.get(`/api/interviews/${props.interview.id}/questions`).then(res => {
       setQuestions(res.data);
     });
-  }, [props.interview.id]);
+  }, [props.interview.id, questions.length]);
 
   const toggleAdd = () => {
     setToggleAddQuestions(!toggleAddQuestions);
@@ -65,8 +65,9 @@ const Questions = props => {
   if (!questions) return null;
   return (
     <div>
-      <Row style={{ padding: "1em 0em" }}>
+      <Row style={styles.buttonRow}>
         <Button onClick={toggleAdd}>New Question</Button>
+        <Paragraph>Number of Questions: {questions.length}</Paragraph>
       </Row>
       <Row>
         {toggleAddQuestions && (
@@ -93,8 +94,13 @@ const styles = {
   qsCont: {
     display: "flex",
     flexFlow: "row wrap",
-    // justifyContent: "space-evenly",
-    // width: "100%",
+    justifyContent: "space-evenly",
     width: "100%"
+  },
+  buttonRow: {
+    padding: '1em 1em',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between'
   }
 };

@@ -17,11 +17,12 @@ const AddAnswer = () => {
             value={answer}
             onChange={e => setAnswer(e.target.value)}
             type="text"
+            style={{width: '25vw'}}
           />
+        </Row>
           <div style={styles.button}>
             <Button onClick={handleSubmit}>Submit Answer</Button>
           </div>
-        </Row>
       </Form>
     </div>
   );
@@ -37,8 +38,7 @@ const styles = {
   },
   inputRow: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexFlow: 'row wrap',
     width: "100%"
   }
 };

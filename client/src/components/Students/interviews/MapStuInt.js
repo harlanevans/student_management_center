@@ -4,14 +4,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { DatePosted } from "../../../styles/CheckInS";
 
-const MapStuInt = props => {
+const MapStuInt = (props) => {
   // const [student, setStudent] = useState({})
   const [interview, setInterview] = useState({});
+  const [showInt, setShowInt] = useState(false);
 
   useEffect(() => {
     axios
       .get(`/api/interviews/${props.interview_id}`)
-      .then(res => setInterview(res.data));
+      .then((res) => setInterview(res.data));
   }, []);
 
   const dateCreated = () => {
@@ -40,13 +41,13 @@ const MapStuInt = props => {
         border: "solid 2px black",
         borderRadius: "3px",
         margin: "1em 0em",
-        padding: "1em"
+        padding: "1em",
       }}
     >
       <Row>
         <Link
           to={{
-            pathname: `/student/${props.student_id}/interview/${props.interview_id}/student_interview/${props.id}`
+            pathname: `/student/${props.student_id}/interview/${props.interview_id}/student_interview/${props.id}`,
           }}
           className="card-link"
         >
@@ -54,15 +55,19 @@ const MapStuInt = props => {
         </Link>
       </Row>
       <Row style={styles.viewButton}>
-        <Link
-          to={{
-            pathname: `/student/${props.student_id}/interview/${props.interview_id}/student_interview/${props.id}`
-          }}
-          className="card-link"
-          >
-        <ViewButton>View Interivew</ViewButton>
-          </Link>
+        {showInt ? (
+          <ViewButton onClick={() => setShowInt(!showInt)}>
+            Hide Interview <span>&#8593;</span>
+          </ViewButton>
+        ) : (
+          <ViewButton onClick={() => setShowInt(!showInt)}>
+            Show Interivew <span>&#8595;</span>
+          </ViewButton>
+        )}
       </Row>
+      <div>
+      {showInt && <div>Interview Stuff</div>}
+      </div>
       <Row style={{ paddingTop: "0.5em" }}>
         <DatePosted>Submitted: {dateCreated()}</DatePosted>
       </Row>
@@ -74,6 +79,6 @@ export default MapStuInt;
 
 const styles = {
   viewButton: {
-    paddingTop: "1em"
-  }
+    paddingTop: "1em",
+  },
 };

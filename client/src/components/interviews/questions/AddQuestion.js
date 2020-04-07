@@ -29,6 +29,10 @@ const AddQuestion = props => {
       props.editQuestion(props.id, fullQuestion);
       props.toggle();
     }
+    if (qtype === '') {
+      alert("You must choose a question type.")
+      return null;
+    }
     props.addQuestion(fullQuestion);
     props.toggleAdd();
   };
@@ -39,8 +43,8 @@ const AddQuestion = props => {
     <Form onSubmit={handleSubmit}>
       <Label>Type Of Question</Label>
 
-      <Select placeholder="Type" onChange={e => setQType(e.target.value)}>
-        <option disabled selected>
+      <Select required placeholder="Type" defaultValue='Type...' onChange={e => setQType(e.target.value)}>
+        <option disabled defaultValue='Type...'>
           Type...
         </option>
         <option value="Technical">Technical</option>
@@ -49,14 +53,14 @@ const AddQuestion = props => {
         <option value="Experience">Experience</option>
         <option value="Social">Social</option>
       </Select>
-      <Label>Question</Label>
+      {/* <Label>Question</Label> */}
       <Input
         placeholder="What is your question?"
         onChange={e => setQ(e.target.value)}
         value={q}
         type="text"
       />
-      <Label>Correct Answer</Label>
+      {/* <Label>Correct Answer</Label> */}
       <Input
         placeholder="Give an answer to this question"
         onChange={e => setCorrectAnswer(e.target.value)}

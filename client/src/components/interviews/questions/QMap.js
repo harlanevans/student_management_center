@@ -22,13 +22,13 @@ const QMap = props => {
       <div style={styles.cont}>
         <div style={styles.rowCenter}>
           <div style={styles.columns}>
-            <div style={styles.paddingRight}>Type Of Question:</div>
+            <div style={styles.paddingRight}>Question Type:</div>
             <QType>{props.qtype}</QType>
           </div>
         </div>
         <div style={styles.rowCenter}>
           <div style={styles.columns}>
-            <div style={styles.paddingRight}> Question:</div>
+            <div style={styles.paddingRight}>Question:</div>
             <QuestionText>{props.q}</QuestionText>
           </div>
         </div>
