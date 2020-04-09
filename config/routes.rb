@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       resources :courses, module: "schools"
     end
 
+    resources :questions do
+      resources :answers
+    end
 
     
     resources :courses do
@@ -28,13 +31,18 @@ Rails.application.routes.draw do
       resources :tasks, module: 'students'
       resources :student_interviews
     end
+
+    resources :student_interviews do
+      resources :answers
+    end
     
     get '/students/asc', to: 'students#student_asc', as: 'students_asc'
     get '/students/desc', to: 'students#student_desc', as: 'students_desc'
     
     # Student_interviews Routes
-
     get '/get_interviews/', to: 'student_interviews#get_interviews', as: 'get_all_interviews'
+
+    get '/questions/:question_id/answers', to: 'answers#question_answers', as: 'questions_answers'
     
   end
 

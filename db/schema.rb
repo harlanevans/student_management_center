@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_031100) do
+ActiveRecord::Schema.define(version: 2020_04_09_032027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.string "answer"
+    t.text "student_answer"
     t.bigint "question_id", null: false
-    t.bigint "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "correct"
+    t.bigint "student_interview_id", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
-    t.index ["student_id"], name: "index_answers_on_student_id"
+    t.index ["student_interview_id"], name: "index_answers_on_student_interview_id"
   end
 
   create_table "checkins", force: :cascade do |t|
@@ -146,7 +147,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_031100) do
   end
 
   add_foreign_key "answers", "questions"
-  add_foreign_key "answers", "students"
+  add_foreign_key "answers", "student_interviews"
   add_foreign_key "checkins", "students"
   add_foreign_key "comments", "students"
   add_foreign_key "comments", "users"

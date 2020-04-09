@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
   belongs_to :interview
-  has_many :answers
-  has_many :answers, :through => :students
+  has_many :student_interviews
+  has_many :answers, through: :student_interviews
 end

@@ -67,7 +67,7 @@ const AddQuestion = props => {
         value={correct_answer}
         type="text"
       />
-      <Count>For open answers please type *Open*</Count>
+      <Count>For open answers please type *Open* and *Whiteboard* for whiteboard questions.</Count>
       <Row style={{ padding: "1em 0em" }}>
         <Button onSubmit={handleSubmit}>
           {props.id ? "Edit Question" : "Submit"}

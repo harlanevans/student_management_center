@@ -39,12 +39,12 @@ export const NavItem = styled.h1`
   color: white;
 `;
 export const NavItemSmall = styled.h3`
-         display: flex;
-         flex-direction: row;
-         justify-content: center;
-         font-family: "Roboto", sans-serif;
-         font-weight: 100;
-         font-size: 0.75em;
-         padding: 1em 0em;
-         color: white;
-       `;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 0.75em;
+  padding: 1em 0em;
+  color: white;
+`;

@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Row,
-  H1,
-  Select,
-  Form,
-  Button
-} from "../../../styles/Global";
+import { Row, H1, Select, Form, Button } from "../../../styles/Global";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-const NewInt = props => {
+const NewInt = (props) => {
   const [interviews, setInterviews] = useState([]);
   const [student, setStudent] = useState({});
   const [intChoice, setIntChoice] = useState();
@@ -19,13 +13,13 @@ const NewInt = props => {
 
   useEffect(() => {
     const { id } = props.match.params;
-    axios.get("/api/get_interviews").then(res => setInterviews(res.data));
-    axios.get(`/api/students/${id}`).then(res => setStudent(res.data));
+    axios.get("/api/get_interviews").then((res) => setInterviews(res.data));
+    axios.get(`/api/students/${id}`).then((res) => setStudent(res.data));
     // axios.get(`/api/students/${id}/student_interviews`).then(res => setStudentInterviews(res.data));
   }, []);
 
   const iterateInts = () => {
-    return interviews.map(i => (
+    return interviews.map((i) => (
       <option value={i.id} key={i.id}>
         {i.name}
       </option>
@@ -38,7 +32,7 @@ const NewInt = props => {
         <Select
           value={intChoice}
           defaultValue="Interview..."
-          onChange={e => setIntChoice(e.target.value)}
+          onChange={(e) => setIntChoice(e.target.value)}
           required
         >
           <option value="Interview..." disabled>
@@ -46,7 +40,7 @@ const NewInt = props => {
           </option>
           {iterateInts()}
         </Select>
-        <div style={{ paddingTop: "1em"}}>
+        <div style={{ paddingTop: "1em" }}>
           <Button onSubmit={handleSubmit}>Choose Interview</Button>
         </div>
       </Form>
@@ -54,7 +48,7 @@ const NewInt = props => {
   };
 
   // http://localhost:3000/students/1/student_interviews
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     postInt();
   };
@@ -62,11 +56,11 @@ const NewInt = props => {
   const postInt = () => {
     const student_interview = {
       interview_id: intChoice,
-      student_id: student.id
+      student_id: student.id,
     };
     axios
       .post(`/api/students/${student.id}/student_interviews`, student_interview)
-      .then(res => {
+      .then((res) => {
         setSI(res.data);
         if (res.data) {
           setTimeout(() => {
@@ -92,20 +86,29 @@ const NewInt = props => {
         to={{
           pathname: `/student/${student.id}/interview/${intChoice}/student_interview/${si.id}`,
           studentInterview: si,
-          student: student
+          student: student,
         }}
-        />
+      />
     );
   }
   if (!student) return null;
   return (
     <div style={styles.container}>
-      <Row style={styles.centerRow}>
-        <H1>
-          New Interview For {student.first_name} {student.last_name}
-        </H1>
-      </Row>
-      <>{intForm()}</>
+      {interviews.length === 0 ? (
+        <Row style={styles.centerRow}>
+          <H1>No Interviews exist. Please create one.</H1>
+        </Row>
+      ) : (
+        <>
+          <Row style={styles.centerRow}>
+            <H1>
+              New Interview For {student.first_name} {student.last_name}
+            </H1>
+          </Row>
+
+          <>{intForm()}</>
+        </>
+      )}
     </div>
   );
 };
@@ -117,9 +120,9 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    padding: '1em 0em'
+    padding: "1em 0em",
   },
   container: {
-    padding: "2em"
-  }
+    padding: "2em",
+  },
 };
