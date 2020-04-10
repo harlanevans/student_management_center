@@ -27,12 +27,12 @@ const AddAnswer = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    debugger;
     axios
       .post(`/api/student_interviews/${props.stu_int_id}/answers`, completeAnswer)
       .then((res) => {
         props.addAnswers(res.data)
-        setAnswerSubmitted(true);
+        props.answerSubmitted(completeAnswer)
+        // setAnswerSubmitted(true);
       });
   };
 

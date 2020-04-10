@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { QCard } from "../../../../styles/QStyle";
 import { Form, Input, Button, Row, Label } from "../../../../styles/Global";
 import AddAnswer from "./AddAnswer";
@@ -8,28 +8,93 @@ import {
   QuestionText,
   QType,
 } from "../../../../styles/QStyle";
-import axios from 'axios'
+import axios from "axios";
 
 const Quests = (props) => {
-  const [answers, setAnswers] = useState([])
-  
+  const [answer, setAnswer] = useState();
+  const [thereIsAnswer, setThereIsAnswer] = useState(false);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     // debugger
-    axios.get(`/api/questions/${props.id}/answers`).then(
-      res => {
-        setAnswers(res.data)
-
-      }
-      )
-    // axios.get(`/api/students/${props.id}/answers`).then((res) => {
-    //   setAnswers(res.data);
+    // axios
+    //   .get(`/api/student_interviews/${props.stu_int.id}/answers`)
+    //   .then((res) => {
+    // debugger
+    // setAnswers(props.answers);
     // });
-  }, [])
+    getQuestionsAnswers();
+  }, []);
+
+  const answerSubmitted = (subAnswer) => {
+    debugger
+    setAnswer(subAnswer);
+    checkSubmittedAnswerIn();
+  };
+
+  const checkSubmittedAnswerIn = () => {
+    axios
+      .get(`/api/student_interviews/${props.stu_int.id}/answers`)
+      .then((res) => {
+        setAnswers(res.data);
+        if (res.data) {
+          newFilter()
+        }
+      });
+    // setTimeout(() => {
+    //   newFilter();
+    // }, 5000);
+  };
+
+  const newFilter = () => {
+    // if (answers.length !== 0) {
+
+      const newAnswer = answers.filter((a) => {
+        if (a.id === answer.id) {
+          return a;
+        }
+        return null;
+      });
+    // }
+    setAnswer(newAnswer);
+    if (answers.length !== 0) {
+      setThereIsAnswer(true);
+    }
+  };
+
+  const getQuestionsAnswers = () => {
+    const qAnswers = props.answers.filter((answer) => {
+      if (answer.question_id === props.id) {
+        return answer;
+      }
+      return null;
+    });
+    setAnswer(qAnswers);
+    if (qAnswers.length !== 0) {
+      setThereIsAnswer(true);
+    }
+  };
 
   const answeredView = () => {
-
-  }
+    return (
+      <QCard style={styles.cont}>
+        <Row style={styles.rowPadding}>
+          Question Type:
+          <QType style={styles.paddingLeft}>{props.qtype}</QType>
+        </Row>
+        <Row style={styles.rowPadding}>
+          Question:
+          <QuestionText style={styles.paddingLeft}>{props.q}</QuestionText>
+        </Row>
+        <Row style={styles.rowPadding}>
+          Student Answer:
+          <QuestionText style={styles.paddingLeft}>
+            {answer[0].student_answer}
+          </QuestionText>
+        </Row>
+      </QCard>
+    );
+  };
 
   const questionView = () => {
     return (
@@ -43,28 +108,19 @@ const Quests = (props) => {
           <QuestionText style={styles.paddingLeft}>{props.q}</QuestionText>
         </Row>
         <Row style={styles.rowPadding}>
-          <AddAnswer question_id={props.id} stu_int_id={props.stu_int.id} addAnswers={props.addAnswers}/>
+          <AddAnswer
+            question_id={props.id}
+            stu_int_id={props.stu_int.id}
+            addAnswers={props.addAnswers}
+            answerSubmitted={answerSubmitted}
+          />
         </Row>
       </QCard>
     );
+  };
 
-  }
-
-  return (
-    <QCard style={styles.cont}>
-      <Row style={styles.rowPadding}>
-        Question Type:
-        <QType style={styles.paddingLeft}>{props.qtype}</QType>
-      </Row>
-      <Row style={styles.rowPadding}>
-        Question:
-        <QuestionText style={styles.paddingLeft}>{props.q}</QuestionText>
-      </Row>
-      <Row style={styles.rowPadding}>
-        <AddAnswer question_id={props.id} stu_int_id={props.stu_int.id} addAnswers={props.addAnswers}/>
-      </Row>
-    </QCard>
-  );
+  // if (!props.answer) return null;
+  return <>{thereIsAnswer ? <>{answeredView()}</> : <>{questionView()}</>}</>;
 };
 
 export default Quests;

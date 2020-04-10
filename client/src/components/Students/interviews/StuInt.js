@@ -19,12 +19,16 @@ const StuInt = (props) => {
       .then((res) => {
         setStudentInterview(res.data);
       });
-    getOther();
     axios
       .get(`/api/student_interviews/${id}/answers`)
       .then((res) => {
         setAnswers(res.data);
       })
+      .then(
+        setTimeout(() => {
+          getOther();
+        }, 1000)
+      )
       .catch((res) => console.log(res));
   }, []);
 
@@ -43,10 +47,11 @@ const StuInt = (props) => {
 
   const addAnswers = (answer) => {
     setAnswers(answer, ...answers);
+    console.log(answers);
   };
 
   const renderIntQuestions = () => {
-    // if (!intQuestions) return null;
+    if (!intQuestions) return null;
     return intQuestions.map((q) => (
       <Quests
         key={q.id}
@@ -58,7 +63,7 @@ const StuInt = (props) => {
     ));
   };
 
-  if (!student || !interview || !studentInterview) return null;
+  // if (!student || !interview || !studentInterview) return null;
   return (
     <div style={styles.container}>
       <Row>

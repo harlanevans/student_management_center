@@ -13,7 +13,6 @@ class Api::AnswersController < ApplicationController
 
   def create
     @add_answer = Answer.new(answer_params)
-    binding.pry
     if @add_answer.save
       render json: @add_answer
     else 
