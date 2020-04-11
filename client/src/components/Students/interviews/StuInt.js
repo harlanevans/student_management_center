@@ -19,17 +19,18 @@ const StuInt = (props) => {
       .then((res) => {
         setStudentInterview(res.data);
       });
-    axios
-      .get(`/api/student_interviews/${id}/answers`)
-      .then((res) => {
-        setAnswers(res.data);
-      })
-      .then(
-        setTimeout(() => {
-          getOther();
-        }, 1000)
-      )
-      .catch((res) => console.log(res));
+    // axios
+    //   .get(`/api/student_interviews/${id}/answers`)
+    //   .then((res) => {
+    //     setAnswers(res.data);
+    //   })
+    //   .then(
+    //     setTimeout(() => {
+    //       getOther();
+    //     }, 1000)
+    //     )
+    //     .catch((res) => console.log(res));
+        getOther();
   }, []);
 
   const getOther = () => {

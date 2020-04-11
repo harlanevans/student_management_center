@@ -14,20 +14,36 @@ const Quests = (props) => {
   const [answer, setAnswer] = useState();
   const [thereIsAnswer, setThereIsAnswer] = useState(false);
   const [answers, setAnswers] = useState([]);
+  const [gotData, setGotData] = useState(false)
 
   useEffect(() => {
-    // debugger
-    // axios
-    //   .get(`/api/student_interviews/${props.stu_int.id}/answers`)
-    //   .then((res) => {
-    // debugger
-    // setAnswers(props.answers);
-    // });
-    getQuestionsAnswers();
+    axios
+      .get(`/api/student_interviews/${props.stu_int.id}/answers`)
+      .then((res) => {
+        setAnswers(res.data);
+        if (answers) {
+          setGotData(true)
+          debugger
+        }
+      })
+      // .then(
+      //   setTimeout(() => {
+      //     debugger
+      //     if (gotData === true) {
+      //       getQuestionsAnswers();
+      //     }
+      //   }, 1000)
+      // )
+
+      // axios
+      //   .get(`/api/student_interviews/${props.stu_int.id}/answers`)
+      //   .then((res) => {
+      // setAnswers(props.answers);
+      // });
+      .catch((err) => console.log(err));
   }, []);
 
   const answerSubmitted = (subAnswer) => {
-    debugger
     setAnswer(subAnswer);
     checkSubmittedAnswerIn();
   };
@@ -38,7 +54,7 @@ const Quests = (props) => {
       .then((res) => {
         setAnswers(res.data);
         if (res.data) {
-          newFilter()
+          newFilter();
         }
       });
     // setTimeout(() => {
@@ -49,12 +65,12 @@ const Quests = (props) => {
   const newFilter = () => {
     // if (answers.length !== 0) {
 
-      const newAnswer = answers.filter((a) => {
-        if (a.id === answer.id) {
-          return a;
-        }
-        return null;
-      });
+    const newAnswer = answers.filter((a) => {
+      if (a.id === answer.id) {
+        return a;
+      }
+      return null;
+    });
     // }
     setAnswer(newAnswer);
     if (answers.length !== 0) {
@@ -63,7 +79,8 @@ const Quests = (props) => {
   };
 
   const getQuestionsAnswers = () => {
-    const qAnswers = props.answers.filter((answer) => {
+    console.log("hit 2");
+    const qAnswers = answers.filter((answer) => {
       if (answer.question_id === props.id) {
         return answer;
       }
@@ -119,7 +136,7 @@ const Quests = (props) => {
     );
   };
 
-  // if (!props.answer) return null;
+  if (!answers) return null;
   return <>{thereIsAnswer ? <>{answeredView()}</> : <>{questionView()}</>}</>;
 };
 

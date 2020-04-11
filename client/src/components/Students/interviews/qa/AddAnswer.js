@@ -32,7 +32,8 @@ const AddAnswer = (props) => {
       .then((res) => {
         props.addAnswers(res.data)
         props.answerSubmitted(completeAnswer)
-        // setAnswerSubmitted(true);
+        setSubmittedAnswer(completeAnswer)
+        setAnswerSubmitted(true);
       });
   };
 
@@ -65,6 +66,7 @@ const AddAnswer = (props) => {
   };
 
   const answerView = () => {
+    debugger
     return <div>{submittedAnswer.answer}</div>;
   };
 
