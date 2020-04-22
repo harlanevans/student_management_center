@@ -89,7 +89,7 @@ const StudentMap = props => {
       </Row>
       <Row style={styles.skillRow}>
         <div style={styles.bottomCol}>
-          <Button onClick={toggle}>Edit</Button>
+          <Button onClick={toggle}>Edit</Button> 
         </div>
         {/* <Link to={`/student/${props.id}`}>
         <ViewButton>Student Page</ViewButton>

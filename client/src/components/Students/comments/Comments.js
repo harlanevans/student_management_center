@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Com from "./Com";
 import CForm from "./CForm";
 import axios from "axios";
-import { Row, H1, Button, Paragraph } from "../../../styles/Global";
+import { Row, H1, Button, Paragraph, SubTitle, ViewButton } from "../../../styles/Global";
 
 const Comments = props => {
   const [comments, setComments] = useState([]);
   const [toggleForm, setToggleForm] = useState(false);
+  const [hideComments, setHideComments] = useState(true);
 
   useEffect(() => {
     // const
@@ -22,7 +23,12 @@ const Comments = props => {
       );
     return comments.map(comment => {
       return (
-        <Com key={comment.id} {...comment} deleteComment={deleteComment} />
+        <Com
+          key={comment.id}
+          {...comment}
+          deleteComment={deleteComment}
+          user={props.user}
+        />
       );
     });
   };
@@ -47,7 +53,7 @@ const Comments = props => {
   return (
     <div>
       <Row>
-        <H1>Comments</H1>
+        <SubTitle>Comments</SubTitle>
       </Row>
       <Row>
         <Paragraph>
@@ -55,8 +61,12 @@ const Comments = props => {
           updates.
         </Paragraph>
       </Row>
-      <Row style={styles.padding}>
+      <Row style={styles.buttonRow}>
         <Button onClick={() => toggle()}>Add Comment</Button>
+        <ViewButton onClick={() => setHideComments(!hideComments)}>
+          {hideComments ? (<>Show Comments <span>&#8595;</span></>) : (<>Hide Comments <span>&#8593;</span></>)}
+          
+        </ViewButton>
       </Row>
       {toggleForm ? (
         <Row style={styles.padding}>
@@ -64,12 +74,13 @@ const Comments = props => {
             addComment={addComment}
             toggleForm={toggle}
             student={props.student}
+            user={props.user}
           />
         </Row>
       ) : (
         <></>
       )}
-      <div style={styles.col}>{renderComments()}</div>
+      {hideComments ? null : <div style={styles.col}>{renderComments()}</div>}
     </div>
   );
 };
@@ -97,7 +108,13 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    width: '100%'
+    width: "100%"
     // paddingRight: "1em"
+  },
+  buttonRow: {
+    padding: "1em 0em",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 };

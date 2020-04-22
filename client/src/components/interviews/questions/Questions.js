@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Row, Paragraph, Button } from "../../../styles/Global";
-import {
-  QuestionCont,
-  Answer,
-  QuestionText,
-  QType
-} from "../../../styles/QStyle";
+import { Row, SubTitle, Button, Paragraph } from "../../../styles/Global";
+
 import axios from "axios";
 import AddQuestion from "./AddQuestion";
+import QMap from "./QMap";
 
 const Questions = props => {
   const [questions, setQuestions] = useState([]);
@@ -17,7 +13,7 @@ const Questions = props => {
     axios.get(`/api/interviews/${props.interview.id}/questions`).then(res => {
       setQuestions(res.data);
     });
-  }, [props.interview.id]);
+  }, [props.interview.id, questions.length]);
 
   const toggleAdd = () => {
     setToggleAddQuestions(!toggleAddQuestions);
@@ -27,54 +23,84 @@ const Questions = props => {
     axios
       .post(`/api/interviews/${props.interview.id}/questions`, question)
       .then(res => {
-        setQuestions(res.data);
+        setQuestions([question, ...questions]);
+      });
+  };
+
+  const deleteQ = id => {
+    axios
+      .delete(`/api/interviews/${props.interview.id}/questions/${id}`)
+      .then(res => {
+        setQuestions(questions.filter(q => q.id !== id));
+      });
+  };
+
+  const editQuestion = (id, question) => {
+    axios
+      .put(`/api/interviews/${props.interview.id}/questions/${id}`, question)
+      .then(res => {
+        const newQs = questions.map(q => {
+          if (id === q.id) return res.data;
+          return q;
+        });
+        setQuestions(newQs);
       });
   };
 
   const renderQuestions = () => {
-    return questions.map(question => (
-      <QuestionCont>
-        <Row>
-          Question:
-          <QuestionText>{question.q}</QuestionText>
-        </Row>
-        <Row>
-          Type of Question:
-          <QType>{question.qtype}</QType>
-        </Row>
-        <Row>
-          Answer:
-          <Answer>{question.answer}</Answer>
-        </Row>
-      </QuestionCont>
-    ));
+    return (
+      <div style={styles.qsCont}>
+        {questions.map(question => (
+          <QMap
+            key={question.id}
+            {...question}
+            deleteQ={deleteQ}
+            editQuestion={editQuestion}
+          />
+        ))}
+      </div>
+    );
   };
 
-  // if (!questions) return null;
+  if (!questions) return null;
   return (
     <div>
-      <Button onClick={toggleAdd}>Add Questions</Button>
+      <Row style={styles.buttonRow}>
+        <Button onClick={toggleAdd}>New Question</Button>
+        <Paragraph>Number of Questions: {questions.length}</Paragraph>
+      </Row>
       <Row>
-        {toggleAddQuestions ? (
+        {toggleAddQuestions && (
           <AddQuestion addQuestion={addQuestion} toggleAdd={toggleAdd} />
-        ) : (
-          <></>
         )}
       </Row>
-      <Row style={{ padding: "1em 0em" }}>
-        <Paragraph>Questions</Paragraph>
+      <Row style={styles.centerRow}>
+        <SubTitle>Questions</SubTitle>
       </Row>
-      <Row>{renderQuestions()}</Row>
+      <>{renderQuestions()}</>
     </div>
   );
 };
 
 export default Questions;
 
-// const styles = {
-//   centerRow: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "flex-start"
-//   }
-// };
+const styles = {
+  centerRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: "1em 0em"
+  },
+  qsCont: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "space-evenly",
+    width: "100%"
+  },
+  buttonRow: {
+    padding: '1em 1em',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between'
+  }
+};

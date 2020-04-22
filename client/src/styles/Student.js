@@ -16,7 +16,7 @@ export const StudentCard = styled.div`
   height: 100%;
   background-color: white;
   box-shadow: 1px 1px 2px 2px #dcdcdd;
-`;
+`; 
 
 export const Name = styled.h1`
   font-family: "Roboto", sans-serif;

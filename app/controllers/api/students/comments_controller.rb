@@ -1,5 +1,6 @@
 class Api::Students::CommentsController < ApplicationController
-  before_action :authenticate_user!
+    # before_action :authenticate_user!
+
   before_action :set_student, except: [:get_users]
   before_action :set_comment, only: [:destroy]
 

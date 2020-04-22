@@ -21,9 +21,11 @@
 
 input[type="text"],
 input[type='number'],
-input[type="password"] {
+input[type="password"],
+input[type='checkbox'] {
   font-size: 1em;
 }
+
 
 
 a.navItem {

@@ -12,6 +12,12 @@ export const H1 = styled.h1`
   font-weight: lighter;
   color: #46494c;
 `;
+export const SubTitle = styled.h1`
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  font-weight: lighter;
+  color: #46494c;
+`;
 
 export const SchoolH1 = styled.h1`
   font-family: "Roboto", sans-serif;
@@ -128,3 +134,17 @@ export const Select = styled.select`
   font-size: 1em;
   background-color: white;
 `;
+
+export const Text = styled.textarea`
+  font-family: "Raleway", sans-serif;
+  padding: 0.5em 0.5em;
+  margin: 0.5em 0em;
+  border: 1px solid #46494c;
+  border-radius: 3px;
+  font-size: 1em;
+  width: 100%;
+`;
+
+export const CheckBox = styled.input`
+  margin: 0em 1em;
+`

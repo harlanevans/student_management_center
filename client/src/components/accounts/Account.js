@@ -56,6 +56,8 @@ const Account = props => {
         <H1>Account Details</H1>
       </Row>
       <Row style={styles.container}></Row>
+      <div style={styles.centerAcct}>
+
       {editing ? (
         <div style={styles.accountCont}>
         <AForm auth={props.auth} defaultImage={defaultImage} toggleEdit={toggleEdit}/>
@@ -63,7 +65,8 @@ const Account = props => {
         </div>
       ) : (
         <div style={styles.accountCont}>{accountView()}</div>
-      )}
+        )}
+        </div>
     </div>
   );
 };
@@ -76,7 +79,7 @@ export default ConnectedAccount;
 
 const styles = {
   container: {
-    padding: "2em"
+    padding: "2em",
   },
   centerRow: {
     justifyContent: "center"
@@ -90,8 +93,8 @@ const styles = {
     padding: "1em",
     // margin: "1em",
     borderRadius: "3px",
-    // width: "100%",
-    // height: "100%",
+    width: "50vw",
+    height: "100%",
     backgroundColor: "white",
     boxShadow: "1px 1px 2px 2px #dcdcdd"
   },
@@ -99,11 +102,19 @@ const styles = {
     paddingTop: '1em'
   },
   imageCont: {
-    width: '25%',
-    height: '25%'
+    width: '10em',
+    height: '100%',
+    borderRadius: '50%'
   },
   image: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    borderRadius: '50%'
+  },
+  centerAcct: {
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent: "center",
+    width: '100%'
   }
 };

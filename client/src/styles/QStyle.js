@@ -7,20 +7,49 @@ import styled from "styled-components";
 // font - family: "Raleway", sans - serif;
 
 export const QuestionCont = styled.div`
+         flex: 0 0 25%;
+         width: 100%;
+         height: 100%;
+         font-family: "Raleway", sans-serif;
+         border: solid 1px gray;
+         border-radius: 4px;
+         padding: 1em;
+         margin: 1em;
+         background-color: white;
+         box-shadow: 1px 1px 2px 2px #dcdcdd;
+       `;
+
+//        flex: 1 1 37%;
+// border: solid 2px #46494c;
+// padding: 1.5em;
+// margin: 1em;
+// border-radius: 3px;
+
+export const Answer = styled.p`
+font-style: italic;
+color: gray;
+`;
+
+export const QuestionText = styled.p`
+font-style: italic;
+  color: #46494c;
+  `;
+
+  export const QType = styled.p`
+  font-style: italic;
+  color: gray;
+  `;
+  
+  export const QCard = styled.div`
+  flex: 1 1 37%;
+  width: 100%;
+  height: 100%;
   font-family: "Raleway", sans-serif;
   border: solid 1px gray;
   border-radius: 4px;
   padding: 1em;
-  `
+  margin: 1em;
+  background-color: white;
+  box-shadow: 1px 1px 2px 2px #dcdcdd;
+`;
 
-  export const Answer = styled.p`
-    color: gray;
-  `
-
-  export const QuestionText = styled.p`
-    color: #46494C;
-  `
-
-  export const QType = styled.p`
-  color: gray;
-  `
