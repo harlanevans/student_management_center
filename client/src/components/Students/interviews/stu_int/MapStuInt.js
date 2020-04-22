@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Row, SubTitle, ViewButton } from "../../../styles/Global";
+import { Row, SubTitle, ViewButton } from "../../../../styles/Global";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { DatePosted } from "../../../styles/CheckInS";
+import { DatePosted } from "../../../../styles/CheckInS";
 
 const MapStuInt = (props) => {
   // const [student, setStudent] = useState({})
   const [interview, setInterview] = useState({});
   const [showInt, setShowInt] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`/api/interviews/${props.interview_id}`)
-      .then((res) => setInterview(res.data));
+      .get(`/api/interviews/${props.int.interview_id}`)
+      .then((res) => setInterview(res.data))
+      .then(
+        axios
+          .get(`/api/interviews/${props.int.interview_id}/questions`)
+          .then((res) => setQuestions(res.data))
+      );
+    // debugger
   }, []);
 
   const dateCreated = () => {
     //! REFACTOR THIS TO MOMENTJS
-    var date = new Date(props.created_at);
+    var date = new Date(props.int.created_at);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
@@ -47,7 +54,14 @@ const MapStuInt = (props) => {
       <Row>
         <Link
           to={{
-            pathname: `/student/${props.student_id}/interview/${props.interview_id}/student_interview/${props.id}`,
+            pathname: `/student_interview/${props.int.id}`,
+            state: {
+              student: props.student,
+              interview: interview,
+              questions: questions,
+              stu_int: props.int,
+              answers: props.answers
+            },
           }}
           className="card-link"
         >
@@ -65,9 +79,7 @@ const MapStuInt = (props) => {
           </ViewButton>
         )}
       </Row>
-      <div>
-      {showInt && <div>Interview Stuff</div>}
-      </div>
+      <div>{showInt && <div>Interview Stuff</div>}</div>
       <Row style={{ paddingTop: "0.5em" }}>
         <DatePosted>Submitted: {dateCreated()}</DatePosted>
       </Row>

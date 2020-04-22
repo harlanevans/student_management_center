@@ -6,14 +6,17 @@ import * as serviceWorker from "./serviceWorker";
 // import CourseProvider from "./components/context/CourseProvider";
 import { AuthProvider } from "./providers/AuthProvider";
 import { initMiddleware } from "devise-axios";
+import { StudentProvider } from "./providers/StudentProvider";
 
 initMiddleware();
 
 ReactDOM.render(
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <StudentProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StudentProvider>
   </AuthProvider>,
   document.getElementById("root")
 );

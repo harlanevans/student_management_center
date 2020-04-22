@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Row, H1, Select, Form, Button } from "../../../styles/Global";
-import { Redirect } from "react-router-dom";
+import { Row, H1, Select, Form, Button } from "../../../../styles/Global";
+import { Redirect, withRouter } from "react-router-dom";
+import { StudentConsumer } from "../../../../providers/StudentProvider";
 import axios from "axios";
 
 const NewInt = (props) => {
@@ -12,10 +13,9 @@ const NewInt = (props) => {
   const [intLoaded, setIntLoaded] = useState(false);
 
   useEffect(() => {
-    const { id } = props.match.params;
+    const { student } = props;
     axios.get("/api/get_interviews").then((res) => setInterviews(res.data));
-    axios.get(`/api/students/${id}`).then((res) => setStudent(res.data));
-    // axios.get(`/api/students/${id}/student_interviews`).then(res => setStudentInterviews(res.data));
+    setStudent(student.student);
   }, []);
 
   const iterateInts = () => {
@@ -47,7 +47,6 @@ const NewInt = (props) => {
     );
   };
 
-  // http://localhost:3000/students/1/student_interviews
   const handleSubmit = (e) => {
     e.preventDefault();
     postInt();
@@ -84,9 +83,7 @@ const NewInt = (props) => {
     return (
       <Redirect
         to={{
-          pathname: `/student/${student.id}/interview/${intChoice}/student_interview/${si.id}`,
-          studentInterview: si,
-          student: student,
+          pathname: `/student/${si.student_id}`,
         }}
       />
     );
@@ -113,7 +110,16 @@ const NewInt = (props) => {
   );
 };
 
-export default NewInt;
+export const ConnectedNewInt = (props) => {
+  return (
+    <StudentConsumer>
+      {(student) => <NewInt {...props} student={student} />}
+    </StudentConsumer>
+  );
+};
+
+export default withRouter(ConnectedNewInt);
+// export default NewInt;
 
 const styles = {
   centerRow: {

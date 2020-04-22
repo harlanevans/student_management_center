@@ -7,18 +7,22 @@ Rails.application.routes.draw do
     resources :students
     resources :comments
     resources :courses
+    resources :student_interviews
     
     resources :interviews do
       resources :questions, module: 'interviews'
     end
-
+    
     resources :schools do
       resources :courses, module: "schools"
     end
 
-    resources :questions do
-      resources :answers
-    end
+    
+
+
+    # resources :questions do
+    #   resources :answers
+    # end
 
     
     resources :courses do
@@ -29,11 +33,8 @@ Rails.application.routes.draw do
       resources :comments, module: 'students'
       resources :checkins, module: 'students'
       resources :tasks, module: 'students'
-      resources :student_interviews
-    end
-
-    resources :student_interviews do
-      resources :answers
+      resources :student_interviews, module: 'students'
+      resources :answers, module: 'students'
     end
     
     get '/students/asc', to: 'students#student_asc', as: 'students_asc'
@@ -42,9 +43,10 @@ Rails.application.routes.draw do
     # Student_interviews Routes
     get '/get_interviews/', to: 'student_interviews#get_interviews', as: 'get_all_interviews'
 
-    get '/questions/:question_id/answers', to: 'answers#question_answers', as: 'questions_answers'
     
   end
 
   get '*other', to: "static#index"
 end
+
+

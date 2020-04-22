@@ -13,77 +13,19 @@ import axios from "axios";
 const Quests = (props) => {
   const [answer, setAnswer] = useState();
   const [thereIsAnswer, setThereIsAnswer] = useState(false);
-  const [answers, setAnswers] = useState([]);
-  const [gotData, setGotData] = useState(false)
+  const [toggleEdit, setToggleEdit] = useState(false)
 
   useEffect(() => {
-    axios
-      .get(`/api/student_interviews/${props.stu_int.id}/answers`)
-      .then((res) => {
-        setAnswers(res.data);
-        if (answers) {
-          setGotData(true)
-          debugger
-        }
-      })
-      // .then(
-      //   setTimeout(() => {
-      //     debugger
-      //     if (gotData === true) {
-      //       getQuestionsAnswers();
-      //     }
-      //   }, 1000)
-      // )
-
-      // axios
-      //   .get(`/api/student_interviews/${props.stu_int.id}/answers`)
-      //   .then((res) => {
-      // setAnswers(props.answers);
-      // });
-      .catch((err) => console.log(err));
-  }, []);
-
-  const answerSubmitted = (subAnswer) => {
-    setAnswer(subAnswer);
-    checkSubmittedAnswerIn();
-  };
-
-  const checkSubmittedAnswerIn = () => {
-    axios
-      .get(`/api/student_interviews/${props.stu_int.id}/answers`)
-      .then((res) => {
-        setAnswers(res.data);
-        if (res.data) {
-          newFilter();
-        }
-      });
-    // setTimeout(() => {
-    //   newFilter();
-    // }, 5000);
-  };
-
-  const newFilter = () => {
-    // if (answers.length !== 0) {
-
-    const newAnswer = answers.filter((a) => {
-      if (a.id === answer.id) {
-        return a;
-      }
-      return null;
-    });
-    // }
-    setAnswer(newAnswer);
-    if (answers.length !== 0) {
-      setThereIsAnswer(true);
-    }
-  };
+    getQuestionsAnswers();
+  }, [props.student.studentAnswers]);
 
   const getQuestionsAnswers = () => {
-    console.log("hit 2");
-    const qAnswers = answers.filter((answer) => {
-      if (answer.question_id === props.id) {
+    const qAnswers = props.student.studentAnswers.filter((answer) => {
+      if (answer.question_id === props.question.id) {
+        console.log("match for id ", answer.question_id, props.question.id);
         return answer;
       }
+      console.log("no match");
       return null;
     });
     setAnswer(qAnswers);
@@ -93,50 +35,63 @@ const Quests = (props) => {
   };
 
   const answeredView = () => {
-    return (
-      <QCard style={styles.cont}>
-        <Row style={styles.rowPadding}>
-          Question Type:
-          <QType style={styles.paddingLeft}>{props.qtype}</QType>
-        </Row>
-        <Row style={styles.rowPadding}>
-          Question:
-          <QuestionText style={styles.paddingLeft}>{props.q}</QuestionText>
-        </Row>
-        <Row style={styles.rowPadding}>
-          Student Answer:
-          <QuestionText style={styles.paddingLeft}>
-            {answer[0].student_answer}
-          </QuestionText>
-        </Row>
-      </QCard>
-    );
+    return answer.map((answer) => {
+      const {  q } = props.question;
+      return (
+        <QCard style={styles.cont}>
+          <Row style={styles.rowPadding}>
+            Question:
+            <QuestionText style={styles.paddingLeft}>{q}</QuestionText>
+          </Row>
+          <Row style={styles.rowPadding}>
+            Student Answer:
+            <QuestionText style={styles.paddingLeft}>
+              {answer.student_answer}
+            </QuestionText>
+          </Row>
+          <Row style={styles.rowPadding}>
+            Correct?
+            <QuestionText style={styles.paddingLeft}>
+              {answer.correct === true ? "Correct" : "Incorrect"}
+            </QuestionText>
+          </Row>
+          <Row>
+            <Button onClick={() => setToggleEdit(!toggleEdit)}>{toggleEdit ? "Cancel" : "Edit"}</Button>
+          </Row>
+          {toggleEdit ? (
+            <Row>
+              <AddAnswer answer={answer} toggleEdit={setToggleEdit} editAnswer={props.editAnswer}/>
+            </Row>
+
+          ): (
+            <></>
+          )}
+        </QCard>
+      );
+    });
   };
 
   const questionView = () => {
+    const {  q } = props.question;
     return (
       <QCard style={styles.cont}>
         <Row style={styles.rowPadding}>
-          Question Type:
-          <QType style={styles.paddingLeft}>{props.qtype}</QType>
-        </Row>
-        <Row style={styles.rowPadding}>
           Question:
-          <QuestionText style={styles.paddingLeft}>{props.q}</QuestionText>
+          <QuestionText style={styles.paddingLeft}>{q}</QuestionText>
         </Row>
         <Row style={styles.rowPadding}>
           <AddAnswer
-            question_id={props.id}
-            stu_int_id={props.stu_int.id}
-            addAnswers={props.addAnswers}
-            answerSubmitted={answerSubmitted}
+            question_id={props.question.id}
+            student_id={props.student.student.id}
+            addAnswer={props.addAnswer}
+            thereIsAnswer={setThereIsAnswer}
           />
         </Row>
       </QCard>
     );
   };
 
-  if (!answers) return null;
+  // if (!answer) return null;
   return <>{thereIsAnswer ? <>{answeredView()}</> : <>{questionView()}</>}</>;
 };
 

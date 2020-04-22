@@ -80,7 +80,7 @@ const Students = props => {
 
   //! ADD STUDENTS Toggle Form
   const toggle = () => {
-    setToggleForm(!toggleForm);
+    setToggleForm(!toggleForm); 
   };
 
   //? When click delete, need to await users response for delete

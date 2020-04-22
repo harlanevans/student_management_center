@@ -13,11 +13,11 @@ const AddQuestion = props => {
   const [qtype, setQType] = useState("");
   const [q, setQ] = useState("");
   const [correct_answer, setCorrectAnswer] = useState("");
-  const fullQuestion = { qtype: qtype, q: q, correct_answer: correct_answer };
+  const fullQuestion = { q: q, correct_answer: correct_answer };
 
   useEffect(() => {
     if (props.id) {
-      setQType(props.qType);
+      // setQType(props.qType);
       setQ(props.q);
       setCorrectAnswer(props.correct_answer);
     }
@@ -29,10 +29,10 @@ const AddQuestion = props => {
       props.editQuestion(props.id, fullQuestion);
       props.toggle();
     }
-    if (qtype === '') {
-      alert("You must choose a question type.")
-      return null;
-    }
+    // if (qtype === '') {
+    //   alert("You must choose a question type.")
+    //   return null;
+    // }
     props.addQuestion(fullQuestion);
     props.toggleAdd();
   };
@@ -41,7 +41,7 @@ const AddQuestion = props => {
     // <div style={styles.container}>
 
     <Form onSubmit={handleSubmit}>
-      <Label>Type Of Question</Label>
+      {/* <Label>Type Of Question</Label>
 
       <Select required placeholder="Type" defaultValue='Type...' onChange={e => setQType(e.target.value)}>
         <option disabled defaultValue='Type...'>
@@ -52,7 +52,7 @@ const AddQuestion = props => {
         <option value="Open Answer">Open Answer</option>
         <option value="Experience">Experience</option>
         <option value="Social">Social</option>
-      </Select>
+      </Select> */}
       {/* <Label>Question</Label> */}
       <Input
         placeholder="What is your question?"

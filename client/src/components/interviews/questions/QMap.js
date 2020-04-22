@@ -20,12 +20,12 @@ const QMap = props => {
   return (
     <QuestionCont>
       <div style={styles.cont}>
-        <div style={styles.rowCenter}>
+        {/* <div style={styles.rowCenter}>
           <div style={styles.columns}>
             <div style={styles.paddingRight}>Question Type:</div>
             <QType>{props.qtype}</QType>
           </div>
-        </div>
+        </div> */}
         <div style={styles.rowCenter}>
           <div style={styles.columns}>
             <div style={styles.paddingRight}>Question:</div>

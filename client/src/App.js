@@ -20,8 +20,8 @@ import StudentPage from "./components/Students/StudentPage";
 import Rubric from "./components/shared/Rubric";
 import CHome from "./components/Students/check_ins/CHome";
 
-import NewInt from './components/Students/interviews/NewInt';
-import StuInt from './components/Students/interviews/StuInt';
+import NewInt from './components/Students/interviews/stu_int/NewInt';
+import StuInt from './components/Students/interviews/stu_int/StuInt';
 
 // AUTH
 import Login from "./components/auth/Login";
@@ -84,7 +84,7 @@ const App = () => {
               />
               <ProtectedRoute
                 exact
-                path="/student/:student_id/interview/:interview_id/student_interview/:id"
+                path="/student_interview/:id"
                 component={StuInt}
               />
               <Route component={NoMatch} />

@@ -14,27 +14,36 @@ const AddAnswer = (props) => {
   const [correct, setCorrect] = useState(false);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const [submittedAnswer, setSubmittedAnswer] = useState({});
-  const [answers, setAnswers] = useState([])
+  const [answers, setAnswers] = useState([]);
 
   const completeAnswer = {
     student_answer: student_answer,
     correct: correct,
     question_id: props.question_id,
-    student_interview_id: props.stu_int_id,
+    student_id: props.student_id,
   };
 
-  
+  useEffect(() => {
+    if (props.answer) {
+      const { student_answer, correct } = props.answer;
+      // debugger
+      setStudentAnswer(student_answer);
+      setCorrect(correct);
+    }
+  }, [props.answer]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`/api/student_interviews/${props.stu_int_id}/answers`, completeAnswer)
-      .then((res) => {
-        props.addAnswers(res.data)
-        props.answerSubmitted(completeAnswer)
-        setSubmittedAnswer(completeAnswer)
-        setAnswerSubmitted(true);
-      });
+    if (props.answer) {
+      props.editAnswer(props.answer.id, completeAnswer);
+      props.toggleEdit();
+    } else {
+      axios
+        .post(`/api/students/${props.student_id}/answers`, completeAnswer)
+        .then((res) => {
+          props.addAnswer(res.data);
+        });
+    }
   };
 
   const formView = () => {
@@ -66,7 +75,7 @@ const AddAnswer = (props) => {
   };
 
   const answerView = () => {
-    debugger
+    debugger;
     return <div>{submittedAnswer.answer}</div>;
   };
 

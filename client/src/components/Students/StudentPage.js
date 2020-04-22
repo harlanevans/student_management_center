@@ -6,14 +6,14 @@ import {
   Button,
   RedButton,
   ViewButton,
-  SubTitle
+  SubTitle,
 } from "../../styles/Global";
 import {
   Skill,
   Average,
   LowAverage,
   HighAverage,
-  Count
+  Count,
 } from "../../styles/Student";
 import Comments from "./comments/Comments";
 import { Link, withRouter } from "react-router-dom";
@@ -22,20 +22,28 @@ import Checks from "./check_ins/Checks";
 import ColorKeys from "../shared/ColorKeys";
 import StudentTasks from "./tasks/StudentTasks";
 import { AuthConsumer } from "../../providers/AuthProvider";
-import Ints from './interviews/Ints';
+import { StudentConsumer } from "../../providers/StudentProvider";
+import MapStuInt from "./interviews/stu_int/MapStuInt";
+import Loader from "../shared/Loader";
 
-const StudentPage = props => {
+const StudentPage = (props) => {
   const [student, setStudent] = useState();
   const [toggleForm, setToggleForm] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [user, setUser] = useState()
+  const [isLoaded, setIsLoaded] = useState(true);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const { id } = props.match.params;
-    axios.get(`/api/students/${id}`).then(res => {
+    axios.get(`/api/students/${id}`).then((res) => {
       setStudent(res.data);
+      // debugger
+      props.student.getStudent(res.data.id);
     });
-    setUser(props.auth.user)
+    // debugger
+    // if (props.student.loaded === true) {
+    //   toggleLoaded();
+    // }
+    setUser(props.auth.user);
   }, [props.match.params, props.auth.user]);
 
   const toggleEdit = () => {
@@ -55,7 +63,7 @@ const StudentPage = props => {
   };
 
   const editStudent = (id, student) => {
-    axios.put(`/api/students/${id}`, { student }).then(res => {
+    axios.put(`/api/students/${id}`, { student }).then((res) => {
       const newStudent = res.data;
       setStudent(newStudent);
     });
@@ -69,9 +77,9 @@ const StudentPage = props => {
     toggleLoaded();
     axios
       .put(`/api/students/${props.match.params.id}`, {
-        student: { times_helped: student.times_helped + 1 }
+        student: { times_helped: student.times_helped + 1 },
       })
-      .then(res => {
+      .then((res) => {
         const newStudent = res.data;
         setStudent(newStudent);
       });
@@ -81,160 +89,203 @@ const StudentPage = props => {
     toggleLoaded();
     axios
       .put(`/api/students/${props.match.params.id}`, {
-        student: { times_helped: student.times_helped - 1 }
+        student: { times_helped: student.times_helped - 1 },
       })
-      .then(res => {
+      .then((res) => {
         const newStudent = res.data;
         setStudent(newStudent);
       });
   };
 
+  const renderInts = () => {
+    const { studentInterviews } = props.student;
+    if (!studentInterviews) return null;
+    return studentInterviews.map((int) => (
+      <MapStuInt
+        key={int.id}
+        int={{ ...int }}
+        student={props.student.student}
+        answers={props.student.studentAnswers}
+      />
+    ));
+  };
+
+  if (!props.student.loaded === true) {
+    return <Loader />;
+  } else {
   if (!student) return null;
   return (
-    <div style={styles.container}>
-      <Row>
-        <Link to={{ pathname: `/courses/${student.course_id}` }}>
-          <RedButton>Course Page</RedButton>
-        </Link>
-      </Row>
-      <Row style={styles.center}>
-        <H1>
-          {student.first_name} {student.last_name}
-        </H1>
-      </Row>
-      <div style={styles.padding}>
-        <Row style={styles.skills}>
-          <Skill style={styles.smallPadding}>
-            Technical: {student.technical}
-          </Skill>
-          <Skill style={styles.smallPadding}>Effort: {student.effort}</Skill>
-          <Skill style={styles.smallPadding}>Social: {student.social}</Skill>
-        </Row>
-      </div>
-      <div>
-        <Row style={styles.center}>{changeAvg()}</Row>
-      </div>
-      <Row
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end"
-            // width: '25%',
-            // height: '100%',
-          }}
-        >
-          <Button onClick={toggleEdit}>Edit Student</Button>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-            width: "25%"
-            // height: '100%',
-          }}
-        >
+    <div>
+     
+        <div style={styles.container}>
+          <Row>
+            <Link to={{ pathname: `/courses/${student.course_id}` }}>
+              <RedButton>Course Page</RedButton>
+            </Link>
+          </Row>
+          <Row style={styles.center}>
+            <H1>
+              {student.first_name} {student.last_name}
+            </H1>
+          </Row>
+          <div style={styles.padding}>
+            <Row style={styles.skills}>
+              <Skill style={styles.smallPadding}>
+                Technical: {student.technical}
+              </Skill>
+              <Skill style={styles.smallPadding}>
+                Effort: {student.effort}
+              </Skill>
+              <Skill style={styles.smallPadding}>
+                Social: {student.social}
+              </Skill>
+            </Row>
+          </div>
+          <div>
+            <Row style={styles.center}>{changeAvg()}</Row>
+          </div>
           <Row
             style={{
               display: "flex",
-              justifyContent: "center",
-              paddingBottom: "1em"
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
-            <Skill>Times Helped</Skill>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                // width: '25%',
+                // height: '100%',
+              }}
+            >
+              <Button onClick={toggleEdit}>Edit Student</Button>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                width: "25%",
+                // height: '100%',
+              }}
+            >
+              <Row
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingBottom: "1em",
+                }}
+              >
+                <Skill>Times Helped</Skill>
+              </Row>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  width: "100%",
+                }}
+              >
+                <Count onClick={decrease}>-</Count>
+                <Skill>
+                  {student.times_helped === null || undefined
+                    ? "0"
+                    : student.times_helped}
+                </Skill>
+                <Count onClick={increase}>+</Count>
+              </div>
+            </div>
           </Row>
+          {toggleForm ? (
+            <StudentForm
+              singleStudent={student}
+              editSingleStudent={editStudent}
+              toggleEditForm={toggleEdit}
+            />
+          ) : (
+            <></>
+          )}
+          <div style={styles.padding}></div>
+          <hr />
+          {/* COMMENTS */}
+          <div style={styles.mainRow}>
+            <div style={styles.colOne}>
+              <Comments student={student} user={user} />
+            </div>
+
+            {/* TASKS */}
+            <div style={styles.colTwo}>
+              <SubTitle>Tasks</SubTitle>
+              <StudentTasks studentId={student.id} user={user} />
+            </div>
+          </div>
+
+          <div style={styles.padding}></div>
+          <div style={styles.padding}></div>
           <div
             style={{
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              width: "100%"
+              flexFlow: "row wrap",
+              justifyContent: "space-evenly",
+              width: "100%",
             }}
           >
-            <Count onClick={decrease}>-</Count>
-            <Skill>
-              {student.times_helped === null || undefined
-                ? "0"
-                : student.times_helped}
-            </Skill>
-            <Count onClick={increase}>+</Count>
+            <ColorKeys />
+          </div>
+          {/*! Checkins */}
+          <div style={styles.mainRow}>
+            <div style={styles.colOne}>
+              <SubTitle>Check Ins</SubTitle>
+              <div style={styles.padding}>
+                <Link to={{ pathname: `/check_in/${student.id}` }}>
+                  <Button>Add Check-In</Button>
+                </Link>
+              </div>
+              <Checks student={student} user={user} />
+            </div>
+            {/*! Interviews */}
+            <div style={styles.colTwo}>
+              <SubTitle>Interviews</SubTitle>
+              <div style={styles.padding}>
+                <Link
+                  to={{
+                  pathname: `/students/${student.id}/student_interviews`,
+                  state: {
+                    // student: {...props.student},
+                    // getStudent: props.student.getStudent
+              // interviews: props.student.studentInterview,
+              // stu_ints: props.student.studentInterviews,
+                    // answers: props.student.studentAnswers
+                  }
+                  }}
+                >
+                  <Button>New Interview</Button>
+                </Link>
+              </div>
+              {renderInts()}
+              {/* <Ints student={student} user={user} /> */}
+            </div>
           </div>
         </div>
-      </Row>
-      {toggleForm ? (
-        <StudentForm
-          singleStudent={student}
-          editSingleStudent={editStudent}
-          toggleEditForm={toggleEdit}
-        />
-      ) : (
-        <></>
-      )}
-      <div style={styles.padding}></div>
-      <hr />
-      {/* COMMENTS */}
-      <div style={styles.mainRow}>
-        <div style={styles.colOne}>
-          <Comments student={student} user={user} />
-        </div>
-
-        {/* TASKS */}
-        <div style={styles.colTwo}>
-          <SubTitle>Tasks</SubTitle>
-          <StudentTasks studentId={student.id} user={user} />
-        </div>
-      </div>
-
-      <div style={styles.padding}></div>
-      <div style={styles.padding}></div>
-      <div
-        style={{
-          display: "flex",
-          flexFlow: "row wrap",
-          justifyContent: "space-evenly",
-          width: "100%"
-        }}
-      >
-        <ColorKeys />
-      </div>
-      <div style={styles.mainRow}>
-        <div style={styles.colOne}>
-          <SubTitle>Check Ins</SubTitle>
-          <div style={styles.padding}>
-            <Link to={{ pathname: `/check_in/${student.id}` }}>
-              <Button>Add Check-In</Button>
-            </Link>
-          </div>
-          <Checks student={student} user={user} />
-        </div>
-        <div style={styles.colTwo}>
-          <SubTitle>Interviews</SubTitle>
-          <div style={styles.padding}>
-            <Link
-              to={{ pathname: `/students/${student.id}/student_interviews` }}
-            >
-              <Button>New Interview</Button>
-            </Link>
-          </div>
-          <Ints student={student} user={user} />
-        </div>
-      </div>
+      
     </div>
   );
+  };
 };
 
-export const ConnectedStudentPage = props => {
+export const ConnectedStudentPage = (props) => {
   return (
     <AuthConsumer>
-      {auth => <StudentPage {...props} auth={auth} />}
+      {(auth) => (
+        <StudentConsumer>
+          {(student) => (
+            <StudentPage {...props} auth={auth} student={student} />
+          )}
+        </StudentConsumer>
+      )}
     </AuthConsumer>
   );
 };
@@ -243,37 +294,37 @@ export default withRouter(ConnectedStudentPage);
 
 const styles = {
   container: {
-    padding: "2em"
+    padding: "2em",
   },
   smallPadding: {
-    padding: "0em .5em"
+    padding: "0em .5em",
   },
   center: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   skills: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   padding: {
-    padding: "1em 0em"
+    padding: "1em 0em",
   },
   mainRow: {
     padding: "1em 0em",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   colOne: {
     // padding: "1em 0em",
-    width: "45%"
+    width: "45%",
   },
   colTwo: {
     // padding: "1em 0em",
-    width: "50%"
+    width: "50%",
     // display: "flex",
     // flexDirection: "row",
     // justifyContent: "center"
@@ -281,6 +332,6 @@ const styles = {
   keyColors: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
